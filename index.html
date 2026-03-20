@@ -4,1032 +4,737 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>新北市消防局 — EMT 常用英文字彙</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --red: #e63946;
-    --navy: #1d3557;
-    --blue: #457b9d;
-    --light: #a8dadc;
-    --bg: #f1faee;
-    --card: #ffffff;
-    --text: #1d3557;
-    --muted: #6c757d;
-    --tag-bg: #e8f4fd;
-    --tag-text: #1a6a9e;
-    --star: #f4a261;
-    --green: #2a9d8f;
-    --shadow: 0 4px 20px rgba(0,0,0,0.10);
-  }
-  
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { 
-    font-family: 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; 
-    background: var(--bg); 
-    color: var(--text); 
-    min-height: 100vh; 
-    padding-bottom: 120px; 
-  }
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --primary:#c0392b;--primary-dark:#962d22;--primary-light:#e74c3c;
+  --bg:#f0f2f5;--card:#fff;--text:#2c3e50;--text-light:#7f8c8d;
+  --shadow:0 4px 20px rgba(0,0,0,.08);--radius:16px;
+  --success:#27ae60;--warning:#f39c12;
+}
+body{font-family:'Noto Sans TC',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 
-  /* ── Header ── */
-  header { 
-    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); 
-    color: #fff; 
-    padding: 18px 20px 14px; 
-    text-align: center; 
-    position: sticky; 
-    top: 0; 
-    z-index: 100; 
-    box-shadow: 0 2px 12px rgba(0,0,0,.25); 
-  }
-  header h1 { font-size: 1.15rem; font-weight: 700; letter-spacing: .04em; }
-  header p  { font-size: .75rem; opacity: .75; margin-top: 2px; }
+/* Header */
+.header{background:linear-gradient(135deg,#1a1a2e,#16213e 50%,#0f3460);color:#fff;padding:28px 20px 22px;text-align:center;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(231,76,60,.12),transparent 50%);}
+.header *{position:relative;}
+.header .icon{font-size:2.2rem;margin-bottom:6px;}
+.header h1{font-size:1.4rem;font-weight:700;}
+.header .sub{font-size:.82rem;opacity:.6;margin-top:4px;}
 
-  /* ── Nav Tabs ── */
-  nav { 
-    display: flex; 
-    background: var(--navy); 
-    position: fixed; 
-    bottom: 0; left: 0; width: 100%; 
-    z-index: 999; 
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1); 
-    padding-bottom: env(safe-area-inset-bottom); 
-  }
-  nav button { 
-    flex: 1; padding: 14px 4px; border: none; background: transparent; 
-    color: rgba(255,255,255,.6); font-size: .95rem; cursor: pointer; 
-    transition: .2s; border-top: 3px solid transparent; 
-  }
-  nav button.active { 
-    color: #fff; border-top-color: var(--light); font-weight: 700; 
-    background: rgba(255,255,255,0.05); 
-  }
-  nav button:hover:not(.active) { color: rgba(255,255,255,.9); }
+/* Tabs */
+.tabs{display:flex;justify-content:center;gap:6px;padding:14px 16px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.05);position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.tab-btn{padding:9px 22px;border:none;background:0;font-family:inherit;font-size:.92rem;font-weight:500;color:var(--text-light);cursor:pointer;border-radius:25px;transition:.25s;}
+.tab-btn:hover{background:#f0f0f0;color:var(--text);}
+.tab-btn.active{background:var(--primary);color:#fff;}
 
-  /* ── Pages ── */
-  .page { display: none; padding: 16px; max-width: 700px; margin: 0 auto; }
-  .page.active { display: block; }
+/* Controls */
+.controls{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 16px;flex-wrap:wrap;}
+.ctl-select,.ctl-btn{padding:7px 16px;border:2px solid #e0e0e0;border-radius:25px;font-family:inherit;font-size:.82rem;background:#fff;color:var(--text);cursor:pointer;outline:none;transition:.25s;}
+.ctl-select:focus{border-color:var(--primary);}
+.ctl-btn.on{border-color:var(--warning);background:#fff8e1;color:#e67e22;}
 
-  /* ── FLASHCARD ── */
-  #flashcard-count { text-align: center; font-size: .78rem; color: var(--muted); margin-bottom: 8px; }
-  .fc-wrap { perspective: 1000px; height: clamp(280px, 45vh, 400px); cursor: pointer; margin: 0 auto 16px; max-width: 520px; }
-  .fc-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s cubic-bezier(.4,0,.2,1); }
-  .fc-wrap.flipped .fc-inner { transform: rotateY(180deg); }
-  .fc-front, .fc-back { 
-    position: absolute; inset: 0; border-radius: 18px; box-shadow: var(--shadow); 
-    display: flex; flex-direction: column; align-items: center; justify-content: center; 
-    backface-visibility: hidden; padding: 22px 20px; 
-  }
-  .fc-front { background: var(--card); border: 2px solid var(--light); }
-  .fc-back  { background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); color: #fff; transform: rotateY(180deg); }
-  .fc-hint  { font-size: .7rem; color: var(--muted); margin-bottom: 10px; letter-spacing:.05em; }
-  .fc-back .fc-hint { color: rgba(255,255,255,.6); }
-  .fc-en { font-size: clamp(1.05rem, 4vw, 1.6rem); font-weight: 700; text-align: center; line-height: 1.3; word-break: break-word; }
-  .fc-abbrv { font-size: .85rem; color: var(--blue); font-weight: 600; margin-top: 6px; }
-  .fc-zh { font-size: clamp(1.1rem, 4vw, 1.55rem); font-weight: 700; text-align: center; line-height: 1.3; }
-  .fc-tag-row { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
-  .fc-tag { font-size: .68rem; background: rgba(255,255,255,.18); color: #fff; border-radius: 999px; padding: 2px 9px; }
-  .fc-front .fc-tag { background: var(--tag-bg); color: var(--tag-text); }
-  .star-btn { position: absolute; top: 12px; right: 14px; background: none; border: none; font-size: 1.4rem; cursor: pointer; line-height: 1; }
-  .tts-btn  { position: absolute; top: 12px; left: 14px; background: none; border: none; font-size: 1.2rem; cursor: pointer; line-height: 1; }
+.container{max-width:680px;margin:0 auto;padding:0 16px 50px;}
+.panel{display:none;}.panel.active{display:block;}
 
-  .fc-controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 8px 0 14px; }
-  .fc-controls button { 
-    background: var(--card); border: 2px solid var(--light); border-radius: 50px; 
-    padding: 12px 22px; font-size: .95rem; cursor: pointer; font-weight: 600; 
-    color: var(--navy); transition: .15s; 
-  }
-  .fc-controls button:hover { background: var(--light); }
-  .fc-controls button#fc-flip { background: var(--blue); color: #fff; border-color: var(--blue); padding: 12px 30px; }
-  
-  /* ── CUSTOM DROPDOWN ── */
-  .custom-dropdown { position: relative; margin: 0 auto 12px; max-width: 340px; width: 100%; text-align: left; z-index: 1000; }
-  .dropdown-trigger { 
-    width: 100%; background: var(--card); border: 2px solid var(--blue); color: var(--navy); 
-    padding: 12px 20px; font-size: .95rem; font-weight: 700; border-radius: 50px; 
-    cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: .2s; 
-  }
-  .dropdown-trigger::after { content: '▼'; font-size: .7rem; transition: transform .3s; }
-  .dropdown-trigger.open { background: var(--tag-bg); }
-  .dropdown-trigger.open::after { transform: rotate(180deg); }
-  .dropdown-menu-wrap { 
-    display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1); 
-    position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 1000; 
-  }
-  .dropdown-menu-wrap.open { grid-template-rows: 1fr; }
-  .dropdown-menu { overflow: hidden; background: var(--card); border-radius: 16px; box-shadow: var(--shadow); border: 1px solid var(--light); display: flex; flex-direction: column; }
-  .dropdown-menu-inner { min-height: 0; max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; }
-  .dropdown-menu-inner button { 
-    background: none; border: none; padding: 14px 20px; text-align: left; font-size: .95rem; 
-    color: var(--text); border-bottom: 1px solid #f1f1f1; cursor: pointer; transition: .15s; 
-  }
-  .dropdown-menu-inner button:last-child { border-bottom: none; }
-  .dropdown-menu-inner button:hover, .dropdown-menu-inner button.active { background: var(--tag-bg); color: var(--blue); font-weight: 700; padding-left: 26px; }
-  
-  .progress-bar-wrap { background: #dde; border-radius: 999px; height: 5px; max-width: 340px; margin: 0 auto 8px; }
-  .progress-bar { background: var(--blue); height: 100%; border-radius: 999px; transition: width .3s; }
+/* ===== FLASHCARD ===== */
+.fc-area{display:flex;flex-direction:column;align-items:center;padding-top:16px;}
+.fc-counter{font-size:.82rem;color:var(--text-light);margin-bottom:10px;}
+.progress-track{width:100%;max-width:480px;height:4px;background:#e0e0e0;border-radius:2px;margin-bottom:18px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),#e74c3c);border-radius:2px;transition:width .4s;}
 
-  /* ── OVERVIEW / DICTIONARY ── */
-  .search-wrap { position: sticky; top: 72px; z-index: 90; background: var(--bg); padding-bottom: 5px; margin-bottom: 12px; }
-  .search-wrap input { 
-    width: 100%; border: 2px solid var(--light); border-radius: 50px; 
-    padding: 12px 40px 12px 18px; font-size: .95rem; outline: none; background: var(--card); color: var(--text); 
-  }
-  .search-wrap input:focus { border-color: var(--blue); }
-  .search-clear { position: absolute; right: 12px; top: calc(50% - 2px); transform: translateY(-50%); background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--muted); }
+.fc-wrap{perspective:1200px;width:100%;max-width:480px;height:270px;margin-bottom:22px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
+.fc-inner.flipped{transform:rotateY(180deg);}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;box-shadow:var(--shadow);}
+.fc-front{background:#fff;}
+.fc-back{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;transform:rotateY(180deg);}
+.fc-cat{font-size:.72rem;padding:3px 12px;border-radius:20px;background:rgba(0,0,0,.06);color:var(--text-light);margin-bottom:14px;}
+.fc-back .fc-cat{background:rgba(255,255,255,.18);color:rgba(255,255,255,.85);}
+.fc-word{font-size:2rem;font-weight:700;text-align:center;line-height:1.35;}
+.fc-hint{font-size:.78rem;color:var(--text-light);margin-top:auto;}
+.fc-back .fc-hint{color:rgba(255,255,255,.45);}
+.fc-actions{position:absolute;top:14px;right:14px;display:flex;gap:6px;}
+.act-btn{width:38px;height:38px;border:none;background:rgba(0,0,0,.05);border-radius:50%;cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:.2s;}
+.act-btn:hover{background:rgba(0,0,0,.1);transform:scale(1.1);}
+.fc-back .act-btn{background:rgba(255,255,255,.14);}
+.fc-back .act-btn:hover{background:rgba(255,255,255,.25);}
+.act-btn.fav{color:#f39c12;}
 
-  #dict-count { font-size: .75rem; color: var(--muted); margin-bottom: 8px; }
-  .dict-list { display: flex; flex-direction: column; gap: 8px; }
-  .dict-card { background: var(--card); border-radius: 12px; padding: 12px 14px; box-shadow: 0 2px 8px rgba(0,0,0,.07); display: flex; align-items: center; gap: 10px; }
-  .dict-card .abbrv { font-size: .72rem; background: var(--navy); color: #fff; border-radius: 6px; padding: 2px 7px; font-weight: 700; min-width: 36px; text-align: center; white-space: nowrap; }
-  .dict-card .en  { font-size: .92rem; font-weight: 700; color: var(--navy); flex: 1; word-break: break-word; }
-  .dict-card .zh  { font-size: .82rem; color: var(--muted); margin-left: auto; white-space: nowrap; }
-  .dict-card .tag { font-size: .65rem; background: var(--tag-bg); color: var(--tag-text); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
-  .dict-card .star-sm { background: none; border: none; font-size: 1.05rem; cursor: pointer; }
+.fc-nav{display:flex;align-items:center;gap:12px;}
+.nav-btn{padding:11px 26px;border:none;background:#fff;font-family:inherit;font-size:.88rem;font-weight:500;color:var(--text);cursor:pointer;border-radius:25px;box-shadow:0 2px 8px rgba(0,0,0,.07);transition:.2s;}
+.nav-btn:hover{box-shadow:0 4px 14px rgba(0,0,0,.12);transform:translateY(-1px);}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed;transform:none!important;box-shadow:none;}
+.nav-btn.flip{background:var(--primary);color:#fff;}.nav-btn.flip:hover{background:var(--primary-dark);}
+.kbd-hint{text-align:center;font-size:.75rem;color:var(--text-light);margin-top:18px;}
+.kbd-hint kbd{display:inline-block;padding:1px 7px;background:#e8e8e8;border-radius:4px;font-family:inherit;font-size:.72rem;margin:0 2px;}
 
-  /* ── QUIZ ── */
-  .quiz-info { text-align: center; margin-bottom: 14px; }
-  .quiz-info span { font-size: .85rem; color: var(--muted); }
-  #quiz-score { font-size: 1rem; font-weight: 700; color: var(--navy); }
-  .quiz-q { background: var(--card); border-radius: 14px; padding: 20px 18px; box-shadow: var(--shadow); margin-bottom: 14px; }
-  .quiz-q .q-label { font-size: .7rem; color: var(--muted); margin-bottom: 6px; }
-  .quiz-q .q-text  { font-size: clamp(1rem, 4vw, 1.3rem); font-weight: 700; color: var(--navy); text-align: center; word-break: break-word; line-height: 1.35; }
-  .quiz-q .q-hint  { font-size: .78rem; color: var(--blue); text-align: center; margin-top: 6px; }
-  .quiz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .quiz-opts button { 
-    background: var(--card); border: 2px solid var(--light); border-radius: 12px; 
-    padding: 16px 10px; font-size: .95rem; cursor: pointer; font-weight: 600; 
-    color: var(--navy); transition: .15s; text-align: center; word-break: break-word; line-height: 1.3; 
-  }
-  .quiz-opts button:hover:not(:disabled) { border-color: var(--blue); background: var(--tag-bg); }
-  .quiz-opts button.correct { background: #d4f7e8; border-color: var(--green); color: var(--green); }
-  .quiz-opts button.wrong   { background: #fde8e8; border-color: var(--red); color: var(--red); }
-  .quiz-opts button:disabled { cursor: default; }
-  .quiz-next { display: block; margin: 14px auto 0; background: var(--blue); color: #fff; border: none; border-radius: 50px; padding: 11px 36px; font-size: .9rem; font-weight: 700; cursor: pointer; transition: .15s; }
-  .quiz-next:hover { background: var(--navy); }
-  #quiz-result { text-align: center; padding: 30px 20px; }
-  #quiz-result h2 { font-size: 1.5rem; margin-bottom: 8px; }
-  #quiz-result p  { color: var(--muted); margin-bottom: 20px; }
-  #quiz-result button { background: var(--blue); color: #fff; border: none; border-radius: 50px; padding: 12px 32px; font-size: .9rem; font-weight: 700; cursor: pointer; }
-  .fav-only-toggle { display: flex; align-items: center; gap: 8px; font-size: .9rem; color: var(--muted); margin-bottom: 12px; justify-content: center; }
-  .fav-only-toggle input { width: 18px; height: 18px; cursor: pointer; }
+/* ===== OVERVIEW ===== */
+.search-box{width:100%;padding:11px 20px;border:2px solid #e0e0e0;border-radius:25px;font-family:inherit;font-size:.92rem;outline:none;transition:.25s;margin:14px 0 16px;}
+.search-box:focus{border-color:var(--primary);}
+.ov-stats{text-align:center;font-size:.82rem;color:var(--text-light);margin-bottom:14px;}
+.grp-title{font-size:.82rem;font-weight:700;color:var(--primary);padding:10px 0 6px;border-bottom:2px solid var(--primary);margin:18px 0 8px;}
+.vocab-row{display:flex;align-items:center;padding:12px 14px;background:#fff;border-radius:12px;margin-bottom:5px;box-shadow:0 1px 4px rgba(0,0,0,.04);transition:.2s;cursor:pointer;}
+.vocab-row:hover{box-shadow:0 4px 12px rgba(0,0,0,.08);transform:translateX(4px);}
+.vocab-row .eng{font-weight:600;font-size:.92rem;flex:1;}
+.vocab-row .chi{font-size:.88rem;color:var(--text-light);margin-left:10px;}
+.vocab-row .row-acts{display:flex;gap:2px;margin-left:10px;}
+.vocab-row .row-acts button{width:32px;height:32px;border:none;background:0;cursor:pointer;border-radius:50%;font-size:.88rem;transition:.2s;}
+.vocab-row .row-acts button:hover{background:#f0f0f0;}
+.vocab-row .row-acts button.fav{color:#f39c12;}
+.vocab-row .row-acts button.del{color:var(--primary-light);}
+
+/* ===== QUIZ ===== */
+.qz-area{display:flex;flex-direction:column;align-items:center;padding-top:16px;}
+.qz-modes{display:flex;gap:6px;margin-bottom:14px;}
+.qz-mode{padding:6px 14px;border:2px solid #e0e0e0;border-radius:20px;background:#fff;font-family:inherit;font-size:.78rem;cursor:pointer;transition:.25s;}
+.qz-mode.active{border-color:var(--primary);background:var(--primary);color:#fff;}
+.qz-info{font-size:.85rem;color:var(--text-light);margin-bottom:6px;}
+.qz-info b{color:var(--text);font-size:1.05rem;}
+.qz-card{width:100%;max-width:480px;background:#fff;border-radius:var(--radius);padding:30px 28px;box-shadow:var(--shadow);text-align:center;}
+.qz-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:10px;}
+.qz-q{font-size:1.7rem;font-weight:700;margin-bottom:26px;line-height:1.3;}
+.qz-opts{display:flex;flex-direction:column;gap:9px;}
+.qz-opt{padding:13px 18px;border:2px solid #e8e8e8;border-radius:12px;background:#fff;font-family:inherit;font-size:.95rem;cursor:pointer;transition:.2s;text-align:left;}
+.qz-opt:hover:not(:disabled){border-color:var(--primary);background:#fff5f5;}
+.qz-opt.correct{border-color:var(--success);background:#eafaf1;color:var(--success);font-weight:600;}
+.qz-opt.wrong{border-color:var(--primary-light);background:#fdecea;color:var(--primary-light);}
+.qz-opt:disabled{cursor:default;}
+.qz-next{margin-top:18px;padding:11px 30px;border:none;background:var(--primary);color:#fff;font-family:inherit;font-size:.92rem;font-weight:500;border-radius:25px;cursor:pointer;transition:.2s;}
+.qz-next:hover{background:var(--primary-dark);}
+.qz-result{text-align:center;padding:40px 20px;}
+.qz-result .big{font-size:3rem;font-weight:900;color:var(--primary);}
+.qz-result .lbl{font-size:1rem;color:var(--text-light);margin-top:6px;}
+.empty{text-align:center;padding:60px 20px;color:var(--text-light);}
+.empty .em{font-size:2.8rem;margin-bottom:10px;}
+
+/* ===== MANAGE (NEW) ===== */
+.manage-section{background:#fff;padding:24px;border-radius:var(--radius);box-shadow:var(--shadow);margin-top:16px;}
+.manage-title{font-size:1.05rem;font-weight:700;color:var(--primary);margin-bottom:16px;border-bottom:2px solid #f0f2f5;padding-bottom:8px;}
+.form-group{margin-bottom:12px;}
+.form-input{width:100%;padding:11px 16px;border:2px solid #e0e0e0;border-radius:12px;font-family:inherit;font-size:.92rem;outline:none;transition:.25s;}
+.form-input:focus{border-color:var(--primary);}
+.form-btn{padding:10px 20px;border:none;background:var(--primary);color:#fff;font-family:inherit;font-size:.9rem;font-weight:500;border-radius:12px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:6px;}
+.form-btn:hover{background:var(--primary-dark);}
+.form-btn.sec{background:#e0e0e0;color:var(--text);}
+.form-btn.sec:hover{background:#d0d0d0;}
+.form-btn.succ{background:var(--success);}
+.form-btn.succ:hover{background:#219653;}
+.json-area{width:100%;height:140px;padding:12px;border:2px solid #e0e0e0;border-radius:12px;font-family:monospace;font-size:.85rem;resize:vertical;margin-bottom:12px;outline:none;}
+.json-area:focus{border-color:var(--primary);}
+.msg-box{font-size:.85rem;margin-top:10px;min-height:20px;font-weight:500;}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.fade-in{animation:fadeIn .3s ease;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+.shake{animation:shake .35s ease;}
+@keyframes pop{0%,100%{transform:scale(1);}50%{transform:scale(1.25);}}
+.pop{animation:pop .25s ease;}
+
+@media(max-width:480px){
+  .fc-wrap{height:230px;}.fc-word{font-size:1.5rem;}.qz-q{font-size:1.35rem;}
+  .nav-btn{padding:9px 18px;font-size:.82rem;}.tab-btn{padding:7px 14px;font-size:.82rem;}
+  .form-btn{width:100%;margin-bottom:8px;}
+}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>🚑 新北市消防局 EMT 常用英文字彙</h1>
-  <p>思婕整理 · 全方位背單字學習工具</p>
-</header>
-
-<nav>
-  <button class="active" onclick="showPage('fc')">📇 閃卡</button>
-  <button onclick="showPage('dict')">📖 總覽</button>
-  <button onclick="showPage('quiz')">📝 測驗</button>
-</nav>
-
-<div class="page active" id="page-fc">
-  <div class="custom-dropdown" id="dropdown-fc">
-    <button class="dropdown-trigger" id="fc-cat-trigger" onclick="toggleDropdown('fc')">分類：全部</button>
-    <div class="dropdown-menu-wrap" id="fc-cat-wrap">
-      <div class="dropdown-menu">
-        <div class="dropdown-menu-inner" id="fc-cat-btns"></div>
-      </div>
-    </div>
-  </div>
-  <label class="fav-only-toggle"><input type="checkbox" id="fc-fav-only" onchange="toggleFcFavOnly()"> ⭐ 只顯示最愛</label>
-  <div id="flashcard-count"></div>
-  <div class="progress-bar-wrap"><div class="progress-bar" id="fc-progress"></div></div>
-  
-  <div class="fc-wrap" id="fc-wrap" onclick="if(!window.isSwiping) flipCard()">
-    <div class="fc-inner" id="fc-inner">
-      <div class="fc-front">
-        <button class="tts-btn" onclick="speakEN(event)" title="朗讀">🔊</button>
-        <button class="star-btn" onclick="toggleStar(event)" id="fc-star">☆</button>
-        <span class="fc-hint">點擊翻面看中文</span>
-        <div class="fc-abbrv" id="fc-abbrv"></div>
-        <div class="fc-en" id="fc-en">載入中...</div>
-        <div class="fc-tag-row" id="fc-tags-front"></div>
-      </div>
-      <div class="fc-back">
-        <button class="star-btn" onclick="toggleStar(event)" id="fc-star-back" style="color:#fff;">☆</button>
-        <span class="fc-hint">翻回英文</span>
-        <div class="fc-zh" id="fc-zh"></div>
-        <div class="fc-tag-row" id="fc-tags-back"></div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="fc-controls">
-    <button onclick="prevCard()">← 上一張</button>
-    <button id="fc-flip" onclick="flipCard()">翻面</button>
-    <button onclick="nextCard()">下一張 →</button>
-  </div>
-  <p style="text-align:center;font-size:.72rem;color:var(--muted);margin-top:4px;">鍵盤：← → 切換 · Space 翻面</p>
+<div class="header">
+  <div class="icon">🚑</div>
+  <h1>新北市消防局 EMT 常用英文字彙</h1>
+  <div class="sub">思婕整理 · 全方位背單字學習工具</div>
 </div>
 
-<div class="page" id="page-dict">
-  <div class="search-wrap">
-    <input type="text" id="search-input" placeholder="搜尋英文、中文、縮寫…" oninput="renderDict()">
-    <button class="search-clear" onclick="clearSearch()">✕</button>
-  </div>
-  <div class="custom-dropdown" id="dropdown-dict">
-    <button class="dropdown-trigger" id="dict-cat-trigger" onclick="toggleDropdown('dict')">分類：全部</button>
-    <div class="dropdown-menu-wrap" id="dict-cat-wrap">
-      <div class="dropdown-menu">
-        <div class="dropdown-menu-inner" id="dict-cat-btns"></div>
-      </div>
-    </div>
-  </div>
-  <div id="dict-count"></div>
-  <div class="dict-list" id="dict-list"></div>
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('flash')">📇 閃卡</button>
+  <button class="tab-btn" onclick="switchTab('overview')">📖 總覽</button>
+  <button class="tab-btn" onclick="switchTab('quiz')">📝 測驗</button>
+  <button class="tab-btn" onclick="switchTab('manage')">⚙️ 新增 / 管理</button>
 </div>
 
-<div class="page" id="page-quiz">
-  <label class="fav-only-toggle"><input type="checkbox" id="quiz-fav-only" onchange="initQuiz()"> ⭐ 只考最愛單字</label>
-  <div class="quiz-info"><span id="quiz-progress"></span> &nbsp;|&nbsp; <span id="quiz-score">得分：0 / 0</span></div>
-  <div id="quiz-area"></div>
+<div class="controls" id="mainControls">
+  <select class="ctl-select" id="catSelect" onchange="onFilterChange()">
+    <option value="全部">分類：全部</option>
+  </select>
+  <button class="ctl-btn" id="favBtn" onclick="toggleFavOnly()">⭐ 只顯示最愛</button>
+  <button class="ctl-btn" id="shuffleBtn" onclick="shuffleCards()">🔀 隨機排序</button>
+</div>
+
+<div class="container">
+
+  <div class="panel active" id="panel-flash">
+    <div class="fc-area">
+      <div class="fc-counter" id="fcCounter">0 / 0</div>
+      <div class="progress-track"><div class="progress-fill" id="fcProgress" style="width:0%"></div></div>
+      <div class="fc-wrap" id="fcWrap" onclick="flipCard()">
+        <div class="fc-inner" id="fcInner">
+          <div class="fc-face fc-front" id="fcFront">
+            <div class="fc-actions">
+              <button class="act-btn" id="speakBtnF" onclick="event.stopPropagation();speakWord()">🔊</button>
+              <button class="act-btn" id="favBtnF" onclick="event.stopPropagation();toggleFav()">☆</button>
+            </div>
+            <div class="fc-cat" id="fcCatF"></div>
+            <div class="fc-word" id="fcEng"></div>
+            <div class="fc-hint">點擊翻面看中文</div>
+          </div>
+          <div class="fc-face fc-back" id="fcBack">
+            <div class="fc-actions">
+              <button class="act-btn" id="speakBtnB" onclick="event.stopPropagation();speakWord()">🔊</button>
+              <button class="act-btn" id="favBtnB" onclick="event.stopPropagation();toggleFav()">☆</button>
+            </div>
+            <div class="fc-cat" id="fcCatB"></div>
+            <div class="fc-word" id="fcZh"></div>
+            <div class="fc-hint">點擊翻回英文</div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-nav">
+        <button class="nav-btn" id="prevBtn" onclick="prevCard()">← 上一張</button>
+        <button class="nav-btn flip" onclick="flipCard()">翻面</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextCard()">下一張 →</button>
+      </div>
+      <div class="kbd-hint">鍵盤：<kbd>←</kbd> <kbd>→</kbd> 切換 · <kbd>Space</kbd> 翻面 · <kbd>S</kbd> 發音</div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-overview">
+    <input class="search-box" id="searchBox" placeholder="🔍 搜尋英文或中文…" oninput="renderOverview()">
+    <div class="ov-stats" id="ovStats"></div>
+    <div id="ovList"></div>
+  </div>
+
+  <div class="panel" id="panel-quiz">
+    <div class="qz-area">
+      <div class="qz-modes">
+        <button class="qz-mode active" onclick="setQuizMode('en2zh',this)">英 → 中</button>
+        <button class="qz-mode" onclick="setQuizMode('zh2en',this)">中 → 英</button>
+      </div>
+      <div class="qz-info" id="qzInfo">得分：<b>0 / 0</b></div>
+      <div class="progress-track" style="max-width:480px;margin-bottom:18px;"><div class="progress-fill" id="qzProgress" style="width:0%"></div></div>
+      <div id="qzContent"></div>
+      <button class="qz-next" id="qzStart" onclick="startQuiz()">開始測驗（10 題）</button>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-manage">
+    <div class="manage-section fade-in">
+      <div class="manage-title">➕ 新增單字</div>
+      <div class="form-group"><input type="text" id="newEn" class="form-input" placeholder="英文單字 (例: Splint)"></div>
+      <div class="form-group"><input type="text" id="newZh" class="form-input" placeholder="中文意思 (例: 夾板)"></div>
+      <div class="form-group"><input type="text" id="newCat" class="form-input" placeholder="分類 (例: 器材裝備，留白則為『自訂分類』)"></div>
+      <button class="form-btn" onclick="addSingleWord()">加入單字庫</button>
+      <div id="addMsg" class="msg-box" style="color:var(--success);"></div>
+    </div>
+
+    <div class="manage-section fade-in" style="animation-delay: 0.1s;">
+      <div class="manage-title">📄 JSON 批次匯入 / 匯出</div>
+      <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">格式範例：<code>[{"en":"Apple", "zh":"蘋果", "cat":"水果"}]</code></p>
+      <textarea id="jsonArea" class="json-area" placeholder="在此貼上 JSON 以匯入，或點擊下方按鈕匯出現有資料..."></textarea>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="form-btn" onclick="importFromJSON()">⬇️ 匯入 JSON</button>
+        <button class="form-btn succ" onclick="exportToJSON()">⬆️ 匯出 JSON</button>
+        <button class="form-btn sec" onclick="resetData()">🔄 還原預設單字庫</button>
+      </div>
+      <div id="jsonMsg" class="msg-box"></div>
+    </div>
+  </div>
+
 </div>
 
 <script>
-// ════════════════════════════════════
-//  DATA — 完整字彙庫
-// ════════════════════════════════════
-const VOCAB = [
-  // 意識
-  {en:"Conscious",zh:"意識",abbr:"Con's",cat:"意識"},
-  {en:"Clear",zh:"清醒",abbr:"",cat:"意識"},
-  {en:"Drowse",zh:"嗜睡",abbr:"",cat:"意識"},
-  {en:"Confuse",zh:"昏亂",abbr:"",cat:"意識"},
-  {en:"Coma",zh:"昏迷",abbr:"",cat:"意識"},
-  {en:"To pain",zh:"對痛有反應",abbr:"",cat:"意識"},
-  // 呼吸道
-  {en:"Airway",zh:"呼吸道",abbr:"A",cat:"呼吸道"},
-  {en:"Oral airway",zh:"口咽",abbr:"OPA",cat:"呼吸道"},
-  {en:"Nasal airway",zh:"鼻咽",abbr:"NPA",cat:"呼吸道"},
-  {en:"Suction",zh:"抽吸",abbr:"",cat:"呼吸道"},
-  {en:"Chocking",zh:"異物梗塞",abbr:"",cat:"呼吸道"},
-  {en:"Laryngeal Mask Airway",zh:"喉罩呼吸道",abbr:"LMA",cat:"呼吸道"},
-  {en:"On endo",zh:"插管",abbr:"",cat:"呼吸道"},
-  // 呼吸
-  {en:"Breathing",zh:"呼吸",abbr:"B",cat:"呼吸"},
-  {en:"Nasal cannula",zh:"鼻管",abbr:"",cat:"呼吸"},
-  {en:"Mask",zh:"面罩",abbr:"",cat:"呼吸"},
-  {en:"Non-Rebreathing Mask",zh:"儲留袋面罩",abbr:"NRM",cat:"呼吸"},
-  {en:"Bag-valve Mask",zh:"袋瓣罩甦醒球",abbr:"BVM",cat:"呼吸"},
-  {en:"Ambu Bagging",zh:"人工呼吸",abbr:"",cat:"呼吸"},
-  {en:"Short Of Breath",zh:"喘",abbr:"SOB",cat:"呼吸"},
-  {en:"Hyperventilation",zh:"過度換氣",abbr:"",cat:"呼吸"},
-  {en:"Cyanosis",zh:"發紺",abbr:"",cat:"呼吸"},
-  {en:"SPO2",zh:"血氧濃度",abbr:"SPO2",cat:"呼吸"},
-  // 循環
-  {en:"Circulation",zh:"循環",abbr:"C",cat:"循環"},
-  {en:"Blood Pressure",zh:"脈搏/血壓",abbr:"BP",cat:"循環"},
-  {en:"Pale",zh:"膚色蒼白",abbr:"",cat:"循環"},
-  {en:"Cold sweating",zh:"體溫濕冷",abbr:"",cat:"循環"},
-  {en:"Fever",zh:"發燒",abbr:"",cat:"循環"},
-  {en:"Capillary Refilling Time",zh:"微血管填充",abbr:"CRT",cat:"循環"},
-  {en:"Shock",zh:"休克",abbr:"",cat:"循環"},
-  {en:"Artery",zh:"動脈",abbr:"",cat:"循環"},
-  {en:"Vein",zh:"靜脈",abbr:"",cat:"循環"},
-  // 鑑別診斷
-  {en:"Differential Diagnosis",zh:"鑑別診斷",abbr:"Dx",cat:"診斷"},
-  {en:"Glasgow Coma Scale",zh:"葛氏昏迷指數",abbr:"GCS",cat:"診斷"},
-  {en:"Pupil",zh:"瞳孔",abbr:"",cat:"診斷"},
-  {en:"Light reflex",zh:"對光反應",abbr:"",cat:"診斷"},
-  {en:"Dilate",zh:"延遲、擴大",abbr:"",cat:"診斷"},
-  {en:"Breathing Sound",zh:"呼吸聲",abbr:"",cat:"診斷"},
-  {en:"Lung Sound",zh:"肺音",abbr:"",cat:"診斷"},
-  // 主訴
-  {en:"Chief Complain",zh:"主訴",abbr:"C.C.",cat:"主訴"},
-  {en:"Syncope",zh:"暈厥",abbr:"",cat:"主訴"},
-  {en:"Vomiting",zh:"嘔吐",abbr:"",cat:"主訴"},
-  {en:"Seizure / Convulsion",zh:"全身性/局部性抽搐",abbr:"",cat:"主訴"},
-  {en:"Chest pain",zh:"胸痛",abbr:"",cat:"主訴"},
-  {en:"Abdominal pain",zh:"腹痛",abbr:"",cat:"主訴"},
-  {en:"Low back pain",zh:"下背痛",abbr:"",cat:"主訴"},
-  {en:"Headache",zh:"頭痛",abbr:"",cat:"主訴"},
-  {en:"Dizzy",zh:"頭暈",abbr:"",cat:"主訴"},
-  {en:"Cough",zh:"咳嗽",abbr:"",cat:"主訴"},
-  {en:"Drug Overdose",zh:"藥物過量",abbr:"",cat:"主訴"},
-  {en:"Bloody Stool",zh:"解血便",abbr:"",cat:"主訴"},
-  {en:"Tarry Stool",zh:"解黑便",abbr:"",cat:"主訴"},
-  {en:"Edema",zh:"水腫",abbr:"",cat:"主訴"},
-  // 病史
-  {en:"History",zh:"病史",abbr:"Hx",cat:"病史"},
-  {en:"Diabetes Mellitus",zh:"糖尿病",abbr:"DM",cat:"病史"},
-  {en:"Heart disease",zh:"心臟病",abbr:"",cat:"病史"},
-  {en:"Myocardial Infarction",zh:"心肌梗塞",abbr:"MI",cat:"病史"},
-  {en:"Cerebral Vascular Accident",zh:"腦中風",abbr:"CVA",cat:"病史"},
-  {en:"Cancer",zh:"癌症",abbr:"CA",cat:"病史"},
-  {en:"Psychosis",zh:"精神病患",abbr:"",cat:"病史"},
-  {en:"Psychic",zh:"精神病",abbr:"",cat:"病史"},
-  {en:"Hypertension",zh:"高血壓",abbr:"HTN",cat:"病史"},
-  {en:"Asthma",zh:"氣喘",abbr:"",cat:"病史"},
-  {en:"Tuberculosis",zh:"肺結核",abbr:"TB",cat:"病史"},
-  {en:"Chronic Obstructive Pulmonary Disease",zh:"慢性阻塞性肺疾病",abbr:"COPD",cat:"病史"},
-  // 創傷
-  {en:"Wound",zh:"傷口",abbr:"",cat:"創傷"},
-  {en:"Laceration wound",zh:"撕裂傷",abbr:"L/W",cat:"創傷"},
-  {en:"Abrasion wound",zh:"擦傷",abbr:"A/W",cat:"創傷"},
-  {en:"Crushing injury",zh:"壓碎傷",abbr:"",cat:"創傷"},
-  {en:"C-spinal injury",zh:"頸椎受傷",abbr:"",cat:"創傷"},
-  {en:"Contusion",zh:"挫傷",abbr:"",cat:"創傷"},
-  {en:"Fracture",zh:"骨折",abbr:"Fr'",cat:"創傷"},
-  {en:"Open fracture",zh:"開放性骨折",abbr:"",cat:"創傷"},
-  {en:"Dislocation",zh:"脫臼",abbr:"",cat:"創傷"},
-  {en:"Hematoma",zh:"血腫",abbr:"",cat:"創傷"},
-  {en:"Neck Collar",zh:"頸圈",abbr:"",cat:"創傷"},
-  // 頭部
-  {en:"Epidural Hemorrhage",zh:"硬腦膜上出血",abbr:"EDH",cat:"頭部"},
-  {en:"Subdural Hemorrhage",zh:"硬腦膜下出血",abbr:"SDH",cat:"頭部"},
-  {en:"Subarachnoid Hemorrhage",zh:"蜘蛛膜下腔出血",abbr:"SAH",cat:"頭部"},
-  {en:"Intracerebral Hemorrhage",zh:"顱內出血",abbr:"ICH",cat:"頭部"},
-  {en:"Brain concussion",zh:"腦震盪",abbr:"",cat:"頭部"},
-  {en:"Cerebral contusion",zh:"腦挫傷",abbr:"",cat:"頭部"},
-  {en:"Brain edema",zh:"腦水腫",abbr:"",cat:"頭部"},
-  {en:"Ischemia",zh:"腦缺血",abbr:"",cat:"頭部"},
-  {en:"Infarction",zh:"腦梗塞壞死",abbr:"",cat:"頭部"},
-  {en:"Diffuse Axonal Injury",zh:"瀰漫性神經軸鞘損傷",abbr:"DAI",cat:"頭部"},
-  {en:"Hemorrhagic Stroke",zh:"出血性腦中風",abbr:"",cat:"頭部"},
-  {en:"Ischemic Stroke",zh:"缺血性腦中風",abbr:"",cat:"頭部"},
-  {en:"Raccoon's Eyes",zh:"浣熊眼",abbr:"",cat:"頭部"},
-  {en:"Battle's Sign",zh:"巴氏徵候",abbr:"",cat:"頭部"},
-  {en:"Cerebral Blood Flow",zh:"腦部血流",abbr:"CBF",cat:"頭部"},
-  {en:"Intracranial Pressure",zh:"顱內壓",abbr:"ICP",cat:"頭部"},
-  {en:"Cerebral Perfusion Pressure",zh:"大腦灌流壓",abbr:"CPP",cat:"頭部"},
-  {en:"Mean Arterial Pressure",zh:"平均動脈壓",abbr:"MAP",cat:"頭部"},
-  {en:"Decorticate Posturing",zh:"去大腦皮質姿勢",abbr:"",cat:"頭部"},
-  {en:"Decerebrate Posturing",zh:"去大腦姿勢",abbr:"",cat:"頭部"},
-  {en:"Spinal shock",zh:"脊髓性休克",abbr:"",cat:"頭部"},
-  {en:"Neurogenic shock",zh:"神經性休克",abbr:"",cat:"頭部"},
-  // 呼吸系統
-  {en:"Foreign Body Airway Obstruction",zh:"呼吸道異物梗塞",abbr:"FBAO",cat:"呼吸系統"},
-  {en:"Upper Airway Obstruction",zh:"上呼吸道阻塞",abbr:"UAO",cat:"呼吸系統"},
-  {en:"Upper Respiratory Infection",zh:"上呼吸道感染",abbr:"URI",cat:"呼吸系統"},
-  {en:"Adult Respiratory Distress Syndrome",zh:"成人呼吸窘迫症候群",abbr:"ARDS",cat:"呼吸系統"},
-  {en:"Severe Acute Respiratory Syndrome",zh:"嚴重呼吸道症候群",abbr:"SARS",cat:"呼吸系統"},
-  {en:"Epiglottitis",zh:"會厭炎",abbr:"",cat:"呼吸系統"},
-  {en:"Chronic bronchitis",zh:"慢性支氣管炎",abbr:"",cat:"呼吸系統"},
-  {en:"Pneumonia",zh:"肺炎",abbr:"",cat:"呼吸系統"},
-  {en:"Emphysema",zh:"肺氣腫",abbr:"",cat:"呼吸系統"},
-  {en:"Pulmonary edema",zh:"肺水腫",abbr:"",cat:"呼吸系統"},
-  {en:"Pulmonary embolism",zh:"肺栓塞",abbr:"",cat:"呼吸系統"},
-  {en:"Bronchial sounds",zh:"支氣管音",abbr:"",cat:"呼吸系統"},
-  {en:"Bronchovesicular sounds",zh:"支氣管肺泡音",abbr:"",cat:"呼吸系統"},
-  {en:"Vesicular sounds",zh:"肺泡音",abbr:"",cat:"呼吸系統"},
-  {en:"Carotid bruits",zh:"頸動脈雜音",abbr:"",cat:"呼吸系統"},
-  {en:"Stridor",zh:"喘鳴音",abbr:"",cat:"呼吸系統"},
-  {en:"Wheezes",zh:"哮喘音",abbr:"",cat:"呼吸系統"},
-  {en:"Coarse Crackles",zh:"粗囉音/爆裂音",abbr:"",cat:"呼吸系統"},
-  {en:"Fine Crackles / Rales",zh:"細囉音/濕囉音",abbr:"",cat:"呼吸系統"},
-  {en:"Rhonchi",zh:"鼾音/乾囉音",abbr:"",cat:"呼吸系統"},
-  {en:"Friction rub",zh:"肋膜摩擦音",abbr:"",cat:"呼吸系統"},
-  // 心血管
-  {en:"Acute Myocardial Infarction",zh:"急性心肌梗塞",abbr:"AMI",cat:"心血管"},
-  {en:"Acute Coronary Syndrome",zh:"急性冠狀動脈症候群",abbr:"ACS",cat:"心血管"},
-  {en:"Coronary Artery Disease",zh:"冠心症",abbr:"CAD",cat:"心血管"},
-  {en:"Congestive Heart Failure",zh:"鬱血性心衰竭",abbr:"CHF",cat:"心血管"},
-  {en:"Atrial Septal Defect",zh:"心房中膈缺損",abbr:"ASD",cat:"心血管"},
-  // 胸部創傷
-  {en:"Flail Chest",zh:"連枷胸",abbr:"",cat:"胸部創傷"},
-  {en:"Massive Hemothorax",zh:"大量血胸",abbr:"",cat:"胸部創傷"},
-  {en:"Tension Pneumothorax",zh:"張力性氣胸",abbr:"",cat:"胸部創傷"},
-  {en:"Open Pneumothorax",zh:"開放性氣胸",abbr:"",cat:"胸部創傷"},
-  {en:"Cardiac tamponade",zh:"心包膜填塞",abbr:"",cat:"胸部創傷"},
-  {en:"Airway Obstruction",zh:"呼吸道阻塞",abbr:"",cat:"胸部創傷"},
-  {en:"Traumatic Aortic Rupture",zh:"創傷性主動脈剝離",abbr:"",cat:"胸部創傷"},
-  {en:"Tracheal / Bronchial Rupture",zh:"氣管/支氣管斷裂",abbr:"",cat:"胸部創傷"},
-  {en:"Myocardial Contusion",zh:"心肌挫傷",abbr:"",cat:"胸部創傷"},
-  {en:"Diaphragmatic Rupture",zh:"橫膈膜破裂",abbr:"",cat:"胸部創傷"},
-  {en:"Esophageal Injury",zh:"食道傷害",abbr:"",cat:"胸部創傷"},
-  {en:"Pulmonary Contusion",zh:"肺挫傷",abbr:"",cat:"胸部創傷"},
-  {en:"Rib Fractures",zh:"肋骨骨折",abbr:"",cat:"胸部創傷"},
-  {en:"Traumatic Asphyxia",zh:"創傷性窒息",abbr:"",cat:"胸部創傷"},
-  {en:"Commotio Cordis",zh:"心臟震盪",abbr:"",cat:"胸部創傷"},
-  // 心律
-  {en:"Cardiac",zh:"心臟的",abbr:"",cat:"心律"},
-  {en:"Rhythm",zh:"節律",abbr:"",cat:"心律"},
-  {en:"Sinoatrial node / Sinus node",zh:"竇房結",abbr:"SA node",cat:"心律"},
-  {en:"Atrioventricular node",zh:"房室結",abbr:"AV node",cat:"心律"},
-  {en:"Bundle of His",zh:"希氏束",abbr:"",cat:"心律"},
-  {en:"Left/Right bundle branch",zh:"左、右分枝束",abbr:"",cat:"心律"},
-  {en:"Sinus Tachycardia",zh:"竇性頻脈",abbr:"ST",cat:"心律"},
-  {en:"Sinus Bradycardia",zh:"竇性緩脈",abbr:"SB",cat:"心律"},
-  {en:"Normal Sinus Rhythm",zh:"正常竇性心律",abbr:"NSR",cat:"心律"},
-  {en:"Junctional Escape Rhythm",zh:"房室交界處跳脫心律",abbr:"JER",cat:"心律"},
-  {en:"Pacemaker Rhythm",zh:"調節器心律",abbr:"",cat:"心律"},
-  {en:"Asystole",zh:"心跳停止",abbr:"",cat:"心律"},
-  {en:"Pulseless Electrical Activity",zh:"無脈性電氣活動",abbr:"PEA",cat:"心律"},
-  {en:"Supraventricular Arrhythmias",zh:"心室上心律不整",abbr:"SVR",cat:"心律"},
-  {en:"Paroxysmal Supraventricular Tachycardia",zh:"陣發性心室上頻脈",abbr:"PSVT",cat:"心律"},
-  {en:"Atrial Flutter",zh:"心房撲動",abbr:"AF",cat:"心律"},
-  {en:"Atrial fibrillation",zh:"心房顫動",abbr:"Af",cat:"心律"},
-  {en:"Multifocal Atrial Tachycardia",zh:"多源性心房頻脈",abbr:"MAT",cat:"心律"},
-  {en:"Paroxysmal Atrial Tachycardia",zh:"陣發性心房頻脈",abbr:"PAT",cat:"心律"},
-  {en:"Ectopic Atrial Tachycardia",zh:"異位性心房頻脈",abbr:"EAT",cat:"心律"},
-  {en:"Premature Ventricular Contraction",zh:"心室期外收縮",abbr:"PVC",cat:"心律"},
-  {en:"Ventricular Fibrillation",zh:"心室顫動",abbr:"VF",cat:"心律"},
-  {en:"Ventricular Tachycardia",zh:"心室頻脈",abbr:"VT",cat:"心律"},
-  {en:"Polymorphic Ventricular Tachycardia",zh:"多發性心室頻脈",abbr:"PVT",cat:"心律"},
-  {en:"Accelerated Idioventricular Rhythm",zh:"加速型心室心律",abbr:"AIR",cat:"心律"},
-  {en:"Torsades De Pointes",zh:"多形性的心室頻脈",abbr:"TDP",cat:"心律"},
-  {en:"Bundle Branch Block",zh:"分支束阻斷",abbr:"BBB",cat:"心律"},
-  {en:"Automatic External Defibrillator",zh:"自動體外去顫器",abbr:"AED",cat:"心律"},
-  {en:"Electrocardiogram",zh:"心電圖",abbr:"ECG",cat:"心律"},
-  // 氣管插管
-  {en:"Intubation",zh:"插管",abbr:"",cat:"插管"},
-  {en:"Rapid Sequence Intubation",zh:"快速氣管插管",abbr:"RSI",cat:"插管"},
-  {en:"Laryngeal Mask Airway",zh:"喉頭罩呼吸道",abbr:"LMA",cat:"插管"},
-  {en:"Endotracheal tube",zh:"氣管內管",abbr:"ETT",cat:"插管"},
-  {en:"Cuff",zh:"氣囊",abbr:"",cat:"插管"},
-  {en:"Stylet",zh:"通條",abbr:"",cat:"插管"},
-  {en:"Laryngoscope",zh:"喉頭鏡",abbr:"",cat:"插管"},
-  {en:"Ambubag",zh:"甦醒球",abbr:"",cat:"插管"},
-  {en:"Stethoscope",zh:"聽診器",abbr:"",cat:"插管"},
-  {en:"Esophageal detect device",zh:"食道偵測器",abbr:"EDD",cat:"插管"},
-  {en:"End Tidal CO2",zh:"潮氣末二氧化碳偵測器",abbr:"ETCO2",cat:"插管"},
-  {en:"Magill",zh:"異物鉗",abbr:"",cat:"插管"},
-  {en:"Ventilator",zh:"呼吸器",abbr:"",cat:"插管"},
-  {en:"Pharynx",zh:"咽",abbr:"",cat:"插管"},
-  {en:"Nasopharynx",zh:"鼻咽",abbr:"",cat:"插管"},
-  {en:"Oropharynx",zh:"口咽",abbr:"",cat:"插管"},
-  {en:"Laryngopharynx",zh:"喉咽",abbr:"",cat:"插管"},
-  {en:"Laryngeal",zh:"咽喉的",abbr:"",cat:"插管"},
-  {en:"Throat",zh:"喉",abbr:"",cat:"插管"},
-  {en:"Epiglottis",zh:"會厭",abbr:"",cat:"插管"},
-  {en:"Glottis",zh:"聲門",abbr:"",cat:"插管"},
-  {en:"Vocal cords",zh:"聲帶",abbr:"",cat:"插管"},
-  // 異常呼吸
-  {en:"Kussmaul's Breathing",zh:"庫斯毛耳氏呼吸",abbr:"",cat:"異常呼吸"},
-  {en:"Cheyne-Stokes Breathing",zh:"陳施氏/潮氏呼吸",abbr:"",cat:"異常呼吸"},
-  {en:"Apneustic Breathing",zh:"喟嘆式呼吸",abbr:"",cat:"異常呼吸"},
-  {en:"Ataxic (Biot's) Breathing",zh:"畢歐式呼吸",abbr:"",cat:"異常呼吸"},
-  {en:"Obstructive breathing",zh:"慢性阻塞性肺病呼吸型態",abbr:"",cat:"異常呼吸"},
-  {en:"Rapid shallow breathing",zh:"限制性肺病呼吸型態",abbr:"",cat:"異常呼吸"},
-  {en:"Paradoxical respiration",zh:"逆理性呼吸",abbr:"",cat:"異常呼吸"},
-  {en:"Agonal respiration",zh:"頻死呼吸",abbr:"",cat:"異常呼吸"},
-  {en:"Orthopnea",zh:"端坐呼吸",abbr:"",cat:"異常呼吸"},
-  // 專有名詞
-  {en:"Emergency Medical Service System",zh:"緊急醫療救護系統",abbr:"EMSS",cat:"專有名詞"},
-  {en:"Emergency Medical Technician Paramedic",zh:"高級救護技術員",abbr:"EMTP",cat:"專有名詞"},
-  {en:"Advanced Cardiac Life Support",zh:"高級心臟救命術",abbr:"ACLS",cat:"專有名詞"},
-  {en:"Advanced Pediatric Life Support",zh:"高級小兒救命術",abbr:"PALS/APLS",cat:"專有名詞"},
-  {en:"Emergency Trauma Training Course",zh:"急診創傷訓練課程",abbr:"ETTC",cat:"專有名詞"},
-  {en:"Death On Arrival",zh:"到院前死亡",abbr:"DOA",cat:"專有名詞"},
-  {en:"Out-of-Hospital Cardiac Arrest",zh:"到院前心臟停止",abbr:"OHCA",cat:"專有名詞"},
-  {en:"Cardio Pulmonary Resuscitation",zh:"心肺復甦術",abbr:"CPR",cat:"專有名詞"},
-  {en:"Recovery Of Spontaneous Circulation",zh:"恢復自發性循環",abbr:"ROSC",cat:"專有名詞"},
-  {en:"Chain Of Survival",zh:"生命之鏈",abbr:"",cat:"專有名詞"},
-  {en:"Primary survey",zh:"初步評估",abbr:"",cat:"專有名詞"},
-  {en:"Secondary survey",zh:"二度評估",abbr:"",cat:"專有名詞"},
-  {en:"Heimlich maneuver",zh:"哈姆立克法",abbr:"",cat:"專有名詞"},
-  {en:"Injury Severity Score",zh:"創傷評估指數",abbr:"ISS",cat:"專有名詞"},
-  {en:"Mass Casualty Incident",zh:"大量傷患事件",abbr:"MCI",cat:"專有名詞"},
-  {en:"Simple Triage And Rapid Treatment",zh:"簡單檢傷快速治療",abbr:"START",cat:"專有名詞"},
-  {en:"Reverse triage",zh:"反向檢傷",abbr:"",cat:"專有名詞"},
-  // 救護器材
-  {en:"Ambulance",zh:"救護車",abbr:"",cat:"器材"},
-  {en:"First-aid kit",zh:"急救箱",abbr:"",cat:"器材"},
-  {en:"Cravat",zh:"三角巾",abbr:"",cat:"器材"},
-  {en:"Gauze",zh:"紗布",abbr:"",cat:"器材"},
-  {en:"Bandage",zh:"繃帶",abbr:"",cat:"器材"},
-  {en:"Tourniquet",zh:"止血帶",abbr:"TK",cat:"器材"},
-  {en:"Pulse oximeter",zh:"血氧濃度計",abbr:"",cat:"器材"},
-  {en:"Blood sugar one-touch monitor",zh:"血糖測定器",abbr:"",cat:"器材"},
-  {en:"Suction tube",zh:"抽吸管",abbr:"",cat:"器材"},
-  {en:"Intra Venous",zh:"靜脈注射",abbr:"IV",cat:"器材"},
-  {en:"Normal Saline",zh:"生理食鹽水",abbr:"N/S",cat:"器材"},
-  {en:"Lactated Ringer's",zh:"乳酸林格",abbr:"L/R",cat:"器材"},
-  {en:"Needle",zh:"針頭",abbr:"",cat:"器材"},
-  // 心搏停止原因 6H6T
-  {en:"Hypovolemia",zh:"低血容",abbr:"",cat:"6H6T"},
-  {en:"Hypoxia",zh:"低血氧",abbr:"",cat:"6H6T"},
-  {en:"Hydrogenion",zh:"酸血症",abbr:"",cat:"6H6T"},
-  {en:"Hyper/Hypokalemia",zh:"血鉀過高/過低",abbr:"",cat:"6H6T"},
-  {en:"Hypothermia",zh:"低體溫",abbr:"",cat:"6H6T"},
-  {en:"Hypoglycemia",zh:"低血糖",abbr:"",cat:"6H6T"},
-  {en:"Toxicology",zh:"藥物中毒",abbr:"",cat:"6H6T"},
-  {en:"Tension pneumothorax",zh:"張力性氣胸",abbr:"",cat:"6H6T"},
-  {en:"Tamponade cardiac",zh:"心包膜填塞",abbr:"",cat:"6H6T"},
-  {en:"Thrombosis coronary",zh:"心肌梗塞",abbr:"",cat:"6H6T"},
-  {en:"Thrombosis pulmonary",zh:"肺栓塞",abbr:"",cat:"6H6T"},
-  {en:"Trauma",zh:"創傷",abbr:"",cat:"6H6T"},
-  // 急救藥物 — 自主神經
-  {en:"Epinephrine (Bosmin)",zh:"腎上腺素",abbr:"",cat:"藥物"},
-  {en:"Norepinephrine",zh:"正腎上腺素",abbr:"",cat:"藥物"},
-  {en:"Dopamine",zh:"多巴胺",abbr:"",cat:"藥物"},
-  {en:"Dobutamine",zh:"多巴酚丁胺",abbr:"",cat:"藥物"},
-  {en:"Atropine",zh:"阿托平",abbr:"",cat:"藥物"},
-  // CNS
-  {en:"Lorazepam (BZD)",zh:"安心平",abbr:"",cat:"藥物"},
-  {en:"Diazepam (BZD)",zh:"煩寧",abbr:"",cat:"藥物"},
-  {en:"Midazolam (BZD)",zh:"咪達唑侖",abbr:"",cat:"藥物"},
-  {en:"Phenobarbital",zh:"巴比妥鹽",abbr:"",cat:"藥物"},
-  {en:"Phenytoin (Aleviatin)",zh:"阿雷彼阿慶注射液",abbr:"",cat:"藥物"},
-  {en:"Flumazenil (Anexate)",zh:"安易醒",abbr:"",cat:"藥物"},
-  // 抗心律不整
-  {en:"Procainamide (Class Ia)",zh:"普魯卡因胺",abbr:"",cat:"藥物"},
-  {en:"Lidocaine (Class Ib)",zh:"利多卡因",abbr:"",cat:"藥物"},
-  {en:"β-blockers (Class II)",zh:"乙型交感阻斷劑",abbr:"",cat:"藥物"},
-  {en:"Propranolol (Class II)",zh:"普潘奈",abbr:"",cat:"藥物"},
-  {en:"Labetalol (Class II)",zh:"拉貝洛爾",abbr:"",cat:"藥物"},
-  {en:"Diltiazem (Class III / Herbesser)",zh:"合必爽",abbr:"",cat:"藥物"},
-  {en:"Verapamil (Class III)",zh:"維拉帕米",abbr:"",cat:"藥物"},
-  {en:"Amiodarone (Class IV)",zh:"胺碘酮",abbr:"",cat:"藥物"},
-  {en:"Adenosine",zh:"安室律",abbr:"",cat:"藥物"},
-  // ACS
-  {en:"Morphine",zh:"嗎啡",abbr:"",cat:"藥物"},
-  {en:"Nitroglycerin (NTG)",zh:"硝化甘油",abbr:"NTG",cat:"藥物"},
-  // 抗血小板
-  {en:"Aspirin",zh:"阿斯匹靈",abbr:"",cat:"藥物"},
-  {en:"Glycoprotein 2b/3a receptor antagonist",zh:"醣蛋白2b/3a受體抑制劑",abbr:"",cat:"藥物"},
-  {en:"Heparin",zh:"肝素(海派)",abbr:"",cat:"藥物"},
-  {en:"LMWH",zh:"低分子量肝素",abbr:"LMWH",cat:"藥物"},
-  {en:"r-tPA",zh:"血栓溶解劑",abbr:"r-tPA",cat:"藥物"},
-  // 抗高血壓
-  {en:"ACE Inhibitors",zh:"血管收縮素轉換脢抑制劑",abbr:"ACEI",cat:"藥物"},
-  {en:"Nifedipine",zh:"尼非地平",abbr:"",cat:"藥物"},
-  {en:"Vasodilators",zh:"血管擴張劑",abbr:"",cat:"藥物"},
-  {en:"Sodium Nitroprusside",zh:"醯鐵氰化鈉",abbr:"",cat:"藥物"},
-  {en:"Diuretics",zh:"利尿劑",abbr:"",cat:"藥物"},
-  {en:"Furosemide (Lasix)",zh:"腹速排",abbr:"",cat:"藥物"},
-  {en:"Digoxin",zh:"毛地黃",abbr:"",cat:"藥物"},
-  {en:"CaCl2",zh:"氯化鈣",abbr:"CaCl2",cat:"藥物"},
-  {en:"Magnesium Sulfate",zh:"硫酸鎂",abbr:"MgSO4",cat:"藥物"},
-  {en:"Glucagon",zh:"昇糖素",abbr:"",cat:"藥物"},
-  {en:"Mannitol",zh:"甘露醇",abbr:"",cat:"藥物"},
-  {en:"Naloxone",zh:"拿股松",abbr:"",cat:"藥物"},
-  {en:"Sodium Bicarbonate",zh:"碳酸氫鈉",abbr:"",cat:"藥物"},
-  {en:"Vasopressin",zh:"血管加壓素",abbr:"",cat:"藥物"},
-  {en:"Activated charcoal",zh:"活性炭液劑",abbr:"",cat:"藥物"},
-  {en:"Albuterol (Ventolin)",zh:"支氣管擴張劑",abbr:"",cat:"藥物"},
-  {en:"Steroid",zh:"類固醇類消炎止痛藥",abbr:"",cat:"藥物"},
-  {en:"Anti-histamine",zh:"抗組織胺",abbr:"",cat:"藥物"},
-  // 其他
-  {en:"Penetrating injury",zh:"穿刺傷",abbr:"",cat:"其他"},
-  {en:"Stab injury",zh:"刀刺傷",abbr:"",cat:"其他"},
-  {en:"Gunshot injury",zh:"槍傷",abbr:"",cat:"其他"},
-  {en:"Blast injury",zh:"爆炸傷",abbr:"",cat:"其他"},
-  {en:"Energy injury",zh:"能量化學傷",abbr:"",cat:"其他"},
-  {en:"Chronic",zh:"慢性的",abbr:"Chr.",cat:"其他"},
-  {en:"Acute",zh:"急性的",abbr:"",cat:"其他"},
-  {en:"Common cold",zh:"感冒",abbr:"",cat:"其他"},
-  {en:"Influenza",zh:"流感",abbr:"",cat:"其他"},
-  {en:"Epilepsy",zh:"癲癇",abbr:"",cat:"其他"},
-  {en:"Cellulitis",zh:"蜂窩性組織炎",abbr:"",cat:"其他"},
-  {en:"Compartment syndrome",zh:"腔室症候群",abbr:"",cat:"其他"},
-  {en:"Acidosis",zh:"酸中毒",abbr:"",cat:"其他"},
-  {en:"Alcoholism",zh:"酒精中毒",abbr:"",cat:"其他"},
-  {en:"Diabetic Keto-Acidosis",zh:"糖尿病酮酸中毒",abbr:"DKA",cat:"其他"},
-  {en:"Transient ischemic attack",zh:"暫時性缺血發作",abbr:"TIA",cat:"其他"},
-  {en:"Transcutaneous pacing",zh:"體外心律調整",abbr:"",cat:"其他"},
-  // OPQRST / SAMPLE
-  {en:"OPQRST",zh:"疼痛評估系統",abbr:"OPQRST",cat:"評估"},
-  {en:"Onset",zh:"發作時間",abbr:"O",cat:"評估"},
-  {en:"Position/Provocation",zh:"位置/誘發因素",abbr:"P",cat:"評估"},
-  {en:"Quality",zh:"性質/特徵",abbr:"Q",cat:"評估"},
-  {en:"Region/Radiation",zh:"範圍/放射",abbr:"R",cat:"評估"},
-  {en:"Severity",zh:"嚴重程度",abbr:"S",cat:"評估"},
-  {en:"Time",zh:"時間",abbr:"T",cat:"評估"},
-  {en:"SAMPLE",zh:"病史評估系統",abbr:"SAMPLE",cat:"評估"},
-  {en:"Sign/Syndrome",zh:"徵象/症候群",abbr:"S",cat:"評估"},
-  {en:"Allergy",zh:"過敏史",abbr:"A",cat:"評估"},
-  {en:"Medication",zh:"用藥史",abbr:"M",cat:"評估"},
-  {en:"Pertinent past history",zh:"相關過去病史",abbr:"P",cat:"評估"},
-  {en:"Last oral intake",zh:"最後進食時間",abbr:"E",cat:"評估"},
-  // 腹部
-  {en:"Gastritis",zh:"胃炎",abbr:"",cat:"腹部"},
-  {en:"Hepatitis",zh:"肝炎",abbr:"",cat:"腹部"},
-  {en:"Renal failure",zh:"腎衰竭",abbr:"",cat:"腹部"},
-  {en:"Cullen's sign",zh:"臍部週邊淤青",abbr:"",cat:"腹部"},
-  {en:"Gray-Turner's sign",zh:"腰側淤青",abbr:"",cat:"腹部"},
-  {en:"Portal vein thrombosis",zh:"肝門靜脈高壓或阻塞",abbr:"",cat:"腹部"},
-  {en:"Budd-Chiari syndrome",zh:"下腔靜脈阻塞",abbr:"",cat:"腹部"},
-  {en:"Splenomegaly",zh:"脾腫大",abbr:"",cat:"腹部"},
-  {en:"Traube's space",zh:"特勞伯氏間隙",abbr:"",cat:"腹部"},
-  {en:"Shifting dullness",zh:"轉移性濁音",abbr:"",cat:"腹部"},
-  {en:"Fluid wave",zh:"液體波動",abbr:"",cat:"腹部"},
-  {en:"Costovertebral angle knocking pain",zh:"肋脊角敲擊痛",abbr:"",cat:"腹部"},
-  {en:"Rebound tenderness",zh:"反彈疼痛",abbr:"",cat:"腹部"},
-  {en:"Murphy's sign",zh:"莫菲氏病徵",abbr:"",cat:"腹部"},
-  {en:"Rovsing's sign",zh:"洛夫辛徵候",abbr:"",cat:"腹部"},
-  {en:"Psoas Sign",zh:"腰大肌徵候",abbr:"",cat:"腹部"},
-  {en:"Obturator Sign",zh:"閉孔肌徵候",abbr:"",cat:"腹部"},
-  {en:"Bowel sounds",zh:"腸音",abbr:"",cat:"腹部"},
-  {en:"Bruits",zh:"動脈嘈音",abbr:"",cat:"腹部"},
-  {en:"Friction rubs",zh:"摩擦音",abbr:"",cat:"腹部"},
-  {en:"Venous hum",zh:"靜脈唔音",abbr:"",cat:"腹部"},
-  // 頭頸部理學
-  {en:"Angioedema",zh:"血管性水腫",abbr:"",cat:"理學檢查"},
-  {en:"Cerebrospinal fluid rhinorrhea",zh:"腦脊髓液鼻漏",abbr:"",cat:"理學檢查"},
-  {en:"Cerebrospinal fluid otorrhea",zh:"腦脊髓液耳漏",abbr:"",cat:"理學檢查"},
-  {en:"Orbital cellulitis",zh:"眼窩蜂窩性組織炎",abbr:"",cat:"理學檢查"},
-  {en:"Carotid cavernous sinus fistula / C-C fistula",zh:"頸動脈海綿竇瘺管",abbr:"",cat:"理學檢查"},
-  {en:"Endophthalmitis",zh:"眼內炎",abbr:"",cat:"理學檢查"},
-  {en:"Subconjunctival Hemorrhage",zh:"結膜下出血",abbr:"",cat:"理學檢查"},
-  {en:"Episcleritis",zh:"表層鞏膜炎",abbr:"",cat:"理學檢查"},
-  {en:"Malignant otitis externa",zh:"惡性外耳炎",abbr:"",cat:"理學檢查"},
-  {en:"Hairy Leukoplakia",zh:"毛樣白斑症",abbr:"",cat:"理學檢查"},
-  {en:"Smooth Tongue, Atrophic Glossitis",zh:"平滑舌",abbr:"",cat:"理學檢查"},
-  {en:"Acute Tonsillitis",zh:"急性扁桃腺炎",abbr:"",cat:"理學檢查"},
-  {en:"Diphtheria",zh:"白喉",abbr:"",cat:"理學檢查"},
-  {en:"Kaposi's Sarcoma",zh:"卡波西氏瘤",abbr:"",cat:"理學檢查"},
-  {en:"Priapism",zh:"陰莖持續勃起症",abbr:"",cat:"理學檢查"},
-  {en:"Fournier's gangrene",zh:"福耳尼埃氏壞疽",abbr:"",cat:"理學檢查"},
-  {en:"Mottled skin",zh:"大理石斑駁狀皮膚變化",abbr:"",cat:"理學檢查"},
-  {en:"Pitting edema",zh:"壓凹性水腫",abbr:"",cat:"理學檢查"},
-  {en:"Hemochromatosis",zh:"血鐵沉積症(匙狀指)",abbr:"",cat:"理學檢查"},
-  {en:"Paronychia",zh:"甲溝炎",abbr:"",cat:"理學檢查"},
-  {en:"Onycholysis",zh:"甲床分離症",abbr:"",cat:"理學檢查"},
-  {en:"Terry's nail",zh:"泰瑞氏指甲",abbr:"",cat:"理學檢查"},
-  {en:"Transverse white bands",zh:"橫向指甲白紋",abbr:"",cat:"理學檢查"},
-  {en:"Transverse Linear Depressions",zh:"橫向指甲凹陷",abbr:"",cat:"理學檢查"},
-  {en:"Splinter hemorrhage",zh:"指甲夾板出血",abbr:"",cat:"理學檢查"},
-  {en:"Arachnodactyly",zh:"蜘蛛狀指",abbr:"",cat:"理學檢查"},
-  {en:"Myxedema coma",zh:"黏液水腫昏迷",abbr:"",cat:"理學檢查"},
-  {en:"Deep vein thrombosis",zh:"深部靜脈血栓",abbr:"DVT",cat:"理學檢查"},
-  {en:"Differential cyanosis",zh:"差異性發紺",abbr:"",cat:"理學檢查"},
-  // 皮膚
-  {en:"Meningococcemia",zh:"流行性腦脊髓膜炎雙球菌菌血症",abbr:"",cat:"皮膚"},
-  {en:"Tinea",zh:"皮膚黴菌感染",abbr:"",cat:"皮膚"},
-  {en:"Herpes Zoster",zh:"帶狀疱疹",abbr:"",cat:"皮膚"},
-  {en:"Chicken Pox",zh:"水痘",abbr:"",cat:"皮膚"},
-  {en:"Smallpox",zh:"天花",abbr:"",cat:"皮膚"},
-  {en:"Scabies",zh:"疥瘡",abbr:"",cat:"皮膚"},
-  // 理學方式
-  {en:"Inspection",zh:"視診",abbr:"",cat:"理學方式"},
-  {en:"Palpation",zh:"觸診",abbr:"",cat:"理學方式"},
-  {en:"Percussion",zh:"叩診",abbr:"",cat:"理學方式"},
-  {en:"Auscultation",zh:"聽診",abbr:"",cat:"理學方式"},
+// ===== DEFAULT DATA =====
+const defaultData = [
+  {en:"Blood pressure",zh:"血壓",cat:"生命徵象"},
+  {en:"Pulse",zh:"脈搏",cat:"生命徵象"},
+  {en:"Heart rate",zh:"心率",cat:"生命徵象"},
+  {en:"Respiratory rate",zh:"呼吸速率",cat:"生命徵象"},
+  {en:"Body temperature",zh:"體溫",cat:"生命徵象"},
+  {en:"Oxygen saturation (SpO2)",zh:"血氧飽和度",cat:"生命徵象"},
+  {en:"Systolic",zh:"收縮壓",cat:"生命徵象"},
+  {en:"Diastolic",zh:"舒張壓",cat:"生命徵象"},
+  {en:"Consciousness",zh:"意識",cat:"生命徵象"},
+  {en:"Glasgow Coma Scale (GCS)",zh:"昏迷指數",cat:"生命徵象"},
+
+  {en:"Chest pain",zh:"胸痛",cat:"症狀"},
+  {en:"Shortness of breath",zh:"呼吸困難",cat:"症狀"},
+  {en:"Dizziness",zh:"頭暈",cat:"症狀"},
+  {en:"Nausea",zh:"噁心",cat:"症狀"},
+  {en:"Vomiting",zh:"嘔吐",cat:"症狀"},
+  {en:"Seizure",zh:"癲癇發作",cat:"症狀"},
+  {en:"Bleeding",zh:"出血",cat:"症狀"},
+  {en:"Fever",zh:"發燒",cat:"症狀"},
+  {en:"Headache",zh:"頭痛",cat:"症狀"},
+  {en:"Abdominal pain",zh:"腹痛",cat:"症狀"},
+  {en:"Numbness",zh:"麻木",cat:"症狀"},
+  {en:"Swelling",zh:"腫脹",cat:"症狀"},
+  {en:"Weakness",zh:"虛弱",cat:"症狀"},
+  {en:"Altered mental status",zh:"意識改變",cat:"症狀"},
+
+  {en:"Stretcher",zh:"擔架",cat:"器材裝備"},
+  {en:"Stethoscope",zh:"聽診器",cat:"器材裝備"},
+  {en:"Defibrillator (AED)",zh:"自動體外心臟電擊去顫器",cat:"器材裝備"},
+  {en:"Cervical collar",zh:"頸圈",cat:"器材裝備"},
+  {en:"Splint",zh:"夾板",cat:"器材裝備"},
+  {en:"Oxygen mask",zh:"氧氣面罩",cat:"器材裝備"},
+  {en:"Bag-valve mask (BVM)",zh:"甦醒球（球囊面罩）",cat:"器材裝備"},
+  {en:"Bandage",zh:"繃帶",cat:"器材裝備"},
+  {en:"Tourniquet",zh:"止血帶",cat:"器材裝備"},
+  {en:"Suction device",zh:"抽吸器",cat:"器材裝備"},
+  {en:"Backboard",zh:"長背板",cat:"器材裝備"},
+  {en:"Nasal cannula",zh:"鼻導管",cat:"器材裝備"},
+  {en:"Pulse oximeter",zh:"血氧監測儀",cat:"器材裝備"},
+
+  {en:"CPR",zh:"心肺復甦術",cat:"處置技術"},
+  {en:"Intubation",zh:"插管",cat:"處置技術"},
+  {en:"Immobilization",zh:"固定",cat:"處置技術"},
+  {en:"Triage",zh:"檢傷分類",cat:"處置技術"},
+  {en:"Assessment",zh:"評估",cat:"處置技術"},
+  {en:"Airway management",zh:"呼吸道處置",cat:"處置技術"},
+  {en:"Chest compression",zh:"胸部按壓",cat:"處置技術"},
+  {en:"Ventilation",zh:"通氣",cat:"處置技術"},
+  {en:"Wound care",zh:"傷口處理",cat:"處置技術"},
+  {en:"Patient handoff",zh:"病患交接",cat:"處置技術"},
+  {en:"Spinal motion restriction",zh:"脊椎動作限制",cat:"處置技術"},
+
+  {en:"Cardiac arrest",zh:"心跳停止",cat:"傷病狀況"},
+  {en:"Stroke",zh:"中風",cat:"傷病狀況"},
+  {en:"Myocardial infarction (MI)",zh:"心肌梗塞",cat:"傷病狀況"},
+  {en:"Shock",zh:"休克",cat:"傷病狀況"},
+  {en:"Trauma",zh:"創傷",cat:"傷病狀況"},
+  {en:"Fracture",zh:"骨折",cat:"傷病狀況"},
+  {en:"Burn",zh:"燒燙傷",cat:"傷病狀況"},
+  {en:"Anaphylaxis",zh:"過敏性休克",cat:"傷病狀況"},
+  {en:"Hypoglycemia",zh:"低血糖",cat:"傷病狀況"},
+  {en:"Hypothermia",zh:"低體溫",cat:"傷病狀況"},
+  {en:"Heatstroke",zh:"中暑",cat:"傷病狀況"},
+  {en:"Poisoning",zh:"中毒",cat:"傷病狀況"},
+  {en:"Drowning",zh:"溺水",cat:"傷病狀況"},
+  {en:"Asthma attack",zh:"氣喘發作",cat:"傷病狀況"},
+  {en:"Allergic reaction",zh:"過敏反應",cat:"傷病狀況"},
+
+  {en:"Abdomen",zh:"腹部",cat:"解剖位置"},
+  {en:"Thorax / Chest",zh:"胸部（胸廓）",cat:"解剖位置"},
+  {en:"Extremity",zh:"四肢",cat:"解剖位置"},
+  {en:"Spine",zh:"脊椎",cat:"解剖位置"},
+  {en:"Pelvis",zh:"骨盆",cat:"解剖位置"},
+  {en:"Airway",zh:"呼吸道",cat:"解剖位置"},
+  {en:"Femur",zh:"股骨",cat:"解剖位置"},
+  {en:"Cranium",zh:"顱骨",cat:"解剖位置"},
+  {en:"Cervical spine",zh:"頸椎",cat:"解剖位置"},
+  {en:"Tibia",zh:"脛骨",cat:"解剖位置"}
 ];
 
-// ════ STATE ════
-let favSet = new Set();
-try { 
-  favSet = new Set(JSON.parse(localStorage.getItem('emtFav') || '[]')); 
-} catch(e) {}
+// ===== STATE =====
+let DATA = [];
+let favorites = new Set();
+let favOnly = false;
+let currentTab = 'flash';
+let filtered = [];
+let fcIndex = 0;
+let isFlipped = false;
 
-function saveFav() { 
-  localStorage.setItem('emtFav', JSON.stringify([...favSet])); 
+let quizMode = 'en2zh';
+let quizQuestions = [];
+let quizIdx = 0;
+let quizScore = 0;
+let quizAnswered = false;
+let quizTotal = 10;
+
+// ===== INIT & STORAGE =====
+function init(){
+  loadData();
+  updateCategorySelect();
+  applyFilter();
+  renderFlashcard();
+  renderOverview();
 }
 
-// ════ UI DROPDOWN 控制 ════
-function toggleDropdown(id) {
-  document.getElementById(id + '-cat-trigger').classList.toggle('open');
-  document.getElementById(id + '-cat-wrap').classList.toggle('open');
-}
-
-function closeDropdown(id) {
-  const t = document.getElementById(id + '-cat-trigger');
-  const w = document.getElementById(id + '-cat-wrap');
-  if (t) t.classList.remove('open');
-  if (w) w.classList.remove('open');
-}
-
-document.addEventListener('click', e => {
-  if (!e.target.closest('#dropdown-fc') && document.getElementById('fc-cat-trigger')) closeDropdown('fc');
-  if (!e.target.closest('#dropdown-dict') && document.getElementById('dict-cat-trigger')) closeDropdown('dict');
-});
-
-const CATS = ['全部', ...new Set(VOCAB.map(v => v.cat))];
-let fcCat = '全部', fcFavOnly = false;
-let fcPool = [], fcIdx = 0;
-let quizScore = 0, quizTotal = 0, quizIdx = 0, quizPool = [], quizDone = false;
-let dictCat = '全部';
-
-// ════ PAGE SWITCH ════
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  document.querySelectorAll('nav button').forEach((b, i) => {
-    b.classList.toggle('active', ['fc', 'dict', 'quiz'][i] === id);
-  });
-  if (id === 'dict') renderDict();
-  if (id === 'quiz') initQuiz();
-}
-
-// ════════════════════
-//  FLASHCARD
-// ════════════════════
-function buildFcPool() {
-  fcPool = VOCAB.filter(v => {
-    const catOk = fcCat === '全部' || v.cat === fcCat;
-    const favOk = !fcFavOnly || favSet.has(v.en);
-    return catOk && favOk;
-  });
-  fcIdx = 0;
-}
-
-function renderFcCatBtns() {
-  const wrap = document.getElementById('fc-cat-btns');
-  wrap.innerHTML = CATS.map(c => 
-    `<button class="${c === fcCat ? 'active' : ''}" onclick="setFcCat('${c}')">${c}</button>`
-  ).join('');
-}
-
-function setFcCat(c) { 
-  fcCat = c; 
-  document.getElementById('fc-cat-trigger').textContent = '分類：' + c;
-  renderFcCatBtns(); 
-  buildFcPool(); 
-  renderCard(); 
-  closeDropdown('fc');
-}
-
-function toggleFcFavOnly() { 
-  fcFavOnly = document.getElementById('fc-fav-only').checked; 
-  buildFcPool(); 
-  renderCard(); 
-}
-
-function renderCard() {
-  // 處理空狀態（例如勾選最愛但沒有單字時）
-  if (!fcPool.length) {
-    document.getElementById('fc-en').textContent = '尚無單字';
-    document.getElementById('fc-zh').textContent = '請切換分類或加入最愛單字';
-    document.getElementById('fc-abbrv').textContent = '';
-    document.getElementById('fc-star').textContent = '☆';
-    document.getElementById('fc-star-back').textContent = '☆';
-    document.getElementById('fc-tags-front').innerHTML = '';
-    document.getElementById('fc-tags-back').innerHTML = '';
-    document.getElementById('flashcard-count').textContent = `0 / 0`;
-    document.getElementById('fc-progress').style.width = '0%';
-    document.getElementById('fc-wrap').classList.remove('flipped');
-    return;
-  }
-
-  const v = fcPool[fcIdx];
-  document.getElementById('fc-en').textContent = v.en;
-  document.getElementById('fc-zh').textContent = v.zh;
-  document.getElementById('fc-abbrv').textContent = v.abbr || '';
+function loadData() {
+  const savedData = localStorage.getItem('emt_vocab_data');
+  const savedFavs = localStorage.getItem('emt_vocab_favs');
   
-  const starred = favSet.has(v.en);
-  document.getElementById('fc-star').textContent = starred ? '★' : '☆';
-  document.getElementById('fc-star-back').textContent = starred ? '★' : '☆';
-  
-  const tagHtml = `<span class="fc-tag">${v.cat}</span>${v.abbr ? `<span class="fc-tag">${v.abbr}</span>` : ''}`;
-  document.getElementById('fc-tags-front').innerHTML = tagHtml;
-  document.getElementById('fc-tags-back').innerHTML = tagHtml;
-  
-  document.getElementById('flashcard-count').textContent = `${fcIdx + 1} / ${fcPool.length}`;
-  const pct = (fcIdx + 1) / fcPool.length * 100;
-  document.getElementById('fc-progress').style.width = pct + '%';
-  document.getElementById('fc-wrap').classList.remove('flipped');
-}
-
-function flipCard() { 
-  if (fcPool.length > 0) document.getElementById('fc-wrap').classList.toggle('flipped'); 
-}
-
-function nextCard() { 
-  if (!fcPool.length) return;
-  fcIdx = (fcIdx + 1) % fcPool.length; 
-  renderCard(); 
-}
-
-function prevCard() { 
-  if (!fcPool.length) return;
-  fcIdx = (fcIdx - 1 + fcPool.length) % fcPool.length; 
-  renderCard(); 
-}
-
-function speakEN(e) { 
-  e.stopPropagation(); 
-  const v = fcPool[fcIdx]; 
-  if (!v) return; 
-  
-  // 優化：發音前先清除目前的佇列，避免連續點擊造成延遲
-  window.speechSynthesis.cancel();
-  
-  const u = new SpeechSynthesisUtterance(v.en); 
-  u.lang = 'en-US'; 
-  speechSynthesis.speak(u); 
-}
-
-function toggleStar(e) { 
-  e.stopPropagation(); 
-  const v = fcPool[fcIdx]; 
-  if (!v) return; 
-  
-  if (favSet.has(v.en)) favSet.delete(v.en); 
-  else favSet.add(v.en); 
-  
-  saveFav(); 
-  
-  // 如果在「只顯示最愛」模式下取消最愛，則重新整理牌組
-  if (fcFavOnly && !favSet.has(v.en)) {
-    buildFcPool();
-  }
-  renderCard(); 
-}
-
-// ════════════════════
-//  DICTIONARY
-// ════════════════════
-function renderDictCatBtns() {
-  const wrap = document.getElementById('dict-cat-btns');
-  wrap.innerHTML = CATS.map(c => 
-    `<button class="${c === dictCat ? 'active' : ''}" onclick="setDictCat('${c}')">${c}</button>`
-  ).join('');
-}
-
-function setDictCat(c) { 
-  dictCat = c; 
-  document.getElementById('dict-cat-trigger').textContent = '分類：' + c;
-  renderDictCatBtns(); 
-  renderDict(); 
-  closeDropdown('dict');
-}
-
-function clearSearch() { 
-  document.getElementById('search-input').value = ''; 
-  renderDict(); 
-}
-
-function renderDict() {
-  const q = (document.getElementById('search-input').value || '').toLowerCase().trim();
-  let list = VOCAB.filter(v => {
-    const catOk = dictCat === '全部' || v.cat === dictCat;
-    const qOk = !q || v.en.toLowerCase().includes(q) || v.zh.includes(q) || (v.abbr && v.abbr.toLowerCase().includes(q)) || v.cat.includes(q);
-    return catOk && qOk;
-  });
-  
-  document.getElementById('dict-count').textContent = `共 ${list.length} 個字彙`;
-  
-  if (list.length === 0) {
-    document.getElementById('dict-list').innerHTML = `<p style="text-align:center; padding: 20px; color: var(--muted);">沒有找到相符的單字</p>`;
-    return;
-  }
-
-  document.getElementById('dict-list').innerHTML = list.map(v => `
-    <div class="dict-card">
-      ${v.abbr ? `<span class="abbrv">${v.abbr}</span>` : ''}
-      <span class="en">${v.en}</span>
-      <span class="tag">${v.cat}</span>
-      <span class="zh">${v.zh}</span>
-      <button class="star-sm" onclick="toggleStarDict('${v.en.replace(/'/g, "\\'")}', this)">${favSet.has(v.en) ? '★' : '☆'}</button>
-    </div>`).join('');
-}
-
-function toggleStarDict(en, btn) { 
-  if (favSet.has(en)) favSet.delete(en); 
-  else favSet.add(en); 
-  saveFav(); 
-  btn.textContent = favSet.has(en) ? '★' : '☆'; 
-  
-  // 同步更新閃卡狀態（如果正好在閃卡池裡）
-  buildFcPool();
-}
-
-// ════════════════════
-//  QUIZ
-// ════════════════════
-function initQuiz() {
-  const favOnly = document.getElementById('quiz-fav-only').checked;
-  let pool = favOnly ? VOCAB.filter(v => favSet.has(v.en)) : VOCAB;
-  
-  if (pool.length < 4) {
-    if (favOnly) {
-       document.getElementById('quiz-area').innerHTML = `<div style="text-align:center; padding:30px; color:var(--muted);">最愛單字數量不足（至少需 4 個），請先加入更多最愛！</div>`;
-       document.getElementById('quiz-progress').textContent = '';
-       document.getElementById('quiz-score').textContent = '得分：0 / 0';
-       return;
-    }
-    pool = VOCAB; 
-  }
-  
-  quizPool = shuffle([...pool]);
-  quizIdx = 0; 
-  quizScore = 0; 
-  quizTotal = 0; 
-  quizDone = false;
-  renderQuizQ();
-}
-
-function renderQuizQ() {
-  const area = document.getElementById('quiz-area');
-  
-  if (quizIdx >= quizPool.length) { 
-    area.innerHTML = `
-      <div id="quiz-result">
-        <h2>🎉 測驗完成！</h2>
-        <p>得分：${quizScore} / ${quizTotal}（正確率 ${quizTotal ? Math.round(quizScore / quizTotal * 100) : 0}%）</p>
-        <button onclick="initQuiz()">再來一次</button>
-      </div>`; 
-    return; 
-  }
-  
-  const v = quizPool[quizIdx];
-  const enToZh = Math.random() > 0.4; // 60% 機率考英文翻中文
-  const q = enToZh ? v.en : v.zh;
-  const ans = enToZh ? v.zh : v.en;
-  
-  // 隨機挑三個錯誤選項
-  let wrongs = shuffle(VOCAB.filter(w => w.en !== v.en)).slice(0, 3).map(w => enToZh ? w.zh : w.en);
-  const opts = shuffle([ans, ...wrongs]);
-  
-  document.getElementById('quiz-progress').textContent = `題目 ${quizIdx + 1} / ${quizPool.length}`;
-  
-  // 使用 data-* 屬性來傳遞選項，避免引號導致的 HTML 解析錯誤
-  area.innerHTML = `
-    <div class="quiz-q">
-      <div class="q-label">${enToZh ? '英文 → 中文' : '中文 → 英文'} · [${v.cat}]</div>
-      <div class="q-text">${q}</div>
-      ${v.abbr && enToZh ? `<div class="q-hint">縮寫：${v.abbr}</div>` : ''}
-    </div>
-    <div class="quiz-opts" id="quiz-opts-container">
-      ${opts.map((o, idx) => `<button class="quiz-opt-btn" data-val="${o.replace(/"/g, '&quot;')}">${o}</button>`).join('')}
-    </div>
-    <button class="quiz-next" onclick="nextQ()" style="display:none" id="quiz-next-btn">下一題 →</button>
-  `;
-
-  // 綁定選項點擊事件
-  document.querySelectorAll('.quiz-opt-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      checkAns(this, ans);
-    });
-  });
-}
-
-function checkAns(btn, ans) {
-  const allBtns = document.querySelectorAll('.quiz-opts button');
-  allBtns.forEach(b => b.disabled = true);
-  
-  const chose = btn.getAttribute('data-val');
-  quizTotal++;
-  
-  if (chose === ans) { 
-    btn.classList.add('correct'); 
-    quizScore++; 
+  if(savedData) {
+    try { DATA = JSON.parse(savedData); } catch(e) { DATA = [...defaultData]; }
   } else {
-    btn.classList.add('wrong');
-    allBtns.forEach(b => { 
-      if (b.getAttribute('data-val') === ans) b.classList.add('correct'); 
-    });
+    DATA = [...defaultData];
+  }
+
+  if(savedFavs) {
+    try { favorites = new Set(JSON.parse(savedFavs)); } catch(e) { favorites = new Set(); }
+  }
+}
+
+function saveData() {
+  localStorage.setItem('emt_vocab_data', JSON.stringify(DATA));
+  localStorage.setItem('emt_vocab_favs', JSON.stringify([...favorites]));
+}
+
+function updateCategorySelect() {
+  const sel = document.getElementById('catSelect');
+  const currentVal = sel.value;
+  const cats = [...new Set(DATA.map(d=>d.cat))];
+  
+  sel.innerHTML = '<option value="全部">分類：全部</option>';
+  cats.forEach(c=>{
+    const o = document.createElement('option');
+    o.value = c; o.textContent = c; sel.appendChild(o);
+  });
+  
+  if(cats.includes(currentVal)) sel.value = currentVal;
+  else sel.value = '全部';
+}
+
+// ===== MANAGE (NEW) =====
+function showMsg(id, msg, isErr=false) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.style.color = isErr ? 'var(--primary)' : 'var(--success)';
+  setTimeout(() => el.textContent='', 4000);
+}
+
+function addSingleWord() {
+  const en = document.getElementById('newEn').value.trim();
+  const zh = document.getElementById('newZh').value.trim();
+  const cat = document.getElementById('newCat').value.trim() || '自訂分類';
+  
+  if(!en || !zh) {
+    showMsg('addMsg', '⚠️ 英文與中文為必填欄位！', true);
+    return;
+  }
+  if(DATA.find(d => d.en.toLowerCase() === en.toLowerCase())) {
+    showMsg('addMsg', '⚠️ 此單字已存在於字庫中！', true);
+    return;
   }
   
-  document.getElementById('quiz-score').textContent = `得分：${quizScore} / ${quizTotal}`;
-  document.getElementById('quiz-next-btn').style.display = 'block';
-}
-
-function nextQ() { 
-  quizIdx++; 
-  renderQuizQ(); 
-}
-
-function shuffle(a) { 
-  for (let i = a.length - 1; i > 0; i--) { 
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]]; 
-  } 
-  return a; 
-}
-
-// ════ KEYBOARD & SWIPE ════
-document.addEventListener('keydown', e => {
-  if (!document.getElementById('page-fc').classList.contains('active')) return;
-  if (e.key === 'ArrowRight') nextCard();
-  else if (e.key === 'ArrowLeft') prevCard();
-  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
-});
-
-window.isSwiping = false;
-let touchStartX = 0, touchStartY = 0;
-const fcWrap = document.getElementById('fc-wrap');
-
-fcWrap.addEventListener('touchstart', e => {
-  touchStartX = e.changedTouches[0].screenX;
-  touchStartY = e.changedTouches[0].screenY;
-  window.isSwiping = false;
-}, {passive: true});
-
-fcWrap.addEventListener('touchmove', e => {
-  window.isSwiping = true;
-}, {passive: true});
-
-fcWrap.addEventListener('touchend', e => {
-  if (!window.isSwiping) return;
-  const dx = e.changedTouches[0].screenX - touchStartX;
-  const dy = e.changedTouches[0].screenY - touchStartY;
+  DATA.push({en, zh, cat});
+  saveData();
+  updateCategorySelect();
+  applyFilter();
   
-  // 確保滑動超過一定距離且是水平滑動
-  if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-    if (dx < 0) nextCard();
-    else prevCard();
+  document.getElementById('newEn').value = '';
+  document.getElementById('newZh').value = '';
+  document.getElementById('newCat').value = '';
+  showMsg('addMsg', `✅ 成功新增單字：${en}`);
+}
+
+function importFromJSON() {
+  const val = document.getElementById('jsonArea').value.trim();
+  if(!val) {
+    showMsg('jsonMsg', '⚠️ 請先在上方貼上 JSON 內容！', true);
+    return;
+  }
+  try {
+    const arr = JSON.parse(val);
+    if(!Array.isArray(arr)) throw new Error('必須是陣列格式');
     
-    // 防止滑動結束後觸發點擊翻牌
-    setTimeout(() => window.isSwiping = false, 50);
-  } else {
-    window.isSwiping = false;
+    let addedCount = 0;
+    arr.forEach(item => {
+      if(item.en && item.zh) {
+        const cat = item.cat || '自訂分類';
+        if(!DATA.find(d => d.en.toLowerCase() === item.en.toLowerCase())) {
+          DATA.push({en: String(item.en).trim(), zh: String(item.zh).trim(), cat: String(cat).trim()});
+          addedCount++;
+        }
+      }
+    });
+    
+    saveData();
+    updateCategorySelect();
+    applyFilter();
+    document.getElementById('jsonArea').value = '';
+    showMsg('jsonMsg', `✅ 成功匯入 ${addedCount} 個新單字！`);
+  } catch(e) {
+    showMsg('jsonMsg', '❌ JSON 格式錯誤，請確保格式為 [{"en":"...", "zh":"...", "cat":"..."}]', true);
+  }
+}
+
+function exportToJSON() {
+  document.getElementById('jsonArea').value = JSON.stringify(DATA, null, 2);
+  showMsg('jsonMsg', '✅ 已成功匯出目前所有資料至上方文字框，請全選複製。');
+}
+
+function resetData() {
+  if(confirm('⚠️ 警告：這將會刪除所有您自行新增的單字，並還原為預設字庫。確定要繼續嗎？')) {
+    DATA = [...defaultData];
+    saveData();
+    updateCategorySelect();
+    applyFilter();
+    renderOverview();
+    renderFlashcard();
+    document.getElementById('jsonArea').value = '';
+    showMsg('jsonMsg', '✅ 已還原為預設字庫！');
+  }
+}
+
+function deleteWord(en) {
+  if(confirm(`確定要刪除單字「${en}」嗎？`)) {
+    DATA = DATA.filter(d => d.en !== en);
+    favorites.delete(en);
+    saveData();
+    updateCategorySelect();
+    applyFilter();
+    renderOverview();
+    
+    // 如果在閃卡頁面刪除到最後一張，需重算索引
+    if(fcIndex >= filtered.length) fcIndex = Math.max(0, filtered.length - 1);
+    renderFlashcard();
+  }
+}
+
+// ===== FILTER =====
+function applyFilter(){
+  const cat = document.getElementById('catSelect').value;
+  filtered = DATA.filter(d=>{
+    if(cat!=='全部' && d.cat!==cat) return false;
+    if(favOnly && !favorites.has(d.en)) return false;
+    return true;
+  });
+}
+function onFilterChange(){
+  applyFilter();
+  fcIndex=0; isFlipped=false;
+  renderFlashcard();
+  renderOverview();
+}
+function toggleFavOnly(){
+  favOnly=!favOnly;
+  document.getElementById('favBtn').classList.toggle('on',favOnly);
+  document.getElementById('favBtn').textContent=favOnly?'⭐ 顯示全部':'⭐ 只顯示最愛';
+  onFilterChange();
+}
+function shuffleCards(){
+  for(let i=filtered.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[filtered[i],filtered[j]]=[filtered[j],filtered[i]];}
+  fcIndex=0;isFlipped=false;
+  renderFlashcard();
+  const btn=document.getElementById('shuffleBtn');
+  btn.classList.add('pop');setTimeout(()=>btn.classList.remove('pop'),300);
+}
+
+// ===== TABS =====
+function switchTab(t){
+  currentTab=t;
+  const tabs = ['flash', 'overview', 'quiz', 'manage'];
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active', tabs[i]===t);
+  });
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+t).classList.add('active');
+  
+  document.getElementById('mainControls').style.display = (t==='manage') ? 'none' : 'flex';
+  
+  if(t==='overview') renderOverview();
+  if(t==='flash') renderFlashcard();
+}
+
+// ===== FLASHCARD =====
+function renderFlashcard(){
+  if(filtered.length===0){
+    document.getElementById('fcCounter').textContent='0 / 0';
+    document.getElementById('fcProgress').style.width='0%';
+    document.getElementById('fcEng').textContent='沒有符合的單字';
+    document.getElementById('fcZh').textContent='';
+    document.getElementById('fcCatF').textContent='';
+    document.getElementById('fcCatB').textContent='';
+    document.getElementById('prevBtn').disabled=true;
+    document.getElementById('nextBtn').disabled=true;
+    return;
+  }
+  const item=filtered[fcIndex];
+  document.getElementById('fcCounter').textContent=`${fcIndex+1} / ${filtered.length}`;
+  document.getElementById('fcProgress').style.width=((fcIndex+1)/filtered.length*100)+'%';
+  document.getElementById('fcEng').textContent=item.en;
+  document.getElementById('fcZh').textContent=item.zh;
+  document.getElementById('fcCatF').textContent=item.cat;
+  document.getElementById('fcCatB').textContent=item.cat;
+  document.getElementById('fcInner').classList.toggle('flipped',isFlipped);
+  document.getElementById('prevBtn').disabled=fcIndex===0;
+  document.getElementById('nextBtn').disabled=fcIndex>=filtered.length-1;
+  updateFavBtns(item);
+}
+function flipCard(){
+  isFlipped=!isFlipped;
+  document.getElementById('fcInner').classList.toggle('flipped',isFlipped);
+}
+function prevCard(){if(fcIndex>0){fcIndex--;isFlipped=false;renderFlashcard();}}
+function nextCard(){if(fcIndex<filtered.length-1){fcIndex++;isFlipped=false;renderFlashcard();}}
+function toggleFav(){
+  if(filtered.length===0) return;
+  const item=filtered[fcIndex];
+  if(favorites.has(item.en)) favorites.delete(item.en); else favorites.add(item.en);
+  saveData();
+  updateFavBtns(item);
+  if(favOnly){applyFilter();if(fcIndex>=filtered.length)fcIndex=Math.max(0,filtered.length-1);renderFlashcard();}
+}
+function updateFavBtns(item){
+  const isFav=favorites.has(item.en);
+  ['favBtnF','favBtnB'].forEach(id=>{
+    const b=document.getElementById(id);
+    b.textContent=isFav?'★':'☆';
+    b.classList.toggle('fav',isFav);
+  });
+}
+function speakWord(){
+  if(filtered.length===0) return;
+  const item=filtered[fcIndex];
+  const u=new SpeechSynthesisUtterance(item.en);
+  u.lang='en-US'; u.rate=0.85;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+// ===== OVERVIEW =====
+function renderOverview(){
+  const q=(document.getElementById('searchBox').value||'').toLowerCase().trim();
+  let list=filtered;
+  if(q) list=list.filter(d=>d.en.toLowerCase().includes(q)||d.zh.includes(q));
+  document.getElementById('ovStats').textContent=`共 ${list.length} 個單字`;
+  const groups={};
+  list.forEach(d=>{if(!groups[d.cat])groups[d.cat]=[];groups[d.cat].push(d);});
+  let html='';
+  for(const cat in groups){
+    html+=`<div class="grp-title">${cat}（${groups[cat].length}）</div>`;
+    groups[cat].forEach(d=>{
+      const isFav=favorites.has(d.en);
+      const safeEn = d.en.replace(/'/g,"\\'");
+      html+=`<div class="vocab-row fade-in" onclick="speakThis('${safeEn}')">
+        <span class="eng">${highlight(d.en,q)}</span>
+        <span class="chi">${highlight(d.zh,q)}</span>
+        <span class="row-acts">
+          <button onclick="event.stopPropagation();speakThis('${safeEn}')" title="發音">🔊</button>
+          <button onclick="event.stopPropagation();toggleFavOv('${safeEn}')" class="${isFav?'fav':''}" title="最愛">${isFav?'★':'☆'}</button>
+          <button onclick="event.stopPropagation();deleteWord('${safeEn}')" class="del" title="刪除單字">🗑️</button>
+        </span>
+      </div>`;
+    });
+  }
+  if(!list.length) html='<div class="empty"><div class="em">🔍</div>找不到符合的單字</div>';
+  document.getElementById('ovList').innerHTML=html;
+}
+function highlight(text,q){
+  if(!q) return text;
+  const i=text.toLowerCase().indexOf(q);
+  if(i===-1) return text;
+  return text.slice(0,i)+'<mark style="background:#fff3cd;border-radius:3px;padding:0 2px;">'+text.slice(i,i+q.length)+'</mark>'+text.slice(i+q.length);
+}
+function speakThis(en){
+  const u=new SpeechSynthesisUtterance(en);u.lang='en-US';u.rate=0.85;
+  speechSynthesis.cancel();speechSynthesis.speak(u);
+}
+function toggleFavOv(en){
+  if(favorites.has(en)) favorites.delete(en); else favorites.add(en);
+  saveData();
+  renderOverview();
+  if(filtered.length>0 && filtered[fcIndex]) updateFavBtns(filtered[fcIndex]);
+}
+
+// ===== QUIZ =====
+function setQuizMode(mode,btn){
+  quizMode=mode;
+  document.querySelectorAll('.qz-mode').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function startQuiz(){
+  let pool=filtered.length?[...filtered]:[...DATA];
+  // shuffle
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+  quizTotal=Math.min(10,pool.length);
+  quizQuestions=pool.slice(0,quizTotal);
+  quizIdx=0;quizScore=0;quizAnswered=false;
+  document.getElementById('qzStart').style.display='none';
+  renderQuizQuestion();
+}
+function renderQuizQuestion(){
+  if(quizIdx>=quizTotal){showQuizResult();return;}
+  const item=quizQuestions[quizIdx];
+  const isEn2Zh=quizMode==='en2zh';
+  const qText=isEn2Zh?item.en:item.zh;
+  const correctAns=isEn2Zh?item.zh:item.en;
+  const label=isEn2Zh?'請選出正確的中文意思':'請選出正確的英文單字';
+
+  // generate options
+  let opts=[correctAns];
+  let allAns=DATA.map(d=>isEn2Zh?d.zh:d.en).filter(a=>a!==correctAns);
+  for(let i=allAns.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[allAns[i],allAns[j]]=[allAns[j],allAns[i]];}
+  opts.push(...allAns.slice(0,3));
+  // shuffle opts
+  for(let i=opts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]];}
+
+  document.getElementById('qzInfo').innerHTML=`第 ${quizIdx+1}/${quizTotal} 題 · 得分：<b>${quizScore}</b>`;
+  document.getElementById('qzProgress').style.width=((quizIdx)/quizTotal*100)+'%';
+
+  let html=`<div class="qz-card fade-in">
+    <div class="qz-label">${label}</div>
+    <div class="qz-q">${qText}</div>
+    <div class="qz-opts">`;
+  opts.forEach((o,i)=>{
+    html+=`<button class="qz-opt" onclick="answerQuiz(this,'${encodeURIComponent(o)}','${encodeURIComponent(correctAns)}')">${o}</button>`;
+  });
+  html+=`</div></div>`;
+  document.getElementById('qzContent').innerHTML=html;
+  quizAnswered=false;
+}
+function answerQuiz(btn,chosen,correct){
+  if(quizAnswered) return;
+  quizAnswered=true;
+  chosen=decodeURIComponent(chosen);
+  correct=decodeURIComponent(correct);
+  const isCorrect=chosen===correct;
+  if(isCorrect) quizScore++;
+
+  const btns=document.querySelectorAll('.qz-opt');
+  btns.forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===correct) b.classList.add('correct');
+    if(b===btn && !isCorrect) b.classList.add('wrong');
+  });
+
+  document.getElementById('qzInfo').innerHTML=`第 ${quizIdx+1}/${quizTotal} 題 · 得分：<b>${quizScore}</b>`;
+
+  if(!isCorrect){btn.classList.add('shake');}
+
+  setTimeout(()=>{
+    quizIdx++;
+    renderQuizQuestion();
+  },1200);
+}
+function showQuizResult(){
+  const pct=Math.round(quizScore/quizTotal*100);
+  let emoji='🎉';
+  if(pct<60) emoji='💪';
+  else if(pct<80) emoji='👍';
+  document.getElementById('qzProgress').style.width='100%';
+  document.getElementById('qzInfo').innerHTML=`測驗完成！`;
+  document.getElementById('qzContent').innerHTML=`
+    <div class="qz-card fade-in">
+      <div class="qz-result">
+        <div style="font-size:3rem;margin-bottom:12px;">${emoji}</div>
+        <div class="big">${quizScore} / ${quizTotal}</div>
+        <div class="lbl">正確率 ${pct}%</div>
+        <button class="qz-next" onclick="restartQuiz()" style="margin-top:24px;">再測一次</button>
+      </div>
+    </div>`;
+}
+function restartQuiz(){
+  document.getElementById('qzContent').innerHTML='';
+  document.getElementById('qzStart').style.display='';
+  document.getElementById('qzInfo').innerHTML='得分：<b>0 / 0</b>';
+  document.getElementById('qzProgress').style.width='0%';
+}
+
+// ===== KEYBOARD =====
+document.addEventListener('keydown',e=>{
+  if(currentTab==='flash'){
+    if(e.key==='ArrowLeft'){e.preventDefault();prevCard();}
+    if(e.key==='ArrowRight'){e.preventDefault();nextCard();}
+    if(e.key===' '){e.preventDefault();flipCard();}
+    if(e.key==='s'||e.key==='S'){e.preventDefault();speakWord();}
   }
 });
 
-// ════ INIT ════
-renderFcCatBtns();
-renderDictCatBtns();
-buildFcPool();
-renderCard();
-
+// ===== GO =====
+init();
 </script>
 </body>
 </html>
