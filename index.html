@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>新北市消防局 — EMT 常用英文字彙</title>
+<title>新北市消防局 — EMT 常用藥物字彙</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -55,7 +55,7 @@ body{
 .fc-front{background:#fff;}
 .fc-back{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;transform:rotateY(180deg);}
 .fc-cat{font-size:.72rem;padding:3px 12px;border-radius:20px;background:rgba(0,0,0,.06);color:var(--text-light);margin-bottom:14px;}
-.fc-word{font-size:2rem;font-weight:700;text-align:center;line-height:1.35;}
+.fc-word{font-size:1.8rem;font-weight:700;text-align:center;line-height:1.35;word-break: break-word;}
 .fc-actions{position:absolute;top:14px;right:14px;display:flex;gap:6px;}
 .act-btn{width:38px;height:38px;border:none;background:rgba(0,0,0,.05);border-radius:50%;cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:.2s;}
 .act-btn.fav{color:#f39c12;}
@@ -68,10 +68,9 @@ body{
 .search-box{width:100%;padding:11px 20px;border:2px solid #e0e0e0;border-radius:25px;font-family:inherit;font-size:.92rem;outline:none;transition:.25s;margin:10px 0 14px;}
 .vocab-row{display:flex;align-items:center;padding:12px 14px;background:#fff;border-radius:12px;margin-bottom:5px;box-shadow:0 1px 4px rgba(0,0,0,.04);transition:.2s;cursor:pointer;}
 .vocab-row .eng{font-weight:600;font-size:.92rem;flex:1;}
-.vocab-row .chi{font-size:.88rem;color:var(--text-light);margin-left:10px;}
+.vocab-row .chi{font-size:.88rem;color:var(--text-light);margin-left:10px; flex:1;}
 .vocab-row .row-acts{display:flex;gap:2px;margin-left:10px;}
 .vocab-row .row-acts button{width:32px;height:32px;border:none;background:0;cursor:pointer;border-radius:50%;font-size:.88rem;transition:.2s;}
-.vocab-row .row-acts button.fav{color:#f39c12;}
 .vocab-row .row-acts button.del{color:var(--danger);}
 
 /* Manage */
@@ -88,6 +87,7 @@ body{
   .header h1{font-size:1.05rem;}
   .tab-btn{padding:6px 10px;font-size:.8rem;}
   .form-btn{width:100%;margin-bottom:8px;}
+  .fc-word{font-size:1.5rem;}
 }
 </style>
 </head>
@@ -96,13 +96,12 @@ body{
 <div class="header">
   <div class="icon">🚑</div>
   <h1>新北市消防局 EMT 常用英文字彙</h1>
-  <div class="sub">思婕整理 · 全方位背單字學習工具</div>
+  <div class="sub">思婕整理 · 藥物與救護輸液專版</div>
 </div>
 
 <div class="tabs">
   <button class="tab-btn active" onclick="switchTab('flash')">📇 閃卡</button>
   <button class="tab-btn" onclick="switchTab('overview')">📖 總覽</button>
-  <button class="tab-btn" onclick="switchTab('quiz')">📝 測驗</button>
   <button class="tab-btn" onclick="switchTab('manage')">⚙️ 管理</button>
 </div>
 
@@ -150,25 +149,17 @@ body{
   </div>
 
   <div class="panel" id="panel-overview">
-    <input class="search-box" id="searchBox" placeholder="🔍 搜尋單字…" oninput="renderOverview()">
+    <input class="search-box" id="searchBox" placeholder="🔍 搜尋單字或藥名…" oninput="renderOverview()">
     <div id="ovList"></div>
-  </div>
-
-  <div class="panel" id="panel-quiz">
-    <div class="qz-area" id="qzArea">
-       <button class="qz-next" onclick="startQuiz()">開始測驗</button>
-    </div>
-    <div id="qzContent"></div>
   </div>
 
   <div class="panel" id="panel-manage">
     <div class="manage-section">
       <div class="manage-title">➕ 新增單字</div>
-      <input type="text" id="newEn" class="form-input" placeholder="英文 (例: Splint)" style="margin-bottom:8px;">
-      <input type="text" id="newZh" class="form-input" placeholder="中文 (例: 夾板)" style="margin-bottom:8px;">
+      <input type="text" id="newEn" class="form-input" placeholder="英文藥名 (例: Aspirin)" style="margin-bottom:8px;">
+      <input type="text" id="newZh" class="form-input" placeholder="中文/商品名 (例: 阿斯匹靈)" style="margin-bottom:8px;">
       <input type="text" id="newCat" class="form-input" placeholder="分類 (預設: 自訂分類)" style="margin-bottom:8px;">
       <button class="form-btn" onclick="addSingleWord()">加入單字庫</button>
-      <div id="addMsg" style="margin-top:8px; font-size:0.8rem;"></div>
     </div>
 
     <div class="manage-section">
@@ -180,40 +171,86 @@ body{
         <button class="form-btn sec" onclick="resetData()">恢復預設值</button>
         <button class="form-btn danger" onclick="clearAllData()">🗑️ 全部清除</button>
       </div>
-      <div id="jsonMsg" style="margin-top:8px; font-size:0.8rem;"></div>
     </div>
   </div>
 
 </div>
 
 <script>
-// (數據部分與原本相同，略過不重寫以節省篇幅)
+// 使用更新後的單字清單
 const defaultData = [
-  {en:"Blood pressure",zh:"血壓",cat:"生命徵象"},
-  {en:"Pulse",zh:"脈搏",cat:"生命徵象"},
-  {en:"Heart rate",zh:"心率",cat:"生命徵象"},
-  {en:"Respiratory rate",zh:"呼吸速率",cat:"生命徵象"},
-  {en:"Body temperature",zh:"體溫",cat:"生命徵象"},
-  {en:"Oxygen saturation (SpO2)",zh:"血氧飽和度",cat:"生命徵象"},
-  {en:"Systolic",zh:"收縮壓",cat:"生命徵象"},
-  {en:"Diastolic",zh:"舒張壓",cat:"生命徵象"},
-  {en:"Consciousness",zh:"意識",cat:"生命徵象"},
-  {en:"Glasgow Coma Scale (GCS)",zh:"昏迷指數",cat:"生命徵象"},
-  {en:"Chest pain",zh:"胸痛",cat:"症狀"},
-  {en:"Shortness of breath",zh:"呼吸困難",cat:"症狀"},
-  {en:"Dizziness",zh:"頭暈",cat:"症狀"},
-  {en:"Nausea",zh:"噁心",cat:"症狀"},
-  {en:"Vomiting",zh:"嘔吐",cat:"症狀"},
-  {en:"Seizure",zh:"癲癇發作",cat:"症狀"},
-  {en:"Bleeding",zh:"出血",cat:"症狀"},
-  {en:"Fever",zh:"發燒",cat:"症狀"},
-  {en:"Headache",zh:"頭痛",cat:"症狀"},
-  {en:"Abdominal pain",zh:"腹痛",cat:"症狀"},
-  {en:"Stretcher",zh:"擔架",cat:"器材裝備"},
-  {en:"Stethoscope",zh:"聽診器",cat:"器材裝備"},
-  {en:"Defibrillator (AED)",zh:"自動體外心臟電擊去顫器",cat:"器材裝備"},
-  {en:"CPR",zh:"心肺復甦術",cat:"處置技術"},
-  {en:"Stroke",zh:"中風",cat:"傷病狀況"}
+  {en:"Epinephrine",zh:"腎上腺素 (Adrenaline®, Bosmin®)",cat:"影響自主神經系統 (ANS) 藥物"},
+  {en:"Norepinephrine",zh:"正腎上腺素 (Levophed®)",cat:"影響自主神經系統 (ANS) 藥物"},
+  {en:"Dopamine",zh:"多巴胺",cat:"影響自主神經系統 (ANS) 藥物"},
+  {en:"Dobutamine",zh:"多酚丁胺 (Dobutrex®, Gendobu®)",cat:"影響自主神經系統 (ANS) 藥物"},
+  {en:"Atropine",zh:"硫酸阿托品 (Atropine®)",cat:"影響自主神經系統 (ANS) 藥物"},
+  {en:"Phentolamine",zh:"芬托胺 (Regitine®) - 用於處理漏針造成的組織壞死",cat:"影響自主神經系統 (ANS) 藥物"},
+  {en:"Propranolol",zh:"恩得來 (Inderal®) - 非選擇性 β 阻斷劑",cat:"影響自主神經系統 (ANS) 藥物"},
+  {en:"Morphine",zh:"嗎啡 - 第一級管制藥",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Fentanyl",zh:"吩坦尼 - 第二級管制藥，插管前置給藥",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Ketamine",zh:"氯胺酮、K他命 (Ketalar®) - 第三級管制藥，具升壓作用",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Midazolam",zh:"咪達唑崙 (Dormicum®) - 第四級管制藥，BZD 類",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Diazepam",zh:"地西泮 (Stesolid®) - BZD 類，具直腸塞劑劑型",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Lorazepam",zh:"勞拉西泮 (Ativan®) - BZD 類，常用於癲癇",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Flumazenil",zh:"氟馬澤尼 (Anexate®) - BZD 專一解毒劑",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Naloxone",zh:"納洛酮 (Narcan®) - 鴉片類解毒劑",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Tramadol",zh:"曲馬多、翠美道 (Tramal®) - 中樞止痛藥",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Methoxyflurane",zh:"甲氧氟烷、綠哨子 (Penthrox®) - 吸入性止痛",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Propofol",zh:"丙泊酚 (Fresofol®, Diprivan®) - 麻醉誘導藥",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Etomidate",zh:"依托咪酯 (Amidate®) - 麻醉誘導，對血壓影響小",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Haloperidol",zh:"氟哌啶醇 (Haldol®) - 抗精神病藥物，處理躁動",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Physostigmine",zh:"毒扁豆鹼 (Antilirium®) - 膽鹼類解毒劑，治阿托平中毒",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Vitamin B1",zh:"維生素 B1 (Thiamine) - 用於酒精性腦病變",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Amiodarone",zh:"胺碘酮、臟得樂 (Cordarone®) - 第三類抗心律不整藥",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Adenosine",zh:"腺甘酸 (Adenocor®) - 治療 PSVT",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Lidocaine",zh:"利多卡因 (Xylocaine®) - Ib 類抗心律不整，降腦壓",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Procainamide",zh:"普魯卡因胺 (Pronestyl®) - Ia 類，治療寬 QRS 頻脈",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Verapamil / Diltiazem",zh:"維拉帕米 / 地爾硫卓 (Isoptin® / Herbesser®) - 第四類 CCB",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Digoxin",zh:"地高辛、毛地黃 (Lanoxin®) - 強心、控制 A-fib",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Nitroglycerin",zh:"硝化甘油 (Nitrostat®, Millisrol®) - 舒張冠狀動脈",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Acetylsalicylic acid",zh:"阿斯匹靈 (Bokey®, Tapal®) - 抗血小板",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Clopidogrel",zh:"保栓通 (Plavix®) - 抗血小板",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Ticagrelor",zh:"百倍得 (Brillinta®) - 抗血小板",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Prasugrel",zh:"抑凝安 (Efient®) - 抗血小板",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Abciximab / Tirofiban / Eptifibatide",zh:"GP IIb/IIIa 拮抗劑 (ReoPro® / Aggrastat® / Integrilin®)",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"rt-PA (Alteplase, Reteplase, Tenecteplase)",zh:"血栓溶解劑",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Streptokinase",zh:"鏈激酶 (Streptase®) - 血栓溶解劑",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Heparin",zh:"肝素 - 抗凝血劑",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"LMWH",zh:"低分子量肝素 (Clexane®)",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Fondaparinux / Bivalirudin",zh:"抗凝血藥 (Arixtra® / Angiomax®)",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Protamine",zh:"魚精蛋白 - 肝素的專一解毒劑",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Vasopressin",zh:"血管加壓素 (Pitressin®) - 休克升壓劑",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Nifedipine",zh:"尼非地平 (Adalat®) - DHP 類 CCB 降壓藥",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Amlodipine",zh:"脈優 (Norvasc®) - 緩效降血壓藥",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Captopril / Valsartan / Olmesartan",zh:"ACEi 或 ARB 類降壓藥 (Capoten® / Diovan® / Olmetec®)",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Succinylcholine",zh:"去極化肌鬆劑 (Relax-in®)",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Rocuronium",zh:"非去極化肌鬆劑 (Esmeron®)",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Vecuronium",zh:"肌肉鬆弛劑 (Norcuron®)",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Sugammadex",zh:"速定安 (Bridion®) - Rocuronium 的反轉劑",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Salbutamol",zh:"舒喘靈 (Ventolin®) - 支氣管擴張劑",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Ipratropium",zh:"愛全樂 (Atrovent®) - 副交感拮抗支氣管擴張劑",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Furosemide",zh:"呋塞米 (Lasix®) - 利尿劑，救肺水腫",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Acetazolamide",zh:"乙醯胺唑、丹木斯 (Diamox®) - 救高山症",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Mannitol",zh:"甘露醇 - 降腦壓",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Glucagon",zh:"昇糖素 (GlucaGen®) - 治低血糖或 CCB 中毒",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Sodium Bicarbonate",zh:"碳酸氫鈉、小蘇打 (Jusomin®, Rolikan®)",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Calcium chloride / Calcium gluconate",zh:"氯化鈣 / 葡萄糖酸鈣 (Calcium®)",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Magnesium Sulfate",zh:"硫酸鎂 - 治 TdP 或嚴重氣喘",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Tranexamic acid",zh:"傳明酸、斷血炎 (Transamin®) - 止血藥",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Dexamethasone",zh:"地塞米松 (Decadron®) - 類固醇，治高山腦水腫",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Hyoscine Butylbromide",zh:"補斯可胖 (Buscopan®) - 腸胃解痙劑",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Diphenhydramine",zh:"苯海拉明、抗組織胺 (Vena®)",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Diclofenac / Ibuprofen",zh:"非類固醇消炎止痛藥 (Voren® / Advil®)",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Acetaminophen",zh:"乙醯胺酚 (Panadol®, Scanol®)",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Activated charcoal",zh:"活性炭 (Carbomix®) - 腸胃除汙用",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Methylprednisolone",zh:"甲強龍、類固醇 (Solu-Medrol®)",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Tadalafil",zh:"犀利士、威而鋼類 (Cialis®) - 用於高山肺水腫",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"D5W / D10W / D50W",zh:"5% / 10% / 50% 葡萄糖水溶液",cat:"常用救護輸液"},
+  {en:"D5S / D5S 0.33",zh:"葡萄糖生理食鹽水",cat:"常用救護輸液"},
+  {en:"Normal Saline (NS)",zh:"生理食鹽水",cat:"常用救護輸液"},
+  {en:"Half saline 0.45%",zh:"低張生理食鹽水",cat:"常用救護輸液"},
+  {en:"3% Saline",zh:"高張生理食鹽水 - 用於嚴重腦壓升高",cat:"常用救護輸液"},
+  {en:"Lactate Ringer's (LR)",zh:"乳酸林格氏液 - 大量輸注與嚴重創傷首選",cat:"常用救護輸液"}
 ];
 
 let DATA = [];
@@ -223,7 +260,6 @@ let fcIndex = 0;
 let isFlipped = false;
 let filtered = [];
 
-// 初始化
 function init(){
   loadData();
   applyFilter();
@@ -244,7 +280,6 @@ function saveData() {
   localStorage.setItem('emt_vocab_favs', JSON.stringify([...favorites]));
 }
 
-// 刪除單個單字 (在總覽分頁中使用)
 function deleteWord(en) {
   if(confirm(`確定要刪除「${en}」嗎？`)) {
     DATA = DATA.filter(d => d.en !== en);
@@ -254,14 +289,12 @@ function deleteWord(en) {
   }
 }
 
-// 清除所有數據
 function clearAllData() {
-  if(confirm('⚠️ 警告：這將會永久刪除所有單字。此操作無法復原，確定要清空嗎？')) {
+  if(confirm('⚠️ 警告：這將會永久刪除所有單字。')) {
     DATA = [];
     favorites.clear();
     saveData();
     refreshAll();
-    alert('已清空所有單字庫。');
   }
 }
 
@@ -273,10 +306,9 @@ function refreshAll() {
   renderFlashcard();
 }
 
-// --- 介面切換與渲染 ---
 function switchTab(t){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
+  event.currentTarget.classList.add('active');
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+t).classList.add('active');
   document.getElementById('mainControls').style.display = (t==='manage') ? 'none' : 'flex';
@@ -293,6 +325,18 @@ function applyFilter(){
 
 function onFilterChange(){ applyFilter(); fcIndex=0; renderFlashcard(); renderOverview(); }
 
+function toggleFavOnly(){
+  favOnly = !favOnly;
+  document.getElementById('favBtn').classList.toggle('on', favOnly);
+  onFilterChange();
+}
+
+function shuffleCards(){
+  filtered.sort(() => Math.random() - 0.5);
+  fcIndex = 0;
+  renderFlashcard();
+}
+
 function updateCategorySelect() {
   const sel = document.getElementById('catSelect');
   const cats = [...new Set(DATA.map(d=>d.cat))];
@@ -303,12 +347,12 @@ function updateCategorySelect() {
   });
 }
 
-// 閃卡渲染
 function renderFlashcard(){
-  const wrap = document.getElementById('panel-flash');
   if(filtered.length === 0){
     document.getElementById('fcEng').textContent = "目前無單字";
-    document.getElementById('fcZh').textContent = "請在管理分頁新增或恢復預設";
+    document.getElementById('fcZh').textContent = "請在管理分頁恢復預設值";
+    document.getElementById('fcCounter').textContent = "0 / 0";
+    document.getElementById('fcProgress').style.width = '0%';
     return;
   }
   const item = filtered[fcIndex];
@@ -322,8 +366,8 @@ function renderFlashcard(){
 }
 
 function flipCard(){ isFlipped = !isFlipped; document.getElementById('fcInner').classList.toggle('flipped', isFlipped); }
-function nextCard(){ if(fcIndex < filtered.length-1){ fcIndex++; isFlipped=false; renderFlashcard(); } }
-function prevCard(){ if(fcIndex > 0){ fcIndex--; isFlipped=false; renderFlashcard(); } }
+function nextCard(){ if(fcIndex < filtered.length-1){ fcIndex++; isFlipped=false; document.getElementById('fcInner').classList.remove('flipped'); renderFlashcard(); } }
+function prevCard(){ if(fcIndex > 0){ fcIndex--; isFlipped=false; document.getElementById('fcInner').classList.remove('flipped'); renderFlashcard(); } }
 
 function toggleFav(){
   const item = filtered[fcIndex];
@@ -336,13 +380,11 @@ function updateFavBtns(en){
   document.getElementById('favBtnF').textContent = document.getElementById('favBtnB').textContent = isFav?'★':'☆';
 }
 
-// 總覽渲染
 function renderOverview(){
   const q = document.getElementById('searchBox').value.toLowerCase();
   let list = filtered.filter(d => d.en.toLowerCase().includes(q) || d.zh.includes(q));
   let html = '';
   list.forEach(d => {
-    const isFav = favorites.has(d.en);
     html += `
       <div class="vocab-row">
         <span class="eng">${d.en}</span>
@@ -355,7 +397,6 @@ function renderOverview(){
   document.getElementById('ovList').innerHTML = html || '<div style="text-align:center;padding:20px;">無符合單字</div>';
 }
 
-// 管理功能
 function addSingleWord(){
   const en = document.getElementById('newEn').value.trim();
   const zh = document.getElementById('newZh').value.trim();
@@ -364,13 +405,12 @@ function addSingleWord(){
   DATA.push({en, zh, cat});
   saveData();
   refreshAll();
-  document.getElementById('newEn').value = '';
-  document.getElementById('newZh').value = '';
-  alert('已新增！');
+  document.getElementById('newEn').value = document.getElementById('newZh').value = '';
+  alert('已新增藥物！');
 }
 
 function resetData(){
-  if(confirm('確定要還原成預設字庫嗎？您新增的單字會消失。')){
+  if(confirm('確定要還原成預設藥物庫嗎？')){
     DATA = [...defaultData];
     saveData();
     refreshAll();
@@ -400,7 +440,6 @@ function speakWord(){
   speechSynthesis.speak(u);
 }
 
-// 啟動
 init();
 </script>
 </body>
