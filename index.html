@@ -66,12 +66,15 @@ body{
 
 /* Overview */
 .search-box{width:100%;padding:11px 20px;border:2px solid #e0e0e0;border-radius:25px;font-family:inherit;font-size:.92rem;outline:none;transition:.25s;margin:10px 0 14px;}
-.vocab-row{display:flex;align-items:center;padding:12px 14px;background:#fff;border-radius:12px;margin-bottom:5px;box-shadow:0 1px 4px rgba(0,0,0,.04);transition:.2s;cursor:pointer;}
+.vocab-row{display:flex;flex-direction:column;padding:12px 14px;background:#fff;border-radius:12px;margin-bottom:5px;box-shadow:0 1px 4px rgba(0,0,0,.04);transition:.2s;}
+.vocab-row-top{display:flex;align-items:center;width:100%;}
 .vocab-row .eng{font-weight:600;font-size:.92rem;flex:1;}
-.vocab-row .chi{font-size:.88rem;color:var(--text-light);margin-left:10px; flex:1;}
+.vocab-row .chi{font-size:.88rem;color:var(--text-light);margin-left:10px;flex:1;}
 .vocab-row .row-acts{display:flex;gap:2px;margin-left:10px;}
 .vocab-row .row-acts button{width:32px;height:32px;border:none;background:0;cursor:pointer;border-radius:50%;font-size:.88rem;transition:.2s;}
 .vocab-row .row-acts button.del{color:var(--danger);}
+.vocab-note{font-size:.78rem;color:#6c7a89;background:#f8f9fa;border-left:3px solid var(--primary);padding:6px 10px;border-radius:0 6px 6px 0;margin-top:8px;line-height:1.5;}
+.fc-note{font-size:.78rem;opacity:.85;margin-top:10px;text-align:center;line-height:1.5;padding:0 4px;}
 
 /* Manage */
 .manage-section{background:#fff;padding:24px;border-radius:var(--radius);box-shadow:var(--shadow);margin-top:16px;}
@@ -83,11 +86,76 @@ body{
 .form-btn.danger{background:var(--danger);}
 .json-area{width:100%;height:100px;padding:12px;border:2px solid #e0e0e0;border-radius:12px;font-family:monospace;font-size:.85rem;resize:vertical;margin-bottom:12px;}
 
+/* ===== QUIZ STYLES ===== */
+.quiz-start{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:20px;gap:16px;}
+.quiz-start-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:30px;width:100%;max-width:480px;text-align:center;}
+.quiz-start-card h2{font-size:1.3rem;font-weight:700;margin-bottom:8px;color:var(--primary);}
+.quiz-start-card p{font-size:.9rem;color:var(--text-light);margin-bottom:20px;}
+.quiz-mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.quiz-mode-btn{padding:14px 10px;border:2px solid #e0e0e0;border-radius:12px;background:#fff;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:.2s;color:var(--text);}
+.quiz-mode-btn:hover,.quiz-mode-btn.selected{border-color:var(--primary);background:#fff5f5;color:var(--primary);}
+.quiz-start-btn{width:100%;padding:14px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;font-family:inherit;font-size:1rem;font-weight:700;border-radius:12px;cursor:pointer;transition:.2s;}
+.quiz-start-btn:hover{opacity:.9;transform:translateY(-1px);}
+
+.quiz-area{display:flex;flex-direction:column;flex:1;padding-top:8px;}
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-shrink:0;}
+.quiz-info{font-size:.82rem;color:var(--text-light);}
+.quiz-score-badge{background:var(--primary);color:#fff;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700;}
+.quiz-progress-track{width:100%;height:5px;background:#e0e0e0;border-radius:3px;margin-bottom:14px;overflow:hidden;flex-shrink:0;}
+.quiz-progress-fill{height:100%;background:linear-gradient(90deg,var(--success),#2ecc71);border-radius:3px;transition:width .4s;}
+
+.quiz-question-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:14px;flex-shrink:0;}
+.quiz-qtype{font-size:.72rem;color:var(--text-light);margin-bottom:8px;}
+.quiz-question{font-size:1.15rem;font-weight:700;line-height:1.5;color:var(--text);}
+.quiz-question .highlight{color:var(--primary);}
+
+.quiz-options{display:flex;flex-direction:column;gap:9px;flex-shrink:0;}
+.quiz-opt{padding:13px 18px;border:2px solid #e8e8e8;border-radius:12px;background:#fff;font-family:inherit;font-size:.9rem;font-weight:500;cursor:pointer;transition:.2s;text-align:left;color:var(--text);line-height:1.4;}
+.quiz-opt:hover:not(:disabled){border-color:var(--primary);background:#fff5f5;}
+.quiz-opt.correct{border-color:var(--success)!important;background:#eafaf1!important;color:var(--success)!important;}
+.quiz-opt.wrong{border-color:var(--danger)!important;background:#fff0f0!important;color:var(--danger)!important;}
+.quiz-opt.reveal{border-color:#aaa!important;background:#f5f5f5!important;color:#888!important;}
+.quiz-opt:disabled{cursor:default;}
+
+.quiz-feedback{margin-top:12px;padding:12px 16px;border-radius:12px;font-size:.88rem;font-weight:600;text-align:center;display:none;}
+.quiz-feedback.show{display:block;}
+.quiz-feedback.ok{background:#eafaf1;color:var(--success);}
+.quiz-feedback.bad{background:#fff0f0;color:var(--danger);}
+
+.quiz-next-btn{margin-top:12px;width:100%;padding:13px;border:none;background:var(--primary);color:#fff;font-family:inherit;font-size:.95rem;font-weight:700;border-radius:12px;cursor:pointer;display:none;}
+.quiz-next-btn.show{display:block;}
+
+/* Result */
+.quiz-result{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:20px;}
+.result-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:30px;width:100%;max-width:480px;text-align:center;}
+.result-emoji{font-size:3rem;margin-bottom:12px;}
+.result-score{font-size:2.5rem;font-weight:900;color:var(--primary);margin-bottom:4px;}
+.result-sub{font-size:.9rem;color:var(--text-light);margin-bottom:20px;}
+.result-bar{width:100%;height:12px;background:#f0f0f0;border-radius:6px;overflow:hidden;margin-bottom:20px;}
+.result-bar-fill{height:100%;border-radius:6px;transition:width 1s ease;}
+.result-detail{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+.result-stat{background:#f8f8f8;border-radius:10px;padding:12px;text-align:center;}
+.result-stat .val{font-size:1.3rem;font-weight:700;}
+.result-stat .lbl{font-size:.75rem;color:var(--text-light);}
+.result-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.result-btn{padding:11px 22px;border:none;border-radius:12px;font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:.2s;}
+.result-btn.primary{background:var(--primary);color:#fff;}
+.result-btn.sec{background:#e0e0e0;color:var(--text);}
+
+/* Wrong review */
+.wrong-list{margin-top:16px;text-align:left;}
+.wrong-list h3{font-size:.9rem;font-weight:700;color:var(--danger);margin-bottom:10px;}
+.wrong-item{background:#fff5f5;border-radius:10px;padding:10px 14px;margin-bottom:7px;font-size:.85rem;}
+.wrong-item .wi-en{font-weight:700;color:var(--primary);}
+.wrong-item .wi-zh{color:var(--text-light);}
+.wrong-item .wi-note{font-size:.78rem;color:var(--text-light);margin-top:3px;}
+
 @media(max-width:480px){
   .header h1{font-size:1.05rem;}
   .tab-btn{padding:6px 10px;font-size:.8rem;}
   .form-btn{width:100%;margin-bottom:8px;}
   .fc-word{font-size:1.5rem;}
+  .quiz-mode-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -100,9 +168,10 @@ body{
 </div>
 
 <div class="tabs">
-  <button class="tab-btn active" onclick="switchTab('flash')">📇 閃卡</button>
-  <button class="tab-btn" onclick="switchTab('overview')">📖 總覽</button>
-  <button class="tab-btn" onclick="switchTab('manage')">⚙️ 管理</button>
+  <button class="tab-btn active" onclick="switchTab('flash',this)">📇 閃卡</button>
+  <button class="tab-btn" onclick="switchTab('overview',this)">📖 總覽</button>
+  <button class="tab-btn" onclick="switchTab('quiz',this)">📝 測驗</button>
+  <button class="tab-btn" onclick="switchTab('manage',this)">⚙️ 管理</button>
 </div>
 
 <div class="controls" id="mainControls">
@@ -115,6 +184,7 @@ body{
 
 <div class="container">
 
+  <!-- FLASH -->
   <div class="panel active" id="panel-flash">
     <div class="fc-area">
       <div class="fc-counter" id="fcCounter">0 / 0</div>
@@ -137,6 +207,7 @@ body{
             </div>
             <div class="fc-cat" id="fcCatB"></div>
             <div class="fc-word" id="fcZh"></div>
+            <div class="fc-note" id="fcNote"></div>
           </div>
         </div>
       </div>
@@ -148,11 +219,76 @@ body{
     </div>
   </div>
 
+  <!-- OVERVIEW -->
   <div class="panel" id="panel-overview">
     <input class="search-box" id="searchBox" placeholder="🔍 搜尋單字或藥名…" oninput="renderOverview()">
     <div id="ovList"></div>
   </div>
 
+  <!-- QUIZ -->
+  <div class="panel" id="panel-quiz">
+    <!-- Start Screen -->
+    <div id="quizStart" class="quiz-start">
+      <div class="quiz-start-card">
+        <h2>📝 模擬測驗</h2>
+        <p>從藥物庫中隨機抽取 50 題，測試你的臨床藥物知識</p>
+        <div style="font-size:.85rem;color:var(--text-light);margin-bottom:16px;">目前藥物庫共 <strong id="quizPoolCount">0</strong> 種藥物</div>
+        <div style="text-align:left;font-size:.85rem;font-weight:600;margin-bottom:10px;color:var(--text);">選擇題型：</div>
+        <div class="quiz-mode-grid">
+          <button class="quiz-mode-btn selected" id="modeBtn1" onclick="selectMode('en2zh')">🇬🇧 → 🇹🇼<br>英文選中文</button>
+          <button class="quiz-mode-btn" id="modeBtn2" onclick="selectMode('zh2en')">🇹🇼 → 🇬🇧<br>中文選英文</button>
+          <button class="quiz-mode-btn" id="modeBtn3" onclick="selectMode('cat2drug')">分類選藥物<br>🏷️ → 💊</button>
+          <button class="quiz-mode-btn" id="modeBtn4" onclick="selectMode('mixed')">🎲 混合模式<br>(三種皆有)</button>
+        </div>
+        <div style="text-align:left;font-size:.85rem;font-weight:600;margin-bottom:10px;color:var(--text);">題數：</div>
+        <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+          <button class="quiz-mode-btn" id="cntBtn10" onclick="selectCount(10)" style="flex:1;padding:10px 6px;">10 題</button>
+          <button class="quiz-mode-btn selected" id="cntBtn50" onclick="selectCount(50)" style="flex:1;padding:10px 6px;">50 題</button>
+          <button class="quiz-mode-btn" id="cntBtn20" onclick="selectCount(20)" style="flex:1;padding:10px 6px;">20 題</button>
+        </div>
+        <button class="quiz-start-btn" onclick="startQuiz()">🚀 開始測驗</button>
+      </div>
+    </div>
+
+    <!-- Quiz Area -->
+    <div id="quizArea" class="quiz-area" style="display:none;">
+      <div class="quiz-header">
+        <span class="quiz-info" id="quizCounter">第 1 / 50 題</span>
+        <span class="quiz-score-badge" id="quizScoreBadge">✅ 0 分</span>
+      </div>
+      <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizProgress" style="width:0%"></div></div>
+      <div class="quiz-question-card">
+        <div class="quiz-qtype" id="quizQtype"></div>
+        <div class="quiz-question" id="quizQuestion"></div>
+      </div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">下一題 →</button>
+    </div>
+
+    <!-- Result -->
+    <div id="quizResult" class="quiz-result" style="display:none;">
+      <div class="result-card">
+        <div class="result-emoji" id="resultEmoji">🎉</div>
+        <div class="result-score" id="resultScore">0 分</div>
+        <div class="result-sub" id="resultSub"></div>
+        <div class="result-bar"><div class="result-bar-fill" id="resultBarFill" style="width:0%"></div></div>
+        <div class="result-detail">
+          <div class="result-stat"><div class="val" id="resCorrect" style="color:var(--success)">0</div><div class="lbl">✅ 答對</div></div>
+          <div class="result-stat"><div class="val" id="resWrong" style="color:var(--danger)">0</div><div class="lbl">❌ 答錯</div></div>
+          <div class="result-stat"><div class="val" id="resTotal">0</div><div class="lbl">📋 總題數</div></div>
+          <div class="result-stat"><div class="val" id="resPct" style="color:var(--primary)">0%</div><div class="lbl">🎯 正確率</div></div>
+        </div>
+        <div class="result-actions">
+          <button class="result-btn primary" onclick="restartQuiz()">🔁 再測一次</button>
+          <button class="result-btn sec" onclick="backToStart()">🏠 回選單</button>
+        </div>
+        <div class="wrong-list" id="wrongList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANAGE -->
   <div class="panel" id="panel-manage">
     <div class="manage-section">
       <div class="manage-title">➕ 新增單字</div>
@@ -177,38 +313,40 @@ body{
 </div>
 
 <script>
-// 使用更新後的單字清單
 const defaultData = [
-  {en:"Epinephrine",zh:"腎上腺素 (Adrenaline®, Bosmin®)",cat:"影響自主神經系統 (ANS) 藥物"},
-  {en:"Norepinephrine",zh:"正腎上腺素 (Levophed®)",cat:"影響自主神經系統 (ANS) 藥物"},
-  {en:"Dopamine",zh:"多巴胺",cat:"影響自主神經系統 (ANS) 藥物"},
-  {en:"Dobutamine",zh:"多酚丁胺 (Dobutrex®, Gendobu®)",cat:"影響自主神經系統 (ANS) 藥物"},
-  {en:"Atropine",zh:"硫酸阿托品 (Atropine®)",cat:"影響自主神經系統 (ANS) 藥物"},
+  // ===== 影響自主神經系統 =====
+  {en:"Epinephrine",zh:"腎上腺素 (Adrenaline®, Bosmin®)",cat:"影響自主神經系統 (ANS) 藥物",note:"增加心臟收縮力、心搏速率，支氣管擴張。高劑量不增加存活率。"},
+  {en:"Norepinephrine",zh:"正腎上腺素 (Levophed®)",cat:"影響自主神經系統 (ANS) 藥物",note:"收縮周邊小動脈使血壓上升，休克第一線藥物。漏針會導致組織壞死。"},
+  {en:"Dopamine",zh:"多巴胺",cat:"影響自主神經系統 (ANS) 藥物",note:"中劑量提高心跳，高劑量收縮周邊血管。勿與鹼性溶液同管路。"},
+  {en:"Dobutamine",zh:"多酚丁胺 (Dobutrex®, Gendobu®)",cat:"影響自主神經系統 (ANS) 藥物",note:"提升心輸出量，降低周邊血管阻力。血壓低於 90mmHg 應謹慎。"},
+  {en:"Atropine",zh:"硫酸阿托品 (Atropine®)",cat:"影響自主神經系統 (ANS) 藥物",note:"抑制副交感神經，加速心跳。心臟移植病人無效，避免用於低體溫緩脈。"},
   {en:"Phentolamine",zh:"芬托胺 (Regitine®) - 用於處理漏針造成的組織壞死",cat:"影響自主神經系統 (ANS) 藥物"},
   {en:"Propranolol",zh:"恩得來 (Inderal®) - 非選擇性 β 阻斷劑",cat:"影響自主神經系統 (ANS) 藥物"},
-  {en:"Morphine",zh:"嗎啡 - 第一級管制藥",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  // ===== 影響中樞神經系統 =====
+  {en:"Morphine",zh:"嗎啡 - 第一級管制藥",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛",note:"鴉片類止痛，用於 ACS 胸痛或肺水腫。抑制呼吸與低血壓副作用。"},
   {en:"Fentanyl",zh:"吩坦尼 - 第二級管制藥，插管前置給藥",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
-  {en:"Ketamine",zh:"氯胺酮、K他命 (Ketalar®) - 第三級管制藥，具升壓作用",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
-  {en:"Midazolam",zh:"咪達唑崙 (Dormicum®) - 第四級管制藥，BZD 類",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
-  {en:"Diazepam",zh:"地西泮 (Stesolid®) - BZD 類，具直腸塞劑劑型",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Ketamine",zh:"氯胺酮、K他命 (Ketalar®) - 第三級管制藥，具升壓作用",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛",note:"鎮靜與插管誘導，升高血壓、放鬆支氣管。避免用於眼傷或急性青光眼。"},
+  {en:"Midazolam",zh:"咪達唑崙 (Dormicum®) - 第四級管制藥，BZD 類",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛",note:"BZD 類鎮靜、抑制癲癇。密切監測意識、呼吸抑制與低血壓。"},
+  {en:"Diazepam",zh:"地西泮 (Stesolid®) - BZD 類，具直腸塞劑劑型",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛",note:"BZD 類，鎮靜、抑制癲癇。密切監測呼吸抑制。"},
   {en:"Lorazepam",zh:"勞拉西泮 (Ativan®) - BZD 類，常用於癲癇",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
-  {en:"Flumazenil",zh:"氟馬澤尼 (Anexate®) - BZD 專一解毒劑",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
-  {en:"Naloxone",zh:"納洛酮 (Narcan®) - 鴉片類解毒劑",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
-  {en:"Tramadol",zh:"曲馬多、翠美道 (Tramal®) - 中樞止痛藥",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
-  {en:"Methoxyflurane",zh:"甲氧氟烷、綠哨子 (Penthrox®) - 吸入性止痛",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
+  {en:"Flumazenil",zh:"氟馬澤尼 (Anexate®) - BZD 專一解毒劑",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛",note:"專一性 BZD 拮抗劑。勿用於 TCA 中毒，恐引發抽搐。"},
+  {en:"Naloxone",zh:"納洛酮 (Narcan®) - 鴉片類解毒劑",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛",note:"拮抗鴉片類藥物中毒引起的呼吸抑制。"},
+  {en:"Tramadol",zh:"曲馬多、翠美道 (Tramal®) - 中樞止痛藥",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛",note:"類鴉片止痛，作用於 μ 受體。與抗憂鬱藥併用恐生血清素症候群。"},
+  {en:"Methoxyflurane",zh:"甲氧氟烷、綠哨子 (Penthrox®) - 吸入性止痛",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛",note:"吸入性止痛，用於輕中度急性疼痛。腎功能不佳者不宜使用。"},
   {en:"Propofol",zh:"丙泊酚 (Fresofol®, Diprivan®) - 麻醉誘導藥",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
   {en:"Etomidate",zh:"依托咪酯 (Amidate®) - 麻醉誘導，對血壓影響小",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
   {en:"Haloperidol",zh:"氟哌啶醇 (Haldol®) - 抗精神病藥物，處理躁動",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
   {en:"Physostigmine",zh:"毒扁豆鹼 (Antilirium®) - 膽鹼類解毒劑，治阿托平中毒",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
   {en:"Vitamin B1",zh:"維生素 B1 (Thiamine) - 用於酒精性腦病變",cat:"影響中樞神經系統 (CNS) 與鎮靜止痛"},
-  {en:"Amiodarone",zh:"胺碘酮、臟得樂 (Cordarone®) - 第三類抗心律不整藥",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
-  {en:"Adenosine",zh:"腺甘酸 (Adenocor®) - 治療 PSVT",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
-  {en:"Lidocaine",zh:"利多卡因 (Xylocaine®) - Ib 類抗心律不整，降腦壓",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  // ===== 心血管系統 =====
+  {en:"Amiodarone",zh:"胺碘酮、臟得樂 (Cordarone®) - 第三類抗心律不整藥",cat:"心血管系統：抗心律不整、抗血栓、降血壓",note:"Class III 抗心律不整，治療 VF/無脈 VT。Torsades de pointes 時不可使用。"},
+  {en:"Adenosine",zh:"腺甘酸 (Adenocor®) - 治療 PSVT",cat:"心血管系統：抗心律不整、抗血栓、降血壓",note:"抑制房室結活性，治療 PSVT。須快速注射並舉高肢體。"},
+  {en:"Lidocaine",zh:"利多卡因 (Xylocaine®) - Ib 類抗心律不整，降腦壓",cat:"心血管系統：抗心律不整、抗血栓、降血壓",note:"Class Ib 抗心律不整，用於 VF/VT。肝功能不良者需調降維持劑量。"},
   {en:"Procainamide",zh:"普魯卡因胺 (Pronestyl®) - Ia 類，治療寬 QRS 頻脈",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
-  {en:"Verapamil / Diltiazem",zh:"維拉帕米 / 地爾硫卓 (Isoptin® / Herbesser®) - 第四類 CCB",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
-  {en:"Digoxin",zh:"地高辛、毛地黃 (Lanoxin®) - 強心、控制 A-fib",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
-  {en:"Nitroglycerin",zh:"硝化甘油 (Nitrostat®, Millisrol®) - 舒張冠狀動脈",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
-  {en:"Acetylsalicylic acid",zh:"阿斯匹靈 (Bokey®, Tapal®) - 抗血小板",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Verapamil / Diltiazem",zh:"維拉帕米 / 地爾硫卓 (Isoptin® / Herbesser®) - 第四類 CCB",cat:"心血管系統：抗心律不整、抗血栓、降血壓",note:"鈣離子通道阻斷劑，控制心房頻脈速率。不可用於寬 QRS 波頻脈。"},
+  {en:"Digoxin",zh:"地高辛、毛地黃 (Lanoxin®) - 強心、控制 A-fib",cat:"心血管系統：抗心律不整、抗血栓、降血壓",note:"強心並減緩 A-fib 速率。治療濃度狹窄易中毒；禁用於 WPW 與 AMI。"},
+  {en:"Nitroglycerin",zh:"硝化甘油 (Nitrostat®, Millisrol®) - 舒張冠狀動脈",cat:"心血管系統：抗心律不整、抗血栓、降血壓",note:"舒張冠狀動脈，改善心肌供氧。血壓低於 90mmHg 或 24hr 內用 PDE5 抑制劑者禁用。"},
+  {en:"Acetylsalicylic acid",zh:"阿斯匹靈 (Bokey®, Tapal®) - 抗血小板",cat:"心血管系統：抗心律不整、抗血栓、降血壓",note:"抑制血小板凝集，降低 AMI 死亡率。已知過敏或急性潰瘍者禁用。"},
   {en:"Clopidogrel",zh:"保栓通 (Plavix®) - 抗血小板",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
   {en:"Ticagrelor",zh:"百倍得 (Brillinta®) - 抗血小板",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
   {en:"Prasugrel",zh:"抑凝安 (Efient®) - 抗血小板",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
@@ -220,34 +358,36 @@ const defaultData = [
   {en:"Fondaparinux / Bivalirudin",zh:"抗凝血藥 (Arixtra® / Angiomax®)",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
   {en:"Protamine",zh:"魚精蛋白 - 肝素的專一解毒劑",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
   {en:"Vasopressin",zh:"血管加壓素 (Pitressin®) - 休克升壓劑",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
-  {en:"Nifedipine",zh:"尼非地平 (Adalat®) - DHP 類 CCB 降壓藥",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
+  {en:"Nifedipine",zh:"尼非地平 (Adalat®) - DHP 類 CCB 降壓藥",cat:"心血管系統：抗心律不整、抗血栓、降血壓",note:"用於妊娠高血壓或高原肺水腫。速效型不可用於一般高血壓；懷孕前 20 週禁用。"},
   {en:"Amlodipine",zh:"脈優 (Norvasc®) - 緩效降血壓藥",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
   {en:"Captopril / Valsartan / Olmesartan",zh:"ACEi 或 ARB 類降壓藥 (Capoten® / Diovan® / Olmetec®)",cat:"心血管系統：抗心律不整、抗血栓、降血壓"},
-  {en:"Succinylcholine",zh:"去極化肌鬆劑 (Relax-in®)",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Rocuronium",zh:"非去極化肌鬆劑 (Esmeron®)",cat:"呼吸道、電解質、利尿與其他"},
+  // ===== 呼吸道、電解質、利尿與其他 =====
+  {en:"Succinylcholine",zh:"去極化肌鬆劑 (Relax-in®)",cat:"呼吸道、電解質、利尿與其他",note:"DAI 肌肉鬆弛劑。禁忌：高血鉀、燒燙傷、壓碎傷與嚴重感染。"},
+  {en:"Rocuronium",zh:"非去極化肌鬆劑 (Esmeron®)",cat:"呼吸道、電解質、利尿與其他",note:"DAI 肌肉鬆弛劑。可用 Sugammadex 反轉。"},
   {en:"Vecuronium",zh:"肌肉鬆弛劑 (Norcuron®)",cat:"呼吸道、電解質、利尿與其他"},
   {en:"Sugammadex",zh:"速定安 (Bridion®) - Rocuronium 的反轉劑",cat:"呼吸道、電解質、利尿與其他"},
   {en:"Salbutamol",zh:"舒喘靈 (Ventolin®) - 支氣管擴張劑",cat:"呼吸道、電解質、利尿與其他"},
   {en:"Ipratropium",zh:"愛全樂 (Atrovent®) - 副交感拮抗支氣管擴張劑",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Furosemide",zh:"呋塞米 (Lasix®) - 利尿劑，救肺水腫",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Acetazolamide",zh:"乙醯胺唑、丹木斯 (Diamox®) - 救高山症",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Mannitol",zh:"甘露醇 - 降腦壓",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Glucagon",zh:"昇糖素 (GlucaGen®) - 治低血糖或 CCB 中毒",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Sodium Bicarbonate",zh:"碳酸氫鈉、小蘇打 (Jusomin®, Rolikan®)",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Calcium chloride / Calcium gluconate",zh:"氯化鈣 / 葡萄糖酸鈣 (Calcium®)",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Furosemide",zh:"呋塞米 (Lasix®) - 利尿劑，救肺水腫",cat:"呼吸道、電解質、利尿與其他",note:"強力利尿劑，用於急性肺水腫。收縮壓低於 90mmHg 禁用；注意低血鉀。"},
+  {en:"Acetazolamide",zh:"乙醯胺唑、丹木斯 (Diamox®) - 救高山症",cat:"呼吸道、電解質、利尿與其他",note:"高山症 (AMS) 預防與治療第一線藥物。"},
+  {en:"Mannitol",zh:"甘露醇 - 降腦壓",cat:"呼吸道、電解質、利尿與其他",note:"降腦壓與眼壓。"},
+  {en:"Glucagon",zh:"昇糖素 (GlucaGen®) - 治低血糖或 CCB 中毒",cat:"呼吸道、電解質、利尿與其他",note:"治低血糖或 CCB 中毒。"},
+  {en:"Sodium Bicarbonate",zh:"碳酸氫鈉、小蘇打 (Jusomin®, Rolikan®)",cat:"呼吸道、電解質、利尿與其他",note:"矯正代謝性酸中毒或 TCA 中毒。不建議例行性用於心跳停止。"},
+  {en:"Calcium chloride / Calcium gluconate",zh:"氯化鈣 / 葡萄糖酸鈣 (Calcium®)",cat:"呼吸道、電解質、利尿與其他",note:"治療高血鉀、低血鈣、CCB 中毒。急速靜脈注射可能導致心跳停止。"},
   {en:"Magnesium Sulfate",zh:"硫酸鎂 - 治 TdP 或嚴重氣喘",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Tranexamic acid",zh:"傳明酸、斷血炎 (Transamin®) - 止血藥",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Dexamethasone",zh:"地塞米松 (Decadron®) - 類固醇，治高山腦水腫",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Hyoscine Butylbromide",zh:"補斯可胖 (Buscopan®) - 腸胃解痙劑",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Tranexamic acid",zh:"傳明酸、斷血炎 (Transamin®) - 止血藥",cat:"呼吸道、電解質、利尿與其他",note:"止血藥，抑制纖維蛋白溶解。靜脈注射應緩慢，急速給藥可能導致低血壓。"},
+  {en:"Dexamethasone",zh:"地塞米松 (Decadron®) - 類固醇，治高山腦水腫",cat:"呼吸道、電解質、利尿與其他",note:"類固醇，用於高山症 (AMS) 或高山腦水腫 (HACE) 預防與治療。"},
+  {en:"Hyoscine Butylbromide",zh:"補斯可胖 (Buscopan®) - 腸胃解痙劑",cat:"呼吸道、電解質、利尿與其他",note:"平滑肌解痙劑，治療內臟痙攣性絞痛。青光眼、攝護腺肥大者慎用。"},
   {en:"Diphenhydramine",zh:"苯海拉明、抗組織胺 (Vena®)",cat:"呼吸道、電解質、利尿與其他"},
   {en:"Diclofenac / Ibuprofen",zh:"非類固醇消炎止痛藥 (Voren® / Advil®)",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Acetaminophen",zh:"乙醯胺酚 (Panadol®, Scanol®)",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"Activated charcoal",zh:"活性炭 (Carbomix®) - 腸胃除汙用",cat:"呼吸道、電解質、利尿與其他"},
+  {en:"Acetaminophen",zh:"乙醯胺酚 (Panadol®, Scanol®)",cat:"呼吸道、電解質、利尿與其他",note:"解熱、鎮痛。過量使用具肝毒性。"},
+  {en:"Activated charcoal",zh:"活性炭 (Carbomix®) - 腸胃除汙用",cat:"呼吸道、電解質、利尿與其他",note:"胃腸內吸附藥物以減緩中毒。對強酸強鹼、醇類或金屬離子無效。"},
   {en:"Methylprednisolone",zh:"甲強龍、類固醇 (Solu-Medrol®)",cat:"呼吸道、電解質、利尿與其他"},
   {en:"Tadalafil",zh:"犀利士、威而鋼類 (Cialis®) - 用於高山肺水腫",cat:"呼吸道、電解質、利尿與其他"},
-  {en:"D5W / D10W / D50W",zh:"5% / 10% / 50% 葡萄糖水溶液",cat:"常用救護輸液"},
+  // ===== 常用救護輸液 =====
+  {en:"D5W / D10W / D50W",zh:"5% / 10% / 50% 葡萄糖水溶液",cat:"常用救護輸液",note:"D50W 治療低血糖。"},
   {en:"D5S / D5S 0.33",zh:"葡萄糖生理食鹽水",cat:"常用救護輸液"},
-  {en:"Normal Saline (NS)",zh:"生理食鹽水",cat:"常用救護輸液"},
+  {en:"Normal Saline (NS)",zh:"生理食鹽水",cat:"常用救護輸液",note:"體液補充。"},
   {en:"Half saline 0.45%",zh:"低張生理食鹽水",cat:"常用救護輸液"},
   {en:"3% Saline",zh:"高張生理食鹽水 - 用於嚴重腦壓升高",cat:"常用救護輸液"},
   {en:"Lactate Ringer's (LR)",zh:"乳酸林格氏液 - 大量輸注與嚴重創傷首選",cat:"常用救護輸液"}
@@ -260,12 +400,22 @@ let fcIndex = 0;
 let isFlipped = false;
 let filtered = [];
 
+// QUIZ STATE
+let quizMode = 'en2zh';
+let quizCount = 50;
+let quizQuestions = [];
+let quizCurrent = 0;
+let quizScore = 0;
+let quizWrong = [];
+let quizAnswered = false;
+
 function init(){
   loadData();
   applyFilter();
   updateCategorySelect();
   renderFlashcard();
   renderOverview();
+  document.getElementById('quizPoolCount').textContent = DATA.length;
 }
 
 function loadData() {
@@ -304,14 +454,16 @@ function refreshAll() {
   renderOverview();
   fcIndex = 0;
   renderFlashcard();
+  document.getElementById('quizPoolCount').textContent = DATA.length;
 }
 
-function switchTab(t){
+function switchTab(t, btn){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+  btn.classList.add('active');
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+t).classList.add('active');
-  document.getElementById('mainControls').style.display = (t==='manage') ? 'none' : 'flex';
+  const showCtrl = (t==='flash' || t==='overview');
+  document.getElementById('mainControls').style.display = showCtrl ? 'flex' : 'none';
 }
 
 function applyFilter(){
@@ -362,6 +514,9 @@ function renderFlashcard(){
   document.getElementById('fcZh').textContent = item.zh;
   document.getElementById('fcCatF').textContent = item.cat;
   document.getElementById('fcCatB').textContent = item.cat;
+  const noteEl = document.getElementById('fcNote');
+  if(item.note){ noteEl.textContent = '📌 ' + item.note; noteEl.style.display='block'; }
+  else { noteEl.style.display='none'; }
   updateFavBtns(item.en);
 }
 
@@ -387,11 +542,14 @@ function renderOverview(){
   list.forEach(d => {
     html += `
       <div class="vocab-row">
-        <span class="eng">${d.en}</span>
-        <span class="chi">${d.zh}</span>
-        <span class="row-acts">
-          <button onclick="deleteWord('${d.en.replace(/'/g,"\\'")}')" class="del">🗑️</button>
-        </span>
+        <div class="vocab-row-top">
+          <span class="eng">${d.en}</span>
+          <span class="chi">${d.zh}</span>
+          <span class="row-acts">
+            <button onclick="deleteWord('${d.en.replace(/'/g,"\\'")}')" class="del">🗑️</button>
+          </span>
+        </div>
+        ${d.note ? `<div class="vocab-note">📌 ${d.note}</div>` : ''}
       </div>`;
   });
   document.getElementById('ovList').innerHTML = html || '<div style="text-align:center;padding:20px;">無符合單字</div>';
@@ -438,6 +596,185 @@ function speakWord(){
   const u = new SpeechSynthesisUtterance(item.en);
   u.lang = 'en-US';
   speechSynthesis.speak(u);
+}
+
+// ===== QUIZ ENGINE =====
+
+function selectMode(m){
+  quizMode = m;
+  ['modeBtn1','modeBtn2','modeBtn3','modeBtn4'].forEach(id=>document.getElementById(id).classList.remove('selected'));
+  const map = {en2zh:'modeBtn1',zh2en:'modeBtn2',cat2drug:'modeBtn3',mixed:'modeBtn4'};
+  document.getElementById(map[m]).classList.add('selected');
+}
+
+function selectCount(n){
+  quizCount = n;
+  ['cntBtn10','cntBtn20','cntBtn50'].forEach(id=>document.getElementById(id).classList.remove('selected'));
+  const map = {10:'cntBtn10',20:'cntBtn20',50:'cntBtn50'};
+  document.getElementById(map[n]).classList.add('selected');
+}
+
+function shuffleArr(arr){ return arr.sort(()=>Math.random()-0.5); }
+
+function getDistractors(correct, pool, key, n=3){
+  const others = pool.filter(d=>d[key] !== correct[key]);
+  const shuffled = shuffleArr([...others]);
+  return shuffled.slice(0,n).map(d=>d[key]);
+}
+
+function buildQuestion(item, pool, forceMode){
+  const mode = forceMode || quizMode;
+  const cats = [...new Set(pool.map(d=>d.cat))];
+
+  if(mode === 'en2zh'){
+    const distractors = getDistractors(item, pool, 'zh');
+    const options = shuffleArr([item.zh, ...distractors]);
+    return { qtype:'英文 → 中文', question:`以下哪個是「${item.en}」的中文名稱？`, options, answer:item.zh, item };
+  }
+  if(mode === 'zh2en'){
+    const distractors = getDistractors(item, pool, 'en');
+    const options = shuffleArr([item.en, ...distractors]);
+    return { qtype:'中文 → 英文', question:`「${item.zh.split(' ')[0]}」的英文藥名是？`, options, answer:item.en, item };
+  }
+  if(mode === 'cat2drug'){
+    // give category, pick correct drug from options
+    const distractors = getDistractors(item, pool, 'en');
+    const options = shuffleArr([item.en, ...distractors]);
+    return { qtype:'分類辨識', question:`哪一種藥物屬於「${item.cat}」分類？`, options, answer:item.en, item };
+  }
+  // mixed
+  const modes = ['en2zh','zh2en','cat2drug'];
+  return buildQuestion(item, pool, modes[Math.floor(Math.random()*modes.length)]);
+}
+
+function startQuiz(){
+  if(DATA.length < 4){ alert('藥物庫至少需要 4 種藥物才能出題。'); return; }
+  const pool = [...DATA];
+  const count = Math.min(quizCount, pool.length);
+  const selected = shuffleArr([...pool]).slice(0, count);
+  quizQuestions = selected.map(item => buildQuestion(item, pool));
+  quizCurrent = 0;
+  quizScore = 0;
+  quizWrong = [];
+
+  document.getElementById('quizStart').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'none';
+  document.getElementById('quizArea').style.display = 'flex';
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = quizQuestions[quizCurrent];
+  quizAnswered = false;
+  document.getElementById('quizCounter').textContent = `第 ${quizCurrent+1} / ${quizQuestions.length} 題`;
+  document.getElementById('quizScoreBadge').textContent = `✅ ${quizScore} 分`;
+  const pct = (quizCurrent / quizQuestions.length) * 100;
+  document.getElementById('quizProgress').style.width = pct + '%';
+  document.getElementById('quizQtype').textContent = q.qtype;
+  document.getElementById('quizQuestion').textContent = q.question;
+
+  const optContainer = document.getElementById('quizOptions');
+  optContainer.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.onclick = () => answerQuestion(opt, q);
+    optContainer.appendChild(btn);
+  });
+
+  const fb = document.getElementById('quizFeedback');
+  fb.className = 'quiz-feedback';
+  fb.textContent = '';
+  document.getElementById('quizNextBtn').className = 'quiz-next-btn';
+}
+
+function answerQuestion(chosen, q){
+  if(quizAnswered) return;
+  quizAnswered = true;
+  const isCorrect = chosen === q.answer;
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach(btn => {
+    btn.disabled = true;
+    if(btn.textContent === q.answer) btn.classList.add('correct');
+    else if(btn.textContent === chosen && !isCorrect) btn.classList.add('wrong');
+    else btn.classList.add('reveal');
+  });
+
+  const fb = document.getElementById('quizFeedback');
+  if(isCorrect){
+    quizScore++;
+    fb.className = 'quiz-feedback show ok';
+    fb.textContent = '✅ 答對了！';
+  } else {
+    quizWrong.push(q);
+    fb.className = 'quiz-feedback show bad';
+    fb.textContent = `❌ 答錯！正確答案：${q.answer}`;
+  }
+  document.getElementById('quizNextBtn').className = 'quiz-next-btn show';
+}
+
+function nextQuestion(){
+  quizCurrent++;
+  if(quizCurrent >= quizQuestions.length){
+    showResult();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showResult(){
+  document.getElementById('quizArea').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'flex';
+  const total = quizQuestions.length;
+  const pct = Math.round(quizScore / total * 100);
+
+  let emoji = '😢'; let msg = '繼續加油！';
+  if(pct>=90){emoji='🏆';msg='優秀！幾乎全對！';}
+  else if(pct>=75){emoji='🎉';msg='很好！繼續保持！';}
+  else if(pct>=60){emoji='👍';msg='及格！再多練習！';}
+  else if(pct>=40){emoji='📖';msg='需要多複習！';}
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultScore').textContent = `${quizScore} / ${total}`;
+  document.getElementById('resultSub').textContent = msg;
+  document.getElementById('resCorrect').textContent = quizScore;
+  document.getElementById('resWrong').textContent = total - quizScore;
+  document.getElementById('resTotal').textContent = total;
+  document.getElementById('resPct').textContent = pct + '%';
+
+  const fill = document.getElementById('resultBarFill');
+  fill.style.width = '0%';
+  fill.style.background = pct>=75?'linear-gradient(90deg,#27ae60,#2ecc71)':pct>=60?'linear-gradient(90deg,#f39c12,#e67e22)':'linear-gradient(90deg,#d63031,#e74c3c)';
+  setTimeout(()=>{ fill.style.width = pct + '%'; }, 100);
+
+  // Wrong list
+  const wl = document.getElementById('wrongList');
+  if(quizWrong.length === 0){
+    wl.innerHTML = '<div style="text-align:center;color:var(--success);font-weight:700;margin-top:16px;">🎯 全部答對！</div>';
+  } else {
+    let html = `<h3>❌ 答錯的題目 (${quizWrong.length} 題)</h3>`;
+    quizWrong.forEach(q => {
+      html += `<div class="wrong-item">
+        <div class="wi-en">${q.item.en}</div>
+        <div class="wi-zh">${q.item.zh}</div>
+        ${q.item.note ? `<div class="wi-note">📌 ${q.item.note}</div>` : ''}
+      </div>`;
+    });
+    wl.innerHTML = html;
+  }
+}
+
+function restartQuiz(){
+  document.getElementById('quizResult').style.display = 'none';
+  startQuiz();
+}
+
+function backToStart(){
+  document.getElementById('quizResult').style.display = 'none';
+  document.getElementById('quizArea').style.display = 'none';
+  document.getElementById('quizStart').style.display = 'flex';
+  document.getElementById('quizPoolCount').textContent = DATA.length;
 }
 
 init();
