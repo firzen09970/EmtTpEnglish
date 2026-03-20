@@ -20,18 +20,49 @@
     --green: #2a9d8f;
     --shadow: 0 4px 20px rgba(0,0,0,0.10);
   }
+  
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 120px; }
+  body { 
+    font-family: 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif; 
+    background: var(--bg); 
+    color: var(--text); 
+    min-height: 100vh; 
+    padding-bottom: 120px; 
+  }
 
   /* ── Header ── */
-  header { background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); color: #fff; padding: 18px 20px 14px; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+  header { 
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); 
+    color: #fff; 
+    padding: 18px 20px 14px; 
+    text-align: center; 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+    box-shadow: 0 2px 12px rgba(0,0,0,.25); 
+  }
   header h1 { font-size: 1.15rem; font-weight: 700; letter-spacing: .04em; }
   header p  { font-size: .75rem; opacity: .75; margin-top: 2px; }
 
   /* ── Nav Tabs ── */
-  nav { display: flex; background: var(--navy); position: fixed; bottom: 0; left: 0; width: 100%; z-index: 999; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); padding-bottom: env(safe-area-inset-bottom); }
-  nav button { flex: 1; padding: 14px 4px; border: none; background: transparent; color: rgba(255,255,255,.6); font-size: .95rem; cursor: pointer; transition: .2s; border-top: 3px solid transparent; border-bottom: none; }
-  nav button.active { color: #fff; border-top-color: var(--light); font-weight: 700; background: rgba(255,255,255,0.05); }
+  nav { 
+    display: flex; 
+    background: var(--navy); 
+    position: fixed; 
+    bottom: 0; left: 0; width: 100%; 
+    z-index: 999; 
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1); 
+    padding-bottom: env(safe-area-inset-bottom); 
+  }
+  nav button { 
+    flex: 1; padding: 14px 4px; border: none; background: transparent; 
+    color: rgba(255,255,255,.6); font-size: .95rem; cursor: pointer; 
+    transition: .2s; border-top: 3px solid transparent; 
+  }
+  nav button.active { 
+    color: #fff; border-top-color: var(--light); font-weight: 700; 
+    background: rgba(255,255,255,0.05); 
+  }
   nav button:hover:not(.active) { color: rgba(255,255,255,.9); }
 
   /* ── Pages ── */
@@ -43,7 +74,11 @@
   .fc-wrap { perspective: 1000px; height: clamp(280px, 45vh, 400px); cursor: pointer; margin: 0 auto 16px; max-width: 520px; }
   .fc-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s cubic-bezier(.4,0,.2,1); }
   .fc-wrap.flipped .fc-inner { transform: rotateY(180deg); }
-  .fc-front, .fc-back { position: absolute; inset: 0; border-radius: 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; backface-visibility: hidden; padding: 22px 20px; }
+  .fc-front, .fc-back { 
+    position: absolute; inset: 0; border-radius: 18px; box-shadow: var(--shadow); 
+    display: flex; flex-direction: column; align-items: center; justify-content: center; 
+    backface-visibility: hidden; padding: 22px 20px; 
+  }
   .fc-front { background: var(--card); border: 2px solid var(--light); }
   .fc-back  { background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); color: #fff; transform: rotateY(180deg); }
   .fc-hint  { font-size: .7rem; color: var(--muted); margin-bottom: 10px; letter-spacing:.05em; }
@@ -58,28 +93,47 @@
   .tts-btn  { position: absolute; top: 12px; left: 14px; background: none; border: none; font-size: 1.2rem; cursor: pointer; line-height: 1; }
 
   .fc-controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 8px 0 14px; }
-  .fc-controls button { background: var(--card); border: 2px solid var(--light); border-radius: 50px; padding: 12px 22px; font-size: .95rem; cursor: pointer; font-weight: 600; color: var(--navy); transition: .15s; }
+  .fc-controls button { 
+    background: var(--card); border: 2px solid var(--light); border-radius: 50px; 
+    padding: 12px 22px; font-size: .95rem; cursor: pointer; font-weight: 600; 
+    color: var(--navy); transition: .15s; 
+  }
   .fc-controls button:hover { background: var(--light); }
   .fc-controls button#fc-flip { background: var(--blue); color: #fff; border-color: var(--blue); padding: 12px 30px; }
+  
   /* ── CUSTOM DROPDOWN ── */
   .custom-dropdown { position: relative; margin: 0 auto 12px; max-width: 340px; width: 100%; text-align: left; z-index: 1000; }
-  .dropdown-trigger { width: 100%; background: var(--card); border: 2px solid var(--blue); color: var(--navy); padding: 12px 20px; font-size: .95rem; font-weight: 700; border-radius: 50px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: .2s; }
+  .dropdown-trigger { 
+    width: 100%; background: var(--card); border: 2px solid var(--blue); color: var(--navy); 
+    padding: 12px 20px; font-size: .95rem; font-weight: 700; border-radius: 50px; 
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: .2s; 
+  }
   .dropdown-trigger::after { content: '▼'; font-size: .7rem; transition: transform .3s; }
   .dropdown-trigger.open { background: var(--tag-bg); }
   .dropdown-trigger.open::after { transform: rotate(180deg); }
-  .dropdown-menu-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1); position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 1000; }
+  .dropdown-menu-wrap { 
+    display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1); 
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 1000; 
+  }
   .dropdown-menu-wrap.open { grid-template-rows: 1fr; }
   .dropdown-menu { overflow: hidden; background: var(--card); border-radius: 16px; box-shadow: var(--shadow); border: 1px solid var(--light); display: flex; flex-direction: column; }
   .dropdown-menu-inner { min-height: 0; max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; }
-  .dropdown-menu-inner button { background: none; border: none; padding: 14px 20px; text-align: left; font-size: .95rem; color: var(--text); border-bottom: 1px solid #f1f1f1; cursor: pointer; transition: .15s; }
+  .dropdown-menu-inner button { 
+    background: none; border: none; padding: 14px 20px; text-align: left; font-size: .95rem; 
+    color: var(--text); border-bottom: 1px solid #f1f1f1; cursor: pointer; transition: .15s; 
+  }
   .dropdown-menu-inner button:last-child { border-bottom: none; }
   .dropdown-menu-inner button:hover, .dropdown-menu-inner button.active { background: var(--tag-bg); color: var(--blue); font-weight: 700; padding-left: 26px; }
+  
   .progress-bar-wrap { background: #dde; border-radius: 999px; height: 5px; max-width: 340px; margin: 0 auto 8px; }
   .progress-bar { background: var(--blue); height: 100%; border-radius: 999px; transition: width .3s; }
 
   /* ── OVERVIEW / DICTIONARY ── */
   .search-wrap { position: sticky; top: 72px; z-index: 90; background: var(--bg); padding-bottom: 5px; margin-bottom: 12px; }
-  .search-wrap input { width: 100%; border: 2px solid var(--light); border-radius: 50px; padding: 12px 40px 12px 18px; font-size: .95rem; outline: none; background: var(--card); color: var(--text); }
+  .search-wrap input { 
+    width: 100%; border: 2px solid var(--light); border-radius: 50px; 
+    padding: 12px 40px 12px 18px; font-size: .95rem; outline: none; background: var(--card); color: var(--text); 
+  }
   .search-wrap input:focus { border-color: var(--blue); }
   .search-clear { position: absolute; right: 12px; top: calc(50% - 2px); transform: translateY(-50%); background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--muted); }
 
@@ -101,7 +155,11 @@
   .quiz-q .q-text  { font-size: clamp(1rem, 4vw, 1.3rem); font-weight: 700; color: var(--navy); text-align: center; word-break: break-word; line-height: 1.35; }
   .quiz-q .q-hint  { font-size: .78rem; color: var(--blue); text-align: center; margin-top: 6px; }
   .quiz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .quiz-opts button { background: var(--card); border: 2px solid var(--light); border-radius: 12px; padding: 16px 10px; font-size: .95rem; cursor: pointer; font-weight: 600; color: var(--navy); transition: .15s; text-align: center; word-break: break-word; line-height: 1.3; }
+  .quiz-opts button { 
+    background: var(--card); border: 2px solid var(--light); border-radius: 12px; 
+    padding: 16px 10px; font-size: .95rem; cursor: pointer; font-weight: 600; 
+    color: var(--navy); transition: .15s; text-align: center; word-break: break-word; line-height: 1.3; 
+  }
   .quiz-opts button:hover:not(:disabled) { border-color: var(--blue); background: var(--tag-bg); }
   .quiz-opts button.correct { background: #d4f7e8; border-color: var(--green); color: var(--green); }
   .quiz-opts button.wrong   { background: #fde8e8; border-color: var(--red); color: var(--red); }
@@ -129,7 +187,6 @@
   <button onclick="showPage('quiz')">📝 測驗</button>
 </nav>
 
-<!-- ════════ FLASHCARD ════════ -->
 <div class="page active" id="page-fc">
   <div class="custom-dropdown" id="dropdown-fc">
     <button class="dropdown-trigger" id="fc-cat-trigger" onclick="toggleDropdown('fc')">分類：全部</button>
@@ -142,6 +199,7 @@
   <label class="fav-only-toggle"><input type="checkbox" id="fc-fav-only" onchange="toggleFcFavOnly()"> ⭐ 只顯示最愛</label>
   <div id="flashcard-count"></div>
   <div class="progress-bar-wrap"><div class="progress-bar" id="fc-progress"></div></div>
+  
   <div class="fc-wrap" id="fc-wrap" onclick="if(!window.isSwiping) flipCard()">
     <div class="fc-inner" id="fc-inner">
       <div class="fc-front">
@@ -149,7 +207,7 @@
         <button class="star-btn" onclick="toggleStar(event)" id="fc-star">☆</button>
         <span class="fc-hint">點擊翻面看中文</span>
         <div class="fc-abbrv" id="fc-abbrv"></div>
-        <div class="fc-en" id="fc-en"></div>
+        <div class="fc-en" id="fc-en">載入中...</div>
         <div class="fc-tag-row" id="fc-tags-front"></div>
       </div>
       <div class="fc-back">
@@ -160,6 +218,7 @@
       </div>
     </div>
   </div>
+  
   <div class="fc-controls">
     <button onclick="prevCard()">← 上一張</button>
     <button id="fc-flip" onclick="flipCard()">翻面</button>
@@ -168,7 +227,6 @@
   <p style="text-align:center;font-size:.72rem;color:var(--muted);margin-top:4px;">鍵盤：← → 切換 · Space 翻面</p>
 </div>
 
-<!-- ════════ DICTIONARY ════════ -->
 <div class="page" id="page-dict">
   <div class="search-wrap">
     <input type="text" id="search-input" placeholder="搜尋英文、中文、縮寫…" oninput="renderDict()">
@@ -186,7 +244,6 @@
   <div class="dict-list" id="dict-list"></div>
 </div>
 
-<!-- ════════ QUIZ ════════ -->
 <div class="page" id="page-quiz">
   <label class="fav-only-toggle"><input type="checkbox" id="quiz-fav-only" onchange="initQuiz()"> ⭐ 只考最愛單字</label>
   <div class="quiz-info"><span id="quiz-progress"></span> &nbsp;|&nbsp; <span id="quiz-score">得分：0 / 0</span></div>
@@ -608,191 +665,358 @@ const VOCAB = [
 
 // ════ STATE ════
 let favSet = new Set();
-try { favSet = new Set(JSON.parse(localStorage.getItem('emtFav')||'[]')); } catch(e){}
-function saveFav(){ localStorage.setItem('emtFav', JSON.stringify([...favSet])); }
+try { 
+  favSet = new Set(JSON.parse(localStorage.getItem('emtFav') || '[]')); 
+} catch(e) {}
 
+function saveFav() { 
+  localStorage.setItem('emtFav', JSON.stringify([...favSet])); 
+}
+
+// ════ UI DROPDOWN 控制 ════
 function toggleDropdown(id) {
-  document.getElementById(id+'-cat-trigger').classList.toggle('open');
-  document.getElementById(id+'-cat-wrap').classList.toggle('open');
+  document.getElementById(id + '-cat-trigger').classList.toggle('open');
+  document.getElementById(id + '-cat-wrap').classList.toggle('open');
 }
+
 function closeDropdown(id) {
-  const t = document.getElementById(id+'-cat-trigger');
-  const w = document.getElementById(id+'-cat-wrap');
-  if(t) t.classList.remove('open');
-  if(w) w.classList.remove('open');
+  const t = document.getElementById(id + '-cat-trigger');
+  const w = document.getElementById(id + '-cat-wrap');
+  if (t) t.classList.remove('open');
+  if (w) w.classList.remove('open');
 }
+
 document.addEventListener('click', e => {
   if (!e.target.closest('#dropdown-fc') && document.getElementById('fc-cat-trigger')) closeDropdown('fc');
   if (!e.target.closest('#dropdown-dict') && document.getElementById('dict-cat-trigger')) closeDropdown('dict');
 });
 
-const CATS = ['全部', ...new Set(VOCAB.map(v=>v.cat))];
+const CATS = ['全部', ...new Set(VOCAB.map(v => v.cat))];
 let fcCat = '全部', fcFavOnly = false;
 let fcPool = [], fcIdx = 0;
 let quizScore = 0, quizTotal = 0, quizIdx = 0, quizPool = [], quizDone = false;
 let dictCat = '全部';
 
 // ════ PAGE SWITCH ════
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  document.querySelectorAll('nav button').forEach((b,i)=>{
-    b.classList.toggle('active', ['fc','dict','quiz'][i]===id);
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('nav button').forEach((b, i) => {
+    b.classList.toggle('active', ['fc', 'dict', 'quiz'][i] === id);
   });
-  if(id==='dict') renderDict();
-  if(id==='quiz') initQuiz();
+  if (id === 'dict') renderDict();
+  if (id === 'quiz') initQuiz();
 }
 
 // ════════════════════
 //  FLASHCARD
 // ════════════════════
-function buildFcPool(){
-  fcPool = VOCAB.filter(v=>{
-    const catOk = fcCat==='全部' || v.cat===fcCat;
+function buildFcPool() {
+  fcPool = VOCAB.filter(v => {
+    const catOk = fcCat === '全部' || v.cat === fcCat;
     const favOk = !fcFavOnly || favSet.has(v.en);
     return catOk && favOk;
   });
-  if(!fcPool.length) fcPool = VOCAB;
   fcIdx = 0;
 }
-function renderFcCatBtns(){
+
+function renderFcCatBtns() {
   const wrap = document.getElementById('fc-cat-btns');
-  wrap.innerHTML = CATS.map(c=>`<button class="${c===fcCat?'active':''}" onclick="setFcCat('${c}')">${c}</button>`).join('');
+  wrap.innerHTML = CATS.map(c => 
+    `<button class="${c === fcCat ? 'active' : ''}" onclick="setFcCat('${c}')">${c}</button>`
+  ).join('');
 }
-function setFcCat(c){ 
-  fcCat=c; 
+
+function setFcCat(c) { 
+  fcCat = c; 
   document.getElementById('fc-cat-trigger').textContent = '分類：' + c;
-  renderFcCatBtns(); buildFcPool(); renderCard(); 
+  renderFcCatBtns(); 
+  buildFcPool(); 
+  renderCard(); 
   closeDropdown('fc');
 }
-function toggleFcFavOnly(){ fcFavOnly=document.getElementById('fc-fav-only').checked; buildFcPool(); renderCard(); }
-function renderCard(){
-  if(!fcPool.length) return;
+
+function toggleFcFavOnly() { 
+  fcFavOnly = document.getElementById('fc-fav-only').checked; 
+  buildFcPool(); 
+  renderCard(); 
+}
+
+function renderCard() {
+  // 處理空狀態（例如勾選最愛但沒有單字時）
+  if (!fcPool.length) {
+    document.getElementById('fc-en').textContent = '尚無單字';
+    document.getElementById('fc-zh').textContent = '請切換分類或加入最愛單字';
+    document.getElementById('fc-abbrv').textContent = '';
+    document.getElementById('fc-star').textContent = '☆';
+    document.getElementById('fc-star-back').textContent = '☆';
+    document.getElementById('fc-tags-front').innerHTML = '';
+    document.getElementById('fc-tags-back').innerHTML = '';
+    document.getElementById('flashcard-count').textContent = `0 / 0`;
+    document.getElementById('fc-progress').style.width = '0%';
+    document.getElementById('fc-wrap').classList.remove('flipped');
+    return;
+  }
+
   const v = fcPool[fcIdx];
   document.getElementById('fc-en').textContent = v.en;
   document.getElementById('fc-zh').textContent = v.zh;
   document.getElementById('fc-abbrv').textContent = v.abbr || '';
+  
   const starred = favSet.has(v.en);
-  document.getElementById('fc-star').textContent = starred?'★':'☆';
-  document.getElementById('fc-star-back').textContent = starred?'★':'☆';
-  [document.getElementById('fc-tags-front'), document.getElementById('fc-tags-back')].forEach(el=>{
-    el.innerHTML = `<span class="fc-tag">${v.cat}</span>${v.abbr?`<span class="fc-tag">${v.abbr}</span>`:''}`;
-  });
-  document.getElementById('flashcard-count').textContent = `${fcIdx+1} / ${fcPool.length}`;
-  const pct = (fcIdx+1)/fcPool.length*100;
-  document.getElementById('fc-progress').style.width = pct+'%';
+  document.getElementById('fc-star').textContent = starred ? '★' : '☆';
+  document.getElementById('fc-star-back').textContent = starred ? '★' : '☆';
+  
+  const tagHtml = `<span class="fc-tag">${v.cat}</span>${v.abbr ? `<span class="fc-tag">${v.abbr}</span>` : ''}`;
+  document.getElementById('fc-tags-front').innerHTML = tagHtml;
+  document.getElementById('fc-tags-back').innerHTML = tagHtml;
+  
+  document.getElementById('flashcard-count').textContent = `${fcIdx + 1} / ${fcPool.length}`;
+  const pct = (fcIdx + 1) / fcPool.length * 100;
+  document.getElementById('fc-progress').style.width = pct + '%';
   document.getElementById('fc-wrap').classList.remove('flipped');
 }
-function flipCard(){ document.getElementById('fc-wrap').classList.toggle('flipped'); }
-function nextCard(){ fcIdx=(fcIdx+1)%fcPool.length; renderCard(); }
-function prevCard(){ fcIdx=(fcIdx-1+fcPool.length)%fcPool.length; renderCard(); }
-function speakEN(e){ e.stopPropagation(); const v=fcPool[fcIdx]; if(!v) return; const u=new SpeechSynthesisUtterance(v.en); u.lang='en-US'; speechSynthesis.speak(u); }
-function toggleStar(e){ e.stopPropagation(); const v=fcPool[fcIdx]; if(!v) return; if(favSet.has(v.en)) favSet.delete(v.en); else favSet.add(v.en); saveFav(); renderCard(); }
+
+function flipCard() { 
+  if (fcPool.length > 0) document.getElementById('fc-wrap').classList.toggle('flipped'); 
+}
+
+function nextCard() { 
+  if (!fcPool.length) return;
+  fcIdx = (fcIdx + 1) % fcPool.length; 
+  renderCard(); 
+}
+
+function prevCard() { 
+  if (!fcPool.length) return;
+  fcIdx = (fcIdx - 1 + fcPool.length) % fcPool.length; 
+  renderCard(); 
+}
+
+function speakEN(e) { 
+  e.stopPropagation(); 
+  const v = fcPool[fcIdx]; 
+  if (!v) return; 
+  
+  // 優化：發音前先清除目前的佇列，避免連續點擊造成延遲
+  window.speechSynthesis.cancel();
+  
+  const u = new SpeechSynthesisUtterance(v.en); 
+  u.lang = 'en-US'; 
+  speechSynthesis.speak(u); 
+}
+
+function toggleStar(e) { 
+  e.stopPropagation(); 
+  const v = fcPool[fcIdx]; 
+  if (!v) return; 
+  
+  if (favSet.has(v.en)) favSet.delete(v.en); 
+  else favSet.add(v.en); 
+  
+  saveFav(); 
+  
+  // 如果在「只顯示最愛」模式下取消最愛，則重新整理牌組
+  if (fcFavOnly && !favSet.has(v.en)) {
+    buildFcPool();
+  }
+  renderCard(); 
+}
 
 // ════════════════════
 //  DICTIONARY
 // ════════════════════
-function renderDictCatBtns(){
+function renderDictCatBtns() {
   const wrap = document.getElementById('dict-cat-btns');
-  wrap.innerHTML = CATS.map(c=>`<button class="${c===dictCat?'active':''}" onclick="setDictCat('${c}')">${c}</button>`).join('');
+  wrap.innerHTML = CATS.map(c => 
+    `<button class="${c === dictCat ? 'active' : ''}" onclick="setDictCat('${c}')">${c}</button>`
+  ).join('');
 }
-function setDictCat(c){ 
-  dictCat=c; 
+
+function setDictCat(c) { 
+  dictCat = c; 
   document.getElementById('dict-cat-trigger').textContent = '分類：' + c;
-  renderDictCatBtns(); renderDict(); 
+  renderDictCatBtns(); 
+  renderDict(); 
   closeDropdown('dict');
 }
-function clearSearch(){ document.getElementById('search-input').value=''; renderDict(); }
-function renderDict(){
-  const q=(document.getElementById('search-input').value||'').toLowerCase().trim();
-  let list = VOCAB.filter(v=>{
-    const catOk = dictCat==='全部'||v.cat===dictCat;
-    const qOk = !q || v.en.toLowerCase().includes(q)||v.zh.includes(q)||(v.abbr&&v.abbr.toLowerCase().includes(q))||v.cat.includes(q);
-    return catOk&&qOk;
+
+function clearSearch() { 
+  document.getElementById('search-input').value = ''; 
+  renderDict(); 
+}
+
+function renderDict() {
+  const q = (document.getElementById('search-input').value || '').toLowerCase().trim();
+  let list = VOCAB.filter(v => {
+    const catOk = dictCat === '全部' || v.cat === dictCat;
+    const qOk = !q || v.en.toLowerCase().includes(q) || v.zh.includes(q) || (v.abbr && v.abbr.toLowerCase().includes(q)) || v.cat.includes(q);
+    return catOk && qOk;
   });
+  
   document.getElementById('dict-count').textContent = `共 ${list.length} 個字彙`;
-  document.getElementById('dict-list').innerHTML = list.map(v=>`
+  
+  if (list.length === 0) {
+    document.getElementById('dict-list').innerHTML = `<p style="text-align:center; padding: 20px; color: var(--muted);">沒有找到相符的單字</p>`;
+    return;
+  }
+
+  document.getElementById('dict-list').innerHTML = list.map(v => `
     <div class="dict-card">
-      ${v.abbr?`<span class="abbrv">${v.abbr}</span>`:''}
+      ${v.abbr ? `<span class="abbrv">${v.abbr}</span>` : ''}
       <span class="en">${v.en}</span>
       <span class="tag">${v.cat}</span>
       <span class="zh">${v.zh}</span>
-      <button class="star-sm" onclick="toggleStarDict('${v.en.replace(/'/g,"\\'")}',this)">${favSet.has(v.en)?'★':'☆'}</button>
+      <button class="star-sm" onclick="toggleStarDict('${v.en.replace(/'/g, "\\'")}', this)">${favSet.has(v.en) ? '★' : '☆'}</button>
     </div>`).join('');
 }
-function toggleStarDict(en,btn){ if(favSet.has(en)) favSet.delete(en); else favSet.add(en); saveFav(); btn.textContent=favSet.has(en)?'★':'☆'; }
+
+function toggleStarDict(en, btn) { 
+  if (favSet.has(en)) favSet.delete(en); 
+  else favSet.add(en); 
+  saveFav(); 
+  btn.textContent = favSet.has(en) ? '★' : '☆'; 
+  
+  // 同步更新閃卡狀態（如果正好在閃卡池裡）
+  buildFcPool();
+}
 
 // ════════════════════
 //  QUIZ
 // ════════════════════
-function initQuiz(){
+function initQuiz() {
   const favOnly = document.getElementById('quiz-fav-only').checked;
-  let pool = favOnly ? VOCAB.filter(v=>favSet.has(v.en)) : VOCAB;
-  if(pool.length<4) pool=VOCAB;
+  let pool = favOnly ? VOCAB.filter(v => favSet.has(v.en)) : VOCAB;
+  
+  if (pool.length < 4) {
+    if (favOnly) {
+       document.getElementById('quiz-area').innerHTML = `<div style="text-align:center; padding:30px; color:var(--muted);">最愛單字數量不足（至少需 4 個），請先加入更多最愛！</div>`;
+       document.getElementById('quiz-progress').textContent = '';
+       document.getElementById('quiz-score').textContent = '得分：0 / 0';
+       return;
+    }
+    pool = VOCAB; 
+  }
+  
   quizPool = shuffle([...pool]);
-  quizIdx=0; quizScore=0; quizTotal=0; quizDone=false;
+  quizIdx = 0; 
+  quizScore = 0; 
+  quizTotal = 0; 
+  quizDone = false;
   renderQuizQ();
 }
-function renderQuizQ(){
-  const area=document.getElementById('quiz-area');
-  if(quizIdx>=quizPool.length){ area.innerHTML=`<div id="quiz-result"><h2>🎉 完成！</h2><p>得分：${quizScore} / ${quizTotal}（正確率 ${quizTotal?Math.round(quizScore/quizTotal*100):0}%）</p><button onclick="initQuiz()">再來一次</button></div>`; return; }
-  const v=quizPool[quizIdx];
-  const enToZh=Math.random()>.4;
-  const q=enToZh?v.en:v.zh;
-  const ans=enToZh?v.zh:v.en;
-  // wrong options
-  let wrongs=shuffle(VOCAB.filter(w=>w.en!==v.en)).slice(0,3).map(w=>enToZh?w.zh:w.en);
-  const opts=shuffle([ans,...wrongs]);
-  document.getElementById('quiz-progress').textContent=`題目 ${quizIdx+1} / ${quizPool.length}`;
-  area.innerHTML=`
-    <div class="quiz-q">
-      <div class="q-label">${enToZh?'英文→中文':'中文→英文'} · [${v.cat}]</div>
-      <div class="q-text">${q}</div>
-      ${v.abbr&&enToZh?`<div class="q-hint">縮寫：${v.abbr}</div>`:''}
-    </div>
-    <div class="quiz-opts">${opts.map(o=>`<button onclick="checkAns(this,'${ans.replace(/'/g,"\\'")}','${o.replace(/'/g,"\\'")}','${q.replace(/'/g,"\\'")}',${enToZh})">${o}</button>`).join('')}</div>
-    <button class="quiz-next" onclick="nextQ()" style="display:none" id="quiz-next-btn">下一題 →</button>`;
-}
-function checkAns(btn,ans,chose,q,enToZh){
-  document.querySelectorAll('.quiz-opts button').forEach(b=>b.disabled=true);
-  quizTotal++;
-  if(chose===ans){ btn.classList.add('correct'); quizScore++; }
-  else{
-    btn.classList.add('wrong');
-    document.querySelectorAll('.quiz-opts button').forEach(b=>{ if(b.textContent===ans) b.classList.add('correct'); });
+
+function renderQuizQ() {
+  const area = document.getElementById('quiz-area');
+  
+  if (quizIdx >= quizPool.length) { 
+    area.innerHTML = `
+      <div id="quiz-result">
+        <h2>🎉 測驗完成！</h2>
+        <p>得分：${quizScore} / ${quizTotal}（正確率 ${quizTotal ? Math.round(quizScore / quizTotal * 100) : 0}%）</p>
+        <button onclick="initQuiz()">再來一次</button>
+      </div>`; 
+    return; 
   }
-  document.getElementById('quiz-score').textContent=`得分：${quizScore} / ${quizTotal}`;
-  document.getElementById('quiz-next-btn').style.display='block';
+  
+  const v = quizPool[quizIdx];
+  const enToZh = Math.random() > 0.4; // 60% 機率考英文翻中文
+  const q = enToZh ? v.en : v.zh;
+  const ans = enToZh ? v.zh : v.en;
+  
+  // 隨機挑三個錯誤選項
+  let wrongs = shuffle(VOCAB.filter(w => w.en !== v.en)).slice(0, 3).map(w => enToZh ? w.zh : w.en);
+  const opts = shuffle([ans, ...wrongs]);
+  
+  document.getElementById('quiz-progress').textContent = `題目 ${quizIdx + 1} / ${quizPool.length}`;
+  
+  // 使用 data-* 屬性來傳遞選項，避免引號導致的 HTML 解析錯誤
+  area.innerHTML = `
+    <div class="quiz-q">
+      <div class="q-label">${enToZh ? '英文 → 中文' : '中文 → 英文'} · [${v.cat}]</div>
+      <div class="q-text">${q}</div>
+      ${v.abbr && enToZh ? `<div class="q-hint">縮寫：${v.abbr}</div>` : ''}
+    </div>
+    <div class="quiz-opts" id="quiz-opts-container">
+      ${opts.map((o, idx) => `<button class="quiz-opt-btn" data-val="${o.replace(/"/g, '&quot;')}">${o}</button>`).join('')}
+    </div>
+    <button class="quiz-next" onclick="nextQ()" style="display:none" id="quiz-next-btn">下一題 →</button>
+  `;
+
+  // 綁定選項點擊事件
+  document.querySelectorAll('.quiz-opt-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      checkAns(this, ans);
+    });
+  });
 }
-function nextQ(){ quizIdx++; renderQuizQ(); }
-function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+function checkAns(btn, ans) {
+  const allBtns = document.querySelectorAll('.quiz-opts button');
+  allBtns.forEach(b => b.disabled = true);
+  
+  const chose = btn.getAttribute('data-val');
+  quizTotal++;
+  
+  if (chose === ans) { 
+    btn.classList.add('correct'); 
+    quizScore++; 
+  } else {
+    btn.classList.add('wrong');
+    allBtns.forEach(b => { 
+      if (b.getAttribute('data-val') === ans) b.classList.add('correct'); 
+    });
+  }
+  
+  document.getElementById('quiz-score').textContent = `得分：${quizScore} / ${quizTotal}`;
+  document.getElementById('quiz-next-btn').style.display = 'block';
+}
+
+function nextQ() { 
+  quizIdx++; 
+  renderQuizQ(); 
+}
+
+function shuffle(a) { 
+  for (let i = a.length - 1; i > 0; i--) { 
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]]; 
+  } 
+  return a; 
+}
 
 // ════ KEYBOARD & SWIPE ════
-document.addEventListener('keydown',e=>{
-  if(!document.getElementById('page-fc').classList.contains('active')) return;
-  if(e.key==='ArrowRight') nextCard();
-  else if(e.key==='ArrowLeft') prevCard();
-  else if(e.key===' '){ e.preventDefault(); flipCard(); }
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('page-fc').classList.contains('active')) return;
+  if (e.key === 'ArrowRight') nextCard();
+  else if (e.key === 'ArrowLeft') prevCard();
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
 });
 
 window.isSwiping = false;
 let touchStartX = 0, touchStartY = 0;
 const fcWrap = document.getElementById('fc-wrap');
+
 fcWrap.addEventListener('touchstart', e => {
   touchStartX = e.changedTouches[0].screenX;
   touchStartY = e.changedTouches[0].screenY;
   window.isSwiping = false;
 }, {passive: true});
+
 fcWrap.addEventListener('touchmove', e => {
   window.isSwiping = true;
 }, {passive: true});
+
 fcWrap.addEventListener('touchend', e => {
   if (!window.isSwiping) return;
   const dx = e.changedTouches[0].screenX - touchStartX;
   const dy = e.changedTouches[0].screenY - touchStartY;
+  
+  // 確保滑動超過一定距離且是水平滑動
   if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
     if (dx < 0) nextCard();
     else prevCard();
+    
     // 防止滑動結束後觸發點擊翻牌
     setTimeout(() => window.isSwiping = false, 50);
   } else {
@@ -805,6 +1029,7 @@ renderFcCatBtns();
 renderDictCatBtns();
 buildFcPool();
 renderCard();
+
 </script>
 </body>
 </html>
