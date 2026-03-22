@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>EMT TP 常用藥物字彙</title>
+<title>新北市消防局 — EMT 常用藥物字彙</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -150,6 +150,14 @@ body{
 .wrong-item .wi-zh{color:var(--text-light);}
 .wrong-item .wi-note{font-size:.78rem;color:var(--text-light);margin-top:3px;}
 
+/* ===== EDIT MODAL ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .2s;}
+.modal-overlay.open{opacity:1;pointer-events:auto;}
+.modal-box{background:#fff;border-radius:var(--radius);box-shadow:0 8px 40px rgba(0,0,0,.18);padding:24px;width:100%;max-width:440px;transform:translateY(20px);transition:transform .2s;}
+.modal-overlay.open .modal-box{transform:translateY(0);}
+.modal-title{font-size:1.05rem;font-weight:700;color:var(--primary);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #f0f2f5;}
+.modal-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;}
+
 @media(max-width:480px){
   .header h1{font-size:1.05rem;}
   .tab-btn{padding:6px 10px;font-size:.8rem;}
@@ -163,8 +171,8 @@ body{
 
 <div class="header">
   <div class="icon">🚑</div>
-  <h1>EMT TP 常用英文字彙</h1>
-  <div class="sub">藥物與救護輸液</div>
+  <h1>新北市消防局 EMT 常用英文字彙</h1>
+  <div class="sub">思婕整理 · 藥物與救護輸液專版</div>
 </div>
 
 <div class="tabs">
@@ -193,6 +201,7 @@ body{
         <div class="fc-inner" id="fcInner">
           <div class="fc-face fc-front" id="fcFront">
             <div class="fc-actions">
+              <button class="act-btn" onclick="event.stopPropagation();openEditCurrent()">✏️</button>
               <button class="act-btn" onclick="event.stopPropagation();speakWord()">🔊</button>
               <button class="act-btn" id="favBtnF" onclick="event.stopPropagation();toggleFav()">☆</button>
             </div>
@@ -310,6 +319,34 @@ body{
     </div>
   </div>
 
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="editModal" onclick="closeEditModal(event)">
+  <div class="modal-box">
+    <div class="modal-title">✏️ 編輯單字</div>
+    <input type="hidden" id="editOrigEn">
+    <div class="form-group">
+      <label style="font-size:.82rem;font-weight:600;color:var(--text-light);margin-bottom:4px;display:block;">英文藥名</label>
+      <input type="text" id="editEn" class="form-input" placeholder="英文藥名">
+    </div>
+    <div class="form-group">
+      <label style="font-size:.82rem;font-weight:600;color:var(--text-light);margin-bottom:4px;display:block;">中文 / 商品名</label>
+      <input type="text" id="editZh" class="form-input" placeholder="中文名稱">
+    </div>
+    <div class="form-group">
+      <label style="font-size:.82rem;font-weight:600;color:var(--text-light);margin-bottom:4px;display:block;">分類</label>
+      <input type="text" id="editCat" class="form-input" placeholder="分類">
+    </div>
+    <div class="form-group">
+      <label style="font-size:.82rem;font-weight:600;color:var(--text-light);margin-bottom:4px;display:block;">備註 / 意思</label>
+      <textarea id="editNote" class="form-input" placeholder="備註說明（可空白）" rows="3" style="resize:vertical;line-height:1.5;"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="form-btn" onclick="saveEdit()">💾 儲存</button>
+      <button class="form-btn sec" onclick="document.getElementById('editModal').classList.remove('open')">取消</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -546,6 +583,7 @@ function renderOverview(){
           <span class="eng">${d.en}</span>
           <span class="chi">${d.zh}</span>
           <span class="row-acts">
+            <button onclick="openEditModal('${d.en.replace(/'/g,"\\'")}')">✏️</button>
             <button onclick="deleteWord('${d.en.replace(/'/g,"\\'")}')" class="del">🗑️</button>
           </span>
         </div>
@@ -775,6 +813,48 @@ function backToStart(){
   document.getElementById('quizArea').style.display = 'none';
   document.getElementById('quizStart').style.display = 'flex';
   document.getElementById('quizPoolCount').textContent = DATA.length;
+}
+
+// ===== EDIT MODAL =====
+function openEditModal(en){
+  const item = DATA.find(d => d.en === en);
+  if(!item) return;
+  document.getElementById('editOrigEn').value = item.en;
+  document.getElementById('editEn').value = item.en;
+  document.getElementById('editZh').value = item.zh;
+  document.getElementById('editCat').value = item.cat;
+  document.getElementById('editNote').value = item.note || '';
+  document.getElementById('editModal').classList.add('open');
+}
+
+function openEditCurrent(){
+  if(filtered.length === 0) return;
+  openEditModal(filtered[fcIndex].en);
+}
+
+function closeEditModal(e){
+  if(e.target === document.getElementById('editModal'))
+    document.getElementById('editModal').classList.remove('open');
+}
+
+function saveEdit(){
+  const origEn = document.getElementById('editOrigEn').value;
+  const newEn  = document.getElementById('editEn').value.trim();
+  const newZh  = document.getElementById('editZh').value.trim();
+  const newCat = document.getElementById('editCat').value.trim() || '自訂分類';
+  const newNote= document.getElementById('editNote').value.trim();
+  if(!newEn || !newZh){ alert('英文與中文不可空白'); return; }
+  const idx = DATA.findIndex(d => d.en === origEn);
+  if(idx === -1){ alert('找不到該單字'); return; }
+  // update favorites if en changed
+  if(origEn !== newEn && favorites.has(origEn)){
+    favorites.delete(origEn);
+    favorites.add(newEn);
+  }
+  DATA[idx] = { en:newEn, zh:newZh, cat:newCat, ...(newNote ? {note:newNote} : {}) };
+  saveData();
+  refreshAll();
+  document.getElementById('editModal').classList.remove('open');
 }
 
 init();
